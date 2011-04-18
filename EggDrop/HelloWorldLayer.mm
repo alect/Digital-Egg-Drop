@@ -9,12 +9,8 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
-
-//Pixel to metres ratio. Box2D uses metres as the unit for measurement.
-//This ratio defines how many pixels correspond to 1 Box2D "metre"
-//Box2D is optimized for objects of 1x1 metre therefore it makes sense
-//to define the ratio so that your most common object type is 1x1 metre.
-#define PTM_RATIO 32
+#import "Block.h"
+#import "Egg.h"
 
 // enums that will be used as tags
 enum {
@@ -69,6 +65,7 @@ enum {
 		// Construct a world object, which will hold and simulate the rigid bodies.
 		world = new b2World(gravity, doSleep);
 		
+        //Alec: I believe this should avoid the problem of tunneling, but decrease performance. Something to keep in min. 
 		world->SetContinuousPhysics(true);
 		
 		// Debug Draw functions
@@ -76,7 +73,7 @@ enum {
 		world->SetDebugDraw(m_debugDraw);
 		
 		uint32 flags = 0;
-		flags += b2DebugDraw::e_shapeBit;
+//		flags += b2DebugDraw::e_shapeBit;
 //		flags += b2DebugDraw::e_jointBit;
 //		flags += b2DebugDraw::e_aabbBit;
 //		flags += b2DebugDraw::e_pairBit;
@@ -84,6 +81,8 @@ enum {
 		m_debugDraw->SetFlags(flags);		
 		
 		
+        
+        //Here is where we create the boundaries of the world
 		// Define the ground body.
 		b2BodyDef groundBodyDef;
 		groundBodyDef.position.Set(0, 0); // bottom-left corner
@@ -118,8 +117,13 @@ enum {
 		CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:150];
 		[self addChild:batch z:0 tag:kTagBatchNode];
 		
-		[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
-		
+		//[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
+		Egg * myEgg = [[[Egg alloc] initWithPos:ccp(50, 100)] autorelease];
+        [myEgg addToPhysicsWorld:world];
+        [self addChild:myEgg];
+        
+        
+        
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
 		[self addChild:label z:0];
 		[label setColor:ccc3(0,0,255)];
@@ -148,39 +152,13 @@ enum {
 
 }
 
--(void) addNewSpriteWithCoords:(CGPoint)p
-{
-	CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-	CCSpriteBatchNode *batch = (CCSpriteBatchNode*) [self getChildByTag:kTagBatchNode];
-	
-	//We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
-	//just randomly picking one of the images
-	int idx = (CCRANDOM_0_1() > .5 ? 0:1);
-	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-	CCSprite *sprite = [CCSprite spriteWithBatchNode:batch rect:CGRectMake(32 * idx,32 * idy,32,32)];
-	[batch addChild:sprite];
-	
-	sprite.position = ccp( p.x, p.y);
-	
-	// Define the dynamic body.
-	//Set up a 1m squared box in the physics world
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
 
-	bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-	bodyDef.userData = sprite;
-	b2Body *body = world->CreateBody(&bodyDef);
-	
-	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-	
-	// Define the dynamic body fixture.
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;	
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	body->CreateFixture(&fixtureDef);
+//for now, simple function to add a block of given size and weight to the game
+-(void) addNewBlock:(CGRect)rect
+{
+    Block *newBlock = [[[Block alloc] initWithRect:rect] autorelease];
+    [newBlock addToPhysicsWorld:world];
+    [self addChild:newBlock];
 }
 
 
@@ -205,9 +183,11 @@ enum {
 	{
 		if (b->GetUserData() != NULL) {
 			//Synchronize the AtlasSprites position and rotation with the corresponding body
-			CCSprite *myActor = (CCSprite*)b->GetUserData();
-			myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-			myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+			//CCSprite *myActor = (CCSprite*)b->GetUserData();
+			//myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
+			//myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+            id <PhysicalObject> myObject = (id <PhysicalObject>)b->GetUserData();
+            [myObject updatePhysics];
 		}	
 	}
 }
@@ -220,7 +200,8 @@ enum {
 		
 		location = [[CCDirector sharedDirector] convertToGL: location];
 		
-		[self addNewSpriteWithCoords: location];
+        [self addNewBlock:CGRectMake(location.x, location.y, 50, 12)];
+		//[self addNewSpriteWithCoords: location];
 	}
 }
 
