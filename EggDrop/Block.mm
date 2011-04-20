@@ -51,7 +51,7 @@
     blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
     b2FixtureDef blockFixture;
     blockFixture.shape = &blockShape;
-    blockFixture.density = 1.0f;
+    blockFixture.density = 1.5f;
     blockFixture.friction = 0.3f;
     body->CreateFixture(&blockFixture);
 }

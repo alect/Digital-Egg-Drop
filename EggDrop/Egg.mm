@@ -45,6 +45,25 @@
 {
     mySprite.position = CGPointMake(body->GetPosition().x*PTM_RATIO, body->GetPosition().y*PTM_RATIO);
     mySprite.rotation = -1*CC_RADIANS_TO_DEGREES(body->GetAngle());
+    float max_impulse = 0;
+    //now we want to test for impulses that would break the egg. 
+    for (b2ContactEdge* ce = body->GetContactList(); ce; ce = ce->next)
+    {
+        
+        b2Contact* c = ce->contact;
+        
+        // process c
+        b2Manifold* myManifold = c->GetManifold();
+        for(int i = 0; i < b2_maxManifoldPoints; i++)
+        {
+            b2ManifoldPoint mPoint = myManifold->points[i];
+            if(mPoint.normalImpulse > max_impulse)
+                max_impulse = mPoint.normalImpulse;
+        }
+        
+    }
+    if(max_impulse > 5)
+        NSLog(@"Egg Broken!!!: %f", max_impulse);
 }
 
 
