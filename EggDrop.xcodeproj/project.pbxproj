@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286891360E3B100D7CA7C /* EggBlock.mm */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
-		41401DDD135CD09600EEA005 /* Block.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDC135CD09600EEA005 /* Block.mm */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
 		41DE7179135B76F800A118A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE7178135B76F800A118A1 /* QuartzCore.framework */; };
@@ -168,10 +168,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		411286881360E3B100D7CA7C /* EggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggBlock.h; sourceTree = "<group>"; };
+		411286891360E3B100D7CA7C /* EggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggBlock.mm; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
-		41401DDB135CD09600EEA005 /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		41401DDC135CD09600EEA005 /* Block.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Block.mm; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
 		41401DDF135CF64900EEA005 /* Egg.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Egg.mm; sourceTree = "<group>"; };
 		41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LonLonEggSprite4.png; path = Resources/LonLonEggSprite4.png; sourceTree = "<group>"; };
@@ -543,8 +543,8 @@
 				41401DDE135CF64900EEA005 /* Egg.h */,
 				41401DDF135CF64900EEA005 /* Egg.mm */,
 				41401DDA135CD01400EEA005 /* PhysicalObject.h */,
-				41401DDB135CD09600EEA005 /* Block.h */,
-				41401DDC135CD09600EEA005 /* Block.mm */,
+				411286881360E3B100D7CA7C /* EggBlock.h */,
+				411286891360E3B100D7CA7C /* EggBlock.mm */,
 				41DE7340135B76FD00A118A1 /* AppDelegate.h */,
 				41DE7341135B76FD00A118A1 /* AppDelegate.mm */,
 				41DE7343135B76FD00A118A1 /* RootViewController.h */,
@@ -1123,8 +1123,8 @@
 				41DE7345135B76FD00A118A1 /* RootViewController.m in Sources */,
 				41DE7348135B76FD00A118A1 /* HelloWorldLayer.mm in Sources */,
 				41DE734B135B76FD00A118A1 /* GLES-Render.mm in Sources */,
-				41401DDD135CD09600EEA005 /* Block.mm in Sources */,
 				41401DE0135CF64A00EEA005 /* Egg.mm in Sources */,
+				4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

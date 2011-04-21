@@ -12,10 +12,13 @@
 
 @implementation Egg
 
+@synthesize broken;
+
 -(id) initWithPos:(CGPoint)position
 {
     if((self = [super init]))
     {
+        broken = NO;
         mySprite = [CCSprite spriteWithFile:@"LonLonEggSprite4.png"];
         mySprite.position = ccp(position.x, position.y);
         radius = fminf(mySprite.contentSize.width, mySprite.contentSize.height)/2;
@@ -63,7 +66,10 @@
         
     }
     if(max_impulse > 5)
+    {
         NSLog(@"Egg Broken!!!: %f", max_impulse);
+        broken = YES;
+    }
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  Egg.h
+//  Block.h
 //  EggDrop
 //
 //  Created by Alec Thomson on 4/18/11.
@@ -11,15 +11,14 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 
-@interface Egg : CCNode <PhysicalObject> {
-    CCSprite* mySprite;
-    b2Body* body;
-    float radius;
-    BOOL broken;
+@interface EggBlock : CCNode <PhysicalObject> {
+    b2Body *body;
+    CCSprite *mySprite;
+    float width;
+    float height;
+    
 }
 
-@property BOOL broken;
-
--(id) initWithPos:(CGPoint)position;
+-(id) initWithRect:(CGRect)blockRect;
 
 @end

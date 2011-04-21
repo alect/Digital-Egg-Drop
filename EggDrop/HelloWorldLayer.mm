@@ -9,8 +9,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
-#import "Block.h"
-#import "Egg.h"
+#import "EggBlock.h"
 
 // enums that will be used as tags
 enum {
@@ -18,6 +17,7 @@ enum {
 	kTagBatchNode = 1,
 	kTagAnimation1 = 1,
 };
+
 
 
 // HelloWorldLayer implementation
@@ -114,20 +114,17 @@ enum {
 		
 		//Set up sprite
 		
-		CCSpriteBatchNode *batch = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:150];
-		[self addChild:batch z:0 tag:kTagBatchNode];
-		
 		//[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
-		Egg * myEgg = [[[Egg alloc] initWithPos:ccp(50, 100)] autorelease];
+        myEgg = [[[Egg alloc] initWithPos:ccp(50, 20)] autorelease];
         [myEgg addToPhysicsWorld:world];
         [self addChild:myEgg];
+        eggAlreadyBroken = NO;
         
         
-        
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
-		[self addChild:label z:0];
-		[label setColor:ccc3(0,0,255)];
-		label.position = ccp( screenSize.width/2, screenSize.height-50);
+		stateLabel = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Arial" fontSize:32];
+		[self addChild:stateLabel z:0];
+		[stateLabel setColor:ccc3(0,0,255)];
+		stateLabel.position = ccp( screenSize.width/2, screenSize.height-50);
 		
 		[self schedule: @selector(tick:)];
 	}
@@ -156,7 +153,7 @@ enum {
 //for now, simple function to add a block of given size and weight to the game
 -(void) addNewBlock:(CGRect)rect
 {
-    Block *newBlock = [[[Block alloc] initWithRect:rect] autorelease];
+    EggBlock *newBlock = [[[EggBlock alloc] initWithRect:rect] autorelease];
     [newBlock addToPhysicsWorld:world];
     [self addChild:newBlock];
 }
@@ -178,18 +175,21 @@ enum {
 	world->Step(dt, velocityIterations, positionIterations);
 
 	
-	//Iterate over the bodies in the physics world
+	//Iterate over the bodies in the physics world. This is where we call the updatePhysics function. 
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
-		if (b->GetUserData() != NULL) {
-			//Synchronize the AtlasSprites position and rotation with the corresponding body
-			//CCSprite *myActor = (CCSprite*)b->GetUserData();
-			//myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-			//myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+		if (b->GetUserData() != NULL && [((id)b->GetUserData()) conformsToProtocol:@protocol(PhysicalObject) ]) {
             id <PhysicalObject> myObject = (id <PhysicalObject>)b->GetUserData();
             [myObject updatePhysics];
 		}	
 	}
+    if(myEgg.broken && !eggAlreadyBroken)
+    {
+        [stateLabel setString:@"Egg broken!!"];
+        eggAlreadyBroken = YES;
+    }
+    
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -205,6 +205,7 @@ enum {
 	}
 }
 
+//in case we ever want to actually use the accelerometer, I'm leaving this function in here. 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {	
 	static float prevX=0, prevY=0;
