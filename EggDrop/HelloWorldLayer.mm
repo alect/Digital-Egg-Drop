@@ -38,6 +38,12 @@ enum {
 	return scene;
 }
 
+//this let's us receive single touches.
+-(void) registerWithTouchDispatcher
+{
+	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+}
+
 // on "init" you need to initialize your instance
 -(id) init
 {
@@ -121,11 +127,27 @@ enum {
         eggAlreadyBroken = NO;
         
         
-		stateLabel = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Arial" fontSize:32];
-		[self addChild:stateLabel z:0];
-		[stateLabel setColor:ccc3(0,0,255)];
-		stateLabel.position = ccp( screenSize.width/2, screenSize.height-50);
+		//stateLabel = [CCLabelTTF labelWithString:@"place objects" fontName:@"Arial" fontSize:22];
+		stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
+        
+        [self addChild:stateLabel z:0];
+		[stateLabel setColor:ccc3(255,255,255)];
+		stateLabel.position = ccp( screenSize.width/2, screenSize.height-60);
 		
+        //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" fontName:@"Arial" fontSize:18];
+        eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
+        [self addChild:eggLabel z:0];
+        [eggLabel setColor:ccc3(255, 255, 255)];
+        eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
+        
+        
+        //create a simple Array to test out the various kinds of objects we can add to the game
+        objectsToPlace = [[NSMutableArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
+                                                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
+                                                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease], 
+                           nil] retain];
+        
+        
 		[self schedule: @selector(tick:)];
 	}
 	return self;
@@ -148,17 +170,6 @@ enum {
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 }
-
-
-//for now, simple function to add a block of given size and weight to the game
--(void) addNewBlock:(CGRect)rect
-{
-    EggBlock *newBlock = [[[EggBlock alloc] initWithRect:rect] autorelease];
-    [newBlock addToPhysicsWorld:world];
-    [self addChild:newBlock];
-}
-
-
 
 -(void) tick: (ccTime) dt
 {
@@ -185,25 +196,61 @@ enum {
 	}
     if(myEgg.broken && !eggAlreadyBroken)
     {
-        [stateLabel setString:@"Egg broken!!"];
+        [eggLabel setString:@"Egg: broken!!"];
         eggAlreadyBroken = YES;
     }
+    if([objectsToPlace count] == 0)
+        [stateLabel setString:@"No more objects. Begin disasters!"];
+    
+    
     
     
 }
 
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	//Add a new body/atlas sprite at the touched location
-	for( UITouch *touch in touches ) {
-		CGPoint location = [touch locationInView: [touch view]];
-		
-		location = [[CCDirector sharedDirector] convertToGL: location];
-		
-        [self addNewBlock:CGRectMake(location.x, location.y, 50, 12)];
-		//[self addNewSpriteWithCoords: location];
-	}
+    NSLog(@"HELLO");
+    if(objectToPlace != nil || [objectsToPlace count] == 0)
+        return NO;
+    CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    
+    //objectToPlace = [[[EggBlock alloc] initWithRect:CGRectMake(location.x, location.y, 50, 12)] autorelease];
+    objectToPlace = [objectsToPlace objectAtIndex:0];
+    objectToPlace.position = ccp(location.x, location.y);
+    
+    [self addChild:objectToPlace];
+    NSLog(@"HELLO AGAIN");
+    return YES;
 }
+
+-(void) ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if(objectToPlace == nil)
+        return;
+    CGPoint location = [touch locationInView:[touch view]];
+    location = [[CCDirector sharedDirector] convertToGL:location];
+    objectToPlace.position = ccp(location.x, location.y);
+    
+}
+
+-(void) ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if(objectToPlace == nil)
+        return;
+    [objectToPlace addToPhysicsWorld:world];
+    [objectsToPlace removeObject:objectToPlace];
+    objectToPlace = nil;
+}
+
+-(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if(objectToPlace == nil)
+        return;
+    [self removeChild:objectToPlace cleanup:YES];
+    objectToPlace = nil;
+}
+
 
 //in case we ever want to actually use the accelerometer, I'm leaving this function in here. 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
@@ -235,6 +282,8 @@ enum {
 	
 	delete m_debugDraw;
 
+    [objectsToPlace release];
+    
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

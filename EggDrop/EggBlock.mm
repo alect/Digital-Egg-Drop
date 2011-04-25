@@ -11,7 +11,10 @@
 
 @implementation EggBlock
 
-
+-(void) setPosition:(CGPoint)position
+{
+    mySprite.position = position;
+}
 
 -(id) initWithRect:(CGRect)blockRect
 {
