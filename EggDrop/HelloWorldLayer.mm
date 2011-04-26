@@ -147,6 +147,14 @@ enum {
                                                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease], 
                            nil] retain];
         
+        nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
+        [self addChild:nextLabel z:0];
+        [nextLabel setColor:ccc3(255, 255, 255)];
+        nextLabel.position = ccp(460, 300);
+        
+        nextObjectToPlace = [objectsToPlace objectAtIndex:0];
+        nextObjectToPlace.position = ccp(440, 270);
+        [self addChild:nextObjectToPlace];
         
 		[self schedule: @selector(tick:)];
 	}
@@ -201,7 +209,7 @@ enum {
     }
     if([objectsToPlace count] == 0)
         [stateLabel setString:@"No more objects. Begin disasters!"];
-    
+
     
     
     
@@ -212,14 +220,26 @@ enum {
     NSLog(@"HELLO");
     if(objectToPlace != nil || [objectsToPlace count] == 0)
         return NO;
+    
+    //first, remove this object from the "next" preview
+    [self removeChild:nextObjectToPlace cleanup:YES];
+    
+    //go ahead and add this object
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
     
-    //objectToPlace = [[[EggBlock alloc] initWithRect:CGRectMake(location.x, location.y, 50, 12)] autorelease];
     objectToPlace = [objectsToPlace objectAtIndex:0];
     objectToPlace.position = ccp(location.x, location.y);
     
     [self addChild:objectToPlace];
+    
+    if([objectsToPlace count] > 1)
+    {
+        nextObjectToPlace = [objectsToPlace objectAtIndex:1];
+        nextObjectToPlace.position = ccp(440, 270);
+        [self addChild:nextObjectToPlace];
+    }
+    
     NSLog(@"HELLO AGAIN");
     return YES;
 }
@@ -251,7 +271,7 @@ enum {
     objectToPlace = nil;
 }
 
-
+/*
 //in case we ever want to actually use the accelerometer, I'm leaving this function in here. 
 - (void)accelerometer:(UIAccelerometer*)accelerometer didAccelerate:(UIAcceleration*)acceleration
 {	
@@ -272,7 +292,8 @@ enum {
 	
 	world->SetGravity( gravity );
 }
-
+*/
+ 
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
 {
