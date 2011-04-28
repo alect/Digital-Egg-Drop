@@ -13,6 +13,7 @@
 		411286A51368F2AD00D7CA7C /* woodblock.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A21368F2AD00D7CA7C /* woodblock.png */; };
 		411286A71368F31700D7CA7C /* concrete_block.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A61368F31700D7CA7C /* concrete_block.png */; };
 		411286AA136918F600D7CA7C /* PlaceableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 411286A9136918F400D7CA7C /* PlaceableNode.m */; };
+		411286AD1369CDE500D7CA7C /* EggHinge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286AC1369CDE300D7CA7C /* EggHinge.mm */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
@@ -182,6 +183,8 @@
 		411286A61368F31700D7CA7C /* concrete_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = concrete_block.png; path = Resources/concrete_block.png; sourceTree = "<group>"; };
 		411286A8136918F300D7CA7C /* PlaceableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceableNode.h; sourceTree = "<group>"; };
 		411286A9136918F400D7CA7C /* PlaceableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceableNode.m; sourceTree = "<group>"; };
+		411286AB1369CDE000D7CA7C /* EggHinge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggHinge.h; sourceTree = "<group>"; };
+		411286AC1369CDE300D7CA7C /* EggHinge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggHinge.mm; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
@@ -552,6 +555,8 @@
 		41DE7188135B76F800A118A1 /* EggDrop */ = {
 			isa = PBXGroup;
 			children = (
+				411286AB1369CDE000D7CA7C /* EggHinge.h */,
+				411286AC1369CDE300D7CA7C /* EggHinge.mm */,
 				411286A8136918F300D7CA7C /* PlaceableNode.h */,
 				411286A9136918F400D7CA7C /* PlaceableNode.m */,
 				4112869D1365108B00D7CA7C /* EggNail.h */,
@@ -1149,6 +1154,7 @@
 				4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */,
 				4112869F1365108B00D7CA7C /* EggNail.mm in Sources */,
 				411286AA136918F600D7CA7C /* PlaceableNode.m in Sources */,
+				411286AD1369CDE500D7CA7C /* EggHinge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

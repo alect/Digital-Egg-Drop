@@ -11,6 +11,7 @@
 #import "HelloWorldLayer.h"
 #import "EggBlock.h"
 #import "EggNail.h"
+#import "EggHinge.h"
 
 // enums that will be used as tags
 enum {
@@ -144,8 +145,9 @@ enum {
         //create a simple Array to test out the various kinds of objects we can add to the game
         objectsToPlace = [[NSMutableArray arrayWithObjects:
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
+                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
-                            [[[EggNail alloc] init] autorelease],
+                            [[[EggHinge alloc] init] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
                             
                             nil] retain];
