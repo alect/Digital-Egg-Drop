@@ -11,6 +11,11 @@
 
 @implementation EggBlock
 
+-(void) updateAddToWorld:(CGPoint)location
+{
+    self.position = location;
+}
+
 -(void) setPosition:(CGPoint)position
 {
     mySprite.position = position;
@@ -20,14 +25,14 @@
 {
     if((self = [super init]))
     {
-        mySprite = [CCSprite spriteWithFile:@"woodblocktexture.png"];
+        mySprite = [CCSprite spriteWithFile:@"woodblock.png"];
         mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
         width = blockRect.size.width;
         height = blockRect.size.height;
         mySprite.scaleX = width/mySprite.contentSize.width;
         mySprite.scaleY = height/mySprite.contentSize.height;
         [self addChild:mySprite];
-        
+        desiredZ = 0;
     }
     return self;
 }
@@ -43,7 +48,7 @@
     mySprite.rotation = -1*CC_RADIANS_TO_DEGREES(body->GetAngle());
 }
 
--(void) addToPhysicsWorld:(b2World*)world
+-(BOOL) addToPhysicsWorld:(b2World*)world
 {
     b2BodyDef blockBody;
     blockBody.type = b2_dynamicBody;
@@ -58,6 +63,7 @@
     blockFixture.density = 1.5f;
     blockFixture.friction = 0.3f;
     body->CreateFixture(&blockFixture);
+    return YES;
 }
 
 

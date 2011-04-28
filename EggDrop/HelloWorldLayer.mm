@@ -10,6 +10,7 @@
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "EggBlock.h"
+#import "EggNail.h"
 
 // enums that will be used as tags
 enum {
@@ -117,7 +118,6 @@ enum {
 		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
 		groundBody->CreateFixture(&groundBox,0);
 		
-		
 		//Set up sprite
 		
 		//[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
@@ -142,10 +142,15 @@ enum {
         
         
         //create a simple Array to test out the various kinds of objects we can add to the game
-        objectsToPlace = [[NSMutableArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
-                                                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
-                                                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease], 
-                           nil] retain];
+        objectsToPlace = [[NSMutableArray arrayWithObjects:
+                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
+                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
+                            [[[EggNail alloc] init] autorelease],
+                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                            
+                            nil] retain];
+        
+        
         
         nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
         [self addChild:nextLabel z:0];
@@ -202,6 +207,13 @@ enum {
             [myObject updatePhysics];
 		}	
 	}
+    for (b2Joint* j = world->GetJointList(); j; j=j->GetNext())
+    {
+        if(j->GetUserData() != NULL && [((id)j->GetUserData()) conformsToProtocol:@protocol(PhysicalObject)]) {
+            id <PhysicalObject> myObject = (id <PhysicalObject>)j->GetUserData();
+            [myObject updatePhysics];
+        }
+    }
     if(myEgg.broken && !eggAlreadyBroken)
     {
         [eggLabel setString:@"Egg: broken!!"];
@@ -230,8 +242,9 @@ enum {
     
     objectToPlace = [objectsToPlace objectAtIndex:0];
     objectToPlace.position = ccp(location.x, location.y);
+    [objectToPlace beginAddToWorld:location];
     
-    [self addChild:objectToPlace];
+    [self addChild:objectToPlace z:objectToPlace.desiredZ];
     
     if([objectsToPlace count] > 1)
     {
@@ -250,7 +263,8 @@ enum {
         return;
     CGPoint location = [touch locationInView:[touch view]];
     location = [[CCDirector sharedDirector] convertToGL:location];
-    objectToPlace.position = ccp(location.x, location.y);
+    //objectToPlace.position = ccp(location.x, location.y);
+    [objectToPlace updateAddToWorld:location];
     
 }
 
@@ -258,8 +272,11 @@ enum {
 {
     if(objectToPlace == nil)
         return;
-    [objectToPlace addToPhysicsWorld:world];
-    [objectsToPlace removeObject:objectToPlace];
+
+    if([objectToPlace addToPhysicsWorld:world])
+        [objectsToPlace removeObject:objectToPlace];
+    else
+        [self removeChild:objectToPlace cleanup:YES];
     objectToPlace = nil;
 }
 
@@ -304,7 +321,7 @@ enum {
 	delete m_debugDraw;
 
     [objectsToPlace release];
-    
+
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

@@ -10,8 +10,9 @@
 #import "PhysicalObject.h"
 #import "cocos2d.h"
 #import "Box2D.h"
+#import "PlaceableNode.h"
 
-@interface EggBlock : CCNode <PhysicalObject> {
+@interface EggBlock : PlaceableNode <PhysicalObject> {
     b2Body *body;
     CCSprite *mySprite;
     float width;
