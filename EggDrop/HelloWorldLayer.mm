@@ -12,6 +12,7 @@
 #import "EggBlock.h"
 #import "EggNail.h"
 #import "EggHinge.h"
+#import "EggCompoundBlock.h"
 
 // enums that will be used as tags
 enum {
@@ -81,11 +82,11 @@ enum {
 		world->SetDebugDraw(m_debugDraw);
 		
 		uint32 flags = 0;
-//		flags += b2DebugDraw::e_shapeBit;
-//		flags += b2DebugDraw::e_jointBit;
-//		flags += b2DebugDraw::e_aabbBit;
-//		flags += b2DebugDraw::e_pairBit;
-//		flags += b2DebugDraw::e_centerOfMassBit;
+		//flags += b2DebugDraw::e_shapeBit;
+		//flags += b2DebugDraw::e_jointBit;
+		//flags += b2DebugDraw::e_aabbBit;
+		//flags += b2DebugDraw::e_pairBit;
+		//flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
 		
@@ -142,12 +143,19 @@ enum {
         eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
         
         
+        //create a compound block to test it out
+        EggBlock * block1 = [[[EggBlock alloc] initWithRect:CGRectMake(25, 0, 12, 50)] autorelease];
+        EggBlock * block2 = [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease];
+        EggBlock * block3 = [[[EggBlock alloc] initWithRect:CGRectMake(-25, 0, 12, 50)] autorelease];
+        EggCompoundBlock *cBlock = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block1, block2, block3, nil]] autorelease];
+        
         //create a simple Array to test out the various kinds of objects we can add to the game
         objectsToPlace = [[NSMutableArray arrayWithObjects:
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
+                            cBlock,
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
-                            [[[EggHinge alloc] init] autorelease],
+                            [[[EggNail alloc] init] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
                             
                             nil] retain];
@@ -278,7 +286,13 @@ enum {
     if([objectToPlace addToPhysicsWorld:world])
         [objectsToPlace removeObject:objectToPlace];
     else
+    {
         [self removeChild:objectToPlace cleanup:YES];
+        [self removeChild:nextObjectToPlace cleanup:YES];
+        nextObjectToPlace = objectToPlace;
+        nextObjectToPlace.position = ccp(440, 270);
+        [self addChild:nextObjectToPlace];
+    }
     objectToPlace = nil;
 }
 
@@ -287,6 +301,11 @@ enum {
     if(objectToPlace == nil)
         return;
     [self removeChild:objectToPlace cleanup:YES];
+    [self removeChild:nextObjectToPlace cleanup:YES];
+    nextObjectToPlace = objectToPlace;
+    nextObjectToPlace.position = ccp(440, 270);
+    [self addChild:nextObjectToPlace];
+
     objectToPlace = nil;
 }
 

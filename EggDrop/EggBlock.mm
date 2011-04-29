@@ -11,6 +11,9 @@
 
 @implementation EggBlock
 
+@synthesize width;
+@synthesize height;
+
 -(void) updateAddToWorld:(CGPoint)location
 {
     self.position = location;
@@ -19,6 +22,31 @@
 -(void) setPosition:(CGPoint)position
 {
     mySprite.position = position;
+}
+
+-(CGPoint)position
+{
+    return mySprite.position;
+}
+
+-(void) setRotation:(float)rotation
+{
+    mySprite.rotation = rotation;
+}
+
+-(float) rotation
+{
+    return mySprite.rotation;
+}
+
+-(void) setAnchorPoint:(CGPoint)anchorPoint
+{
+    mySprite.anchorPoint = anchorPoint;
+}
+
+-(CGPoint) anchorPoint
+{
+    return mySprite.anchorPoint;
 }
 
 -(id) initWithRect:(CGRect)blockRect
@@ -31,6 +59,7 @@
         height = blockRect.size.height;
         mySprite.scaleX = width/mySprite.contentSize.width;
         mySprite.scaleY = height/mySprite.contentSize.height;
+        
         [self addChild:mySprite];
         desiredZ = 0;
     }
@@ -41,11 +70,25 @@
 
 -(void) updatePhysics
 {
-    //myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-    //myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+    
     
     mySprite.position = CGPointMake(body->GetPosition().x*PTM_RATIO, body->GetPosition().y*PTM_RATIO);
     mySprite.rotation = -1*CC_RADIANS_TO_DEGREES(body->GetAngle());
+}
+
+-(b2Fixture*)createFixture:(b2Body*)someBody
+{
+    b2PolygonShape blockShape;
+    b2Vec2 center(mySprite.position.x/PTM_RATIO-someBody->GetPosition().x, mySprite.position.y/PTM_RATIO-someBody->GetPosition().y);
+    blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2, center, CC_DEGREES_TO_RADIANS(mySprite.rotation));
+    //blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
+    b2FixtureDef blockFixture;
+    blockFixture.shape = &blockShape;
+    blockFixture.density = 1.5f;
+    blockFixture.friction = 0.3f;
+    blockFixture.userData = self;
+    b2Fixture* returnVal = someBody->CreateFixture(&blockFixture);
+    return returnVal;
 }
 
 -(BOOL) addToPhysicsWorld:(b2World*)world

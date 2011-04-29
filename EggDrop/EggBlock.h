@@ -20,6 +20,11 @@
     
 }
 
+@property(readonly) float width;
+@property(readonly) float height;
+
 -(id) initWithRect:(CGRect)blockRect;
+-(b2Fixture*) createFixture:(b2Body*)someBody;
+
 
 @end
