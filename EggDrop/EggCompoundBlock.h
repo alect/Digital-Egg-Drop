@@ -14,6 +14,7 @@
     NSArray *blockList;
     CGPoint basePosition;
     float baseRotation;
+    CGPoint baseAnchorPoint;
 }
 
 

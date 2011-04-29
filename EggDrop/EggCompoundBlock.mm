@@ -27,6 +27,8 @@
     return self;
 }
 
+//various delegate methods
+
 //here we need to offset all of our children by the same amount
 -(void) setPosition:(CGPoint)position
 {
@@ -43,6 +45,28 @@
     return basePosition;
 }
 
+-(void) setAnchorPoint:(CGPoint)anchorPoint
+{
+    CGPoint dAnchor = ccp(anchorPoint.x-baseAnchorPoint.x, anchorPoint.y-baseAnchorPoint.y);
+    for(EggBlock* e in blockList)
+    {
+        e.anchorPoint = ccp(e.anchorPoint.x+dAnchor.x, e.anchorPoint.y+dAnchor.y);
+    }
+    baseAnchorPoint = anchorPoint;
+}
+
+-(void) resolveAnchorPoint
+{
+    for(EggBlock* e in blockList)
+        [e resolveAnchorPoint];
+}
+
+-(void) initiateAnchorPoint:(CGPoint)bodyGlobalCenter
+{
+    for(EggBlock* e in blockList)
+        [e initiateAnchorPoint:bodyGlobalCenter];
+}
+
 
 -(void) setRotation:(float)rotation
 {
@@ -57,6 +81,12 @@
 -(float) rotation
 {
     return baseRotation;
+}
+
+-(void)createFixture:(b2Body*)someBody
+{
+    for(EggBlock* e in blockList)
+        [e createFixture:someBody];
 }
 
 -(BOOL) addToPhysicsWorld:(b2World*)world
@@ -77,9 +107,8 @@
     CGPoint bodyGlobalCenter = ccp(body->GetWorldCenter().x*PTM_RATIO, body->GetWorldCenter().y*PTM_RATIO);
     for(EggBlock* e in blockList)
     {
-        e.anchorPoint = ccp( (bodyGlobalCenter.x-e.position.x)/e.width+0.5, (bodyGlobalCenter.y-e.position.y)/e.height+0.5);
-        e.position = ccp(e.position.x + e.width*(e.anchorPoint.x-0.5), e.position.y+ e.height*(e.anchorPoint.y-0.5));
-        NSLog(@"Anchor: %f, %f", e.anchorPoint.x, e.anchorPoint.y);
+        [e initiateAnchorPoint:bodyGlobalCenter];
+        [e resolveAnchorPoint];
     }
     
     return YES;

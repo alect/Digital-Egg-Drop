@@ -19,6 +19,8 @@
     self.position = location;
 }
 
+
+//various delegate methods
 -(void) setPosition:(CGPoint)position
 {
     mySprite.position = position;
@@ -49,6 +51,16 @@
     return mySprite.anchorPoint;
 }
 
+-(void) initiateAnchorPoint:(CGPoint)bodyGlobalCenter
+{
+    self.anchorPoint = ccp( (bodyGlobalCenter.x-self.position.x)/width+0.5, (bodyGlobalCenter.y-self.position.y)/height+0.5);
+}
+
+-(void) resolveAnchorPoint
+{
+    self.position = ccp(self.position.x + width*(self.anchorPoint.x-0.5), self.position.y+ height*(self.anchorPoint.y-0.5));
+}
+
 -(id) initWithRect:(CGRect)blockRect
 {
     if((self = [super init]))
@@ -76,7 +88,7 @@
     mySprite.rotation = -1*CC_RADIANS_TO_DEGREES(body->GetAngle());
 }
 
--(b2Fixture*)createFixture:(b2Body*)someBody
+-(void)createFixture:(b2Body*)someBody
 {
     b2PolygonShape blockShape;
     b2Vec2 center(mySprite.position.x/PTM_RATIO-someBody->GetPosition().x, mySprite.position.y/PTM_RATIO-someBody->GetPosition().y);
@@ -87,8 +99,7 @@
     blockFixture.density = 1.5f;
     blockFixture.friction = 0.3f;
     blockFixture.userData = self;
-    b2Fixture* returnVal = someBody->CreateFixture(&blockFixture);
-    return returnVal;
+    someBody->CreateFixture(&blockFixture);
 }
 
 -(BOOL) addToPhysicsWorld:(b2World*)world

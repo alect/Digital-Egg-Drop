@@ -82,11 +82,11 @@ enum {
 		world->SetDebugDraw(m_debugDraw);
 		
 		uint32 flags = 0;
-		//flags += b2DebugDraw::e_shapeBit;
-		//flags += b2DebugDraw::e_jointBit;
-		//flags += b2DebugDraw::e_aabbBit;
-		//flags += b2DebugDraw::e_pairBit;
-		//flags += b2DebugDraw::e_centerOfMassBit;
+//		flags += b2DebugDraw::e_shapeBit;
+//		flags += b2DebugDraw::e_jointBit;
+//		flags += b2DebugDraw::e_aabbBit;
+//		flags += b2DebugDraw::e_pairBit;
+//		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
 		
@@ -147,13 +147,17 @@ enum {
         EggBlock * block1 = [[[EggBlock alloc] initWithRect:CGRectMake(25, 0, 12, 50)] autorelease];
         EggBlock * block2 = [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease];
         EggBlock * block3 = [[[EggBlock alloc] initWithRect:CGRectMake(-25, 0, 12, 50)] autorelease];
+        EggBlock * block4 = [[[EggBlock alloc] initWithRect:CGRectMake(-15, 15, 30, 12)] autorelease];
         EggCompoundBlock *cBlock = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block1, block2, block3, nil]] autorelease];
+        
+        EggCompoundBlock *cBlock2 = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block4, cBlock, nil]] autorelease];
+        
         
         //create a simple Array to test out the various kinds of objects we can add to the game
         objectsToPlace = [[NSMutableArray arrayWithObjects:
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
-                            cBlock,
+                            cBlock2,
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
                             [[[EggNail alloc] init] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],

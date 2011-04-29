@@ -24,7 +24,8 @@
 @property(readonly) float height;
 
 -(id) initWithRect:(CGRect)blockRect;
--(b2Fixture*) createFixture:(b2Body*)someBody;
-
+-(void) createFixture:(b2Body*)someBody;
+-(void) initiateAnchorPoint:(CGPoint)bodyGlobalCenter;
+-(void) resolveAnchorPoint;
 
 @end
