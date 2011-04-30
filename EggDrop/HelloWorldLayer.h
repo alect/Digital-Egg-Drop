@@ -30,6 +30,7 @@
     CCLabelTTF *eggLabel;
     Egg *myEgg;
     BOOL eggAlreadyBroken;
+    BOOL windy;
     NSMutableArray *objectsToPlace;
     PlaceableNode <PhysicalObject> *objectToPlace;
     CCLabelTTF *nextLabel;

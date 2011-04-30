@@ -13,6 +13,7 @@
 #import "EggNail.h"
 #import "EggHinge.h"
 #import "EggCompoundBlock.h"
+#import "WindRayCastCallback.h"
 
 // enums that will be used as tags
 enum {
@@ -82,11 +83,11 @@ enum {
 		world->SetDebugDraw(m_debugDraw);
 		
 		uint32 flags = 0;
-//		flags += b2DebugDraw::e_shapeBit;
-//		flags += b2DebugDraw::e_jointBit;
-//		flags += b2DebugDraw::e_aabbBit;
-//		flags += b2DebugDraw::e_pairBit;
-//		flags += b2DebugDraw::e_centerOfMassBit;
+		flags += b2DebugDraw::e_shapeBit;
+		flags += b2DebugDraw::e_jointBit;
+		flags += b2DebugDraw::e_aabbBit;
+		flags += b2DebugDraw::e_pairBit;
+		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
 		
@@ -123,11 +124,13 @@ enum {
 		//Set up sprite
 		
 		//[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
-        myEgg = [[[Egg alloc] initWithPos:ccp(50, 20)] autorelease];
+        myEgg = [[[Egg alloc] initWithPos:ccp(200, 20)] autorelease];
         [myEgg addToPhysicsWorld:world];
         [self addChild:myEgg];
         eggAlreadyBroken = NO;
         
+        //WIND
+        windy = NO;
         
 		//stateLabel = [CCLabelTTF labelWithString:@"place objects" fontName:@"Arial" fontSize:22];
 		stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
@@ -144,6 +147,7 @@ enum {
         
         
         //create a compound block to test it out
+        /*
         EggBlock * block1 = [[[EggBlock alloc] initWithRect:CGRectMake(25, 0, 12, 50)] autorelease];
         EggBlock * block2 = [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease];
         EggBlock * block3 = [[[EggBlock alloc] initWithRect:CGRectMake(-25, 0, 12, 50)] autorelease];
@@ -151,10 +155,10 @@ enum {
         EggCompoundBlock *cBlock = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block1, block2, block3, nil]] autorelease];
         
         EggCompoundBlock *cBlock2 = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block4, cBlock, nil]] autorelease];
-        
+        */
         
         //create a simple Array to test out the various kinds of objects we can add to the game
-        objectsToPlace = [[NSMutableArray arrayWithObjects:
+        /*objectsToPlace = [[NSMutableArray arrayWithObjects:
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
                             cBlock2,
@@ -163,7 +167,12 @@ enum {
                             [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
                             
                             nil] retain];
-        
+        */
+        objectsToPlace = [[NSMutableArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 200)] autorelease],
+                           [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 60, 60)] autorelease],
+                           [[[EggNail alloc] init] autorelease],
+                           [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                           nil] retain];
         
         
         nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
@@ -178,6 +187,30 @@ enum {
 		[self schedule: @selector(tick:)];
 	}
 	return self;
+}
+
+-(void) applyWind
+{
+    
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    
+    //Okay, we've got simulated wind through raycasting right here
+    //basically we cast several horizontal rays and apply wind to the 
+    //first object they hit. 
+    
+    //increase numRays to increase wind density
+    int numRays = 22;
+    float rayInterval = (screenSize.height-20)/(float)numRays;
+    //more complex raycast callback
+    for(int i = 0; i <= numRays; i++)
+    {
+        float y = i*rayInterval+10;
+        WindRayCastCallback myCallback;
+        b2Vec2 point1(1, y/PTM_RATIO);
+        b2Vec2 point2(screenSize.width/PTM_RATIO, y/PTM_RATIO);
+        world->RayCast(&myCallback, point1, point2);
+    }
+    
 }
 
 -(void) draw
@@ -212,7 +245,9 @@ enum {
 	// generally best to keep the time step and iterations fixed.
 	world->Step(dt, velocityIterations, positionIterations);
 
-	
+	if(windy)
+        [self applyWind];
+    
 	//Iterate over the bodies in the physics world. This is where we call the updatePhysics function. 
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
@@ -234,7 +269,10 @@ enum {
         eggAlreadyBroken = YES;
     }
     if([objectsToPlace count] == 0)
+    {
         [stateLabel setString:@"No more objects. Begin disasters!"];
+        windy = YES;
+    }
 
     
     

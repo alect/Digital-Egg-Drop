@@ -78,7 +78,19 @@
     return self;
 }
 
+-(void) setStartRotation:(float)newRotation
+{
+    self->rotation_ = newRotation;
+	isTransformDirty_ = isInverseDirty_ = YES;
+#if CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
+	isTransformGLDirty_ = YES;
+#endif
+}
 
+-(float) startRotation
+{
+    return rotation_;
+}
 
 -(void) updatePhysics
 {
@@ -92,7 +104,7 @@
 {
     b2PolygonShape blockShape;
     b2Vec2 center(mySprite.position.x/PTM_RATIO-someBody->GetPosition().x, mySprite.position.y/PTM_RATIO-someBody->GetPosition().y);
-    blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2, center, CC_DEGREES_TO_RADIANS(mySprite.rotation));
+    blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2, center, -1*CC_DEGREES_TO_RADIANS(self.startRotation));
     //blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
     b2FixtureDef blockFixture;
     blockFixture.shape = &blockShape;

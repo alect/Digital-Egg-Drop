@@ -17,11 +17,13 @@
     CCSprite *mySprite;
     float width;
     float height;
+    float startRotation;
     
 }
 
 @property(readonly) float width;
 @property(readonly) float height;
+@property float startRotation;
 
 -(id) initWithRect:(CGRect)blockRect;
 -(void) createFixture:(b2Body*)someBody;

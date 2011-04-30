@@ -67,7 +67,7 @@
         }
         
     }
-    if(max_impulse > 5)
+    if(fabsf(max_impulse) > 5)
     {
         NSLog(@"Egg Broken!!!: %f", max_impulse);
         broken = YES;
