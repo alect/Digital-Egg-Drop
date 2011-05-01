@@ -14,12 +14,14 @@
 #import "PhysicalObject.h"
 #import "Egg.h"
 #import "PlaceableNode.h"
+#import "EggDisaster.h"
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
 
+typedef enum {paused, placingObjects, runningDisasters} gameState;
 
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer
@@ -31,11 +33,29 @@
     Egg *myEgg;
     BOOL eggAlreadyBroken;
     BOOL windy;
+    
+    //the wind strength of the wind. Officially in Newton's. Be aware however, that an item in the way of the wind will be pelted at multiple points per step.
+    float windStrength;
     NSMutableArray *objectsToPlace;
     PlaceableNode <PhysicalObject> *objectToPlace;
     CCLabelTTF *nextLabel;
     PlaceableNode *nextObjectToPlace;
+    
+    //the amount of time in seconds since the last disaster started
+    float timeSinceLastDisaster; 
+    
+    //our list of disasters
+    NSMutableArray *disasters;
+    //our current disaster
+    EggDisaster *currentDisaster;
+    
+    gameState state;
+    
 }
+
+@property BOOL windy;
+@property float windStrength;
+@property float timeSinceLastDisaster;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;

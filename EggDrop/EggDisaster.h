@@ -7,14 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HelloWorldLayer.h"
+
 #import "cocos2d.h"
 #import "Box2D.h"
 
+@class HelloWorldLayer;
+
 @interface EggDisaster : NSObject {
-    
+    float delay;
 }
 
+
+@property(readonly) float delay;
+
 -(void) addDisasterToGame:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
+-(BOOL) isDisasterActive:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
+-(void) removeDisasterFromGame:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 
 @end

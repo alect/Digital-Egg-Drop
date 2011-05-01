@@ -17,6 +17,7 @@
 		411286B0136B238200D7CA7C /* EggCompoundBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286AF136B238100D7CA7C /* EggCompoundBlock.mm */; };
 		411286B3136B752F00D7CA7C /* EggDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286B2136B752C00D7CA7C /* EggDisaster.mm */; };
 		411286C6136BA02D00D7CA7C /* WindRayCastCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411286C4136BA02D00D7CA7C /* WindRayCastCallback.cpp */; };
+		411286CA136BC8A600D7CA7C /* WindDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286C9136BC8A500D7CA7C /* WindDisaster.mm */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
@@ -194,6 +195,8 @@
 		411286B2136B752C00D7CA7C /* EggDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggDisaster.mm; sourceTree = "<group>"; };
 		411286C4136BA02D00D7CA7C /* WindRayCastCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WindRayCastCallback.cpp; sourceTree = "<group>"; };
 		411286C5136BA02D00D7CA7C /* WindRayCastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindRayCastCallback.h; sourceTree = "<group>"; };
+		411286C8136BC8A500D7CA7C /* WindDisaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindDisaster.h; sourceTree = "<group>"; };
+		411286C9136BC8A500D7CA7C /* WindDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WindDisaster.mm; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
@@ -564,6 +567,8 @@
 		41DE7188135B76F800A118A1 /* EggDrop */ = {
 			isa = PBXGroup;
 			children = (
+				411286C8136BC8A500D7CA7C /* WindDisaster.h */,
+				411286C9136BC8A500D7CA7C /* WindDisaster.mm */,
 				411286C4136BA02D00D7CA7C /* WindRayCastCallback.cpp */,
 				411286C5136BA02D00D7CA7C /* WindRayCastCallback.h */,
 				411286B1136B752900D7CA7C /* EggDisaster.h */,
@@ -1173,6 +1178,7 @@
 				411286B0136B238200D7CA7C /* EggCompoundBlock.mm in Sources */,
 				411286B3136B752F00D7CA7C /* EggDisaster.mm in Sources */,
 				411286C6136BA02D00D7CA7C /* WindRayCastCallback.cpp in Sources */,
+				411286CA136BC8A600D7CA7C /* WindDisaster.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

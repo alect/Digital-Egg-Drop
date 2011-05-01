@@ -14,6 +14,8 @@
 #import "EggHinge.h"
 #import "EggCompoundBlock.h"
 #import "WindRayCastCallback.h"
+#import "WindDisaster.h"
+#import <math.h>
 
 // enums that will be used as tags
 enum {
@@ -26,6 +28,10 @@ enum {
 
 // HelloWorldLayer implementation
 @implementation HelloWorldLayer
+
+@synthesize windy;
+@synthesize windStrength;
+@synthesize timeSinceLastDisaster;
 
 +(CCScene *) scene
 {
@@ -55,6 +61,13 @@ enum {
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
+        //set up state
+        state = placingObjects;
+        timeSinceLastDisaster = 0;
+        disasters = [[NSMutableArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:2 andDuration:4] autorelease],
+                    [[[WindDisaster alloc] initWithDelay:3 andStrength:3  andDuration:2] autorelease],
+                    nil] retain];
+        
 		// enable touches
 		self.isTouchEnabled = YES;
 		
@@ -131,6 +144,7 @@ enum {
         
         //WIND
         windy = NO;
+        windStrength = 2;
         
 		//stateLabel = [CCLabelTTF labelWithString:@"place objects" fontName:@"Arial" fontSize:22];
 		stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
@@ -146,6 +160,8 @@ enum {
         eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
         
         
+        
+        //compound blocks test
         //create a compound block to test it out
         /*
         EggBlock * block1 = [[[EggBlock alloc] initWithRect:CGRectMake(25, 0, 12, 50)] autorelease];
@@ -205,7 +221,7 @@ enum {
     for(int i = 0; i <= numRays; i++)
     {
         float y = i*rayInterval+10;
-        WindRayCastCallback myCallback;
+        WindRayCastCallback myCallback(windStrength);
         b2Vec2 point1(1, y/PTM_RATIO);
         b2Vec2 point2(screenSize.width/PTM_RATIO, y/PTM_RATIO);
         world->RayCast(&myCallback, point1, point2);
@@ -238,7 +254,10 @@ enum {
 	//You need to make an informed choice, the following URL is useful
 	//http://gafferongames.com/game-physics/fix-your-timestep/
 	
-	int32 velocityIterations = 8;
+	if(state == paused)
+        return;
+    
+    int32 velocityIterations = 8;
 	int32 positionIterations = 1;
 	
 	// Instruct the world to perform a single step of simulation. It is
@@ -268,13 +287,37 @@ enum {
         [eggLabel setString:@"Egg: broken!!"];
         eggAlreadyBroken = YES;
     }
-    if([objectsToPlace count] == 0)
-    {
-        [stateLabel setString:@"No more objects. Begin disasters!"];
-        windy = YES;
-    }
-
     
+
+    //handle placing disasters
+    if(state == runningDisasters)
+    {
+        timeSinceLastDisaster+=dt;
+        if(currentDisaster == nil && [disasters count] != 0)
+        {
+            EggDisaster *nextDisaster = [disasters objectAtIndex:0];
+            float timeToNextDisaster = nextDisaster.delay-timeSinceLastDisaster;
+            [stateLabel setString:[NSString stringWithFormat:@"Next Disaster in: %d", (int)roundf(timeToNextDisaster)]];
+            if(timeToNextDisaster <= 0)
+            {
+                currentDisaster = [nextDisaster retain];
+                [disasters removeObjectAtIndex:0];
+                timeSinceLastDisaster = 0;
+                [currentDisaster addDisasterToGame:self withWorld:world];
+            }
+
+        }
+        else if(currentDisaster != nil)
+        {
+            if(![currentDisaster isDisasterActive:self withWorld:world])
+            {
+                [currentDisaster removeDisasterFromGame:self withWorld:world];
+                timeSinceLastDisaster = 0;
+                [currentDisaster release];
+                currentDisaster = nil;
+            }
+        }
+    }
     
     
 }
@@ -336,6 +379,12 @@ enum {
         [self addChild:nextObjectToPlace];
     }
     objectToPlace = nil;
+    if([objectsToPlace count] == 0)
+    {
+        [stateLabel setString:@"No more objects. Begin disasters!"];
+        state = runningDisasters;
+        timeSinceLastDisaster = 0;
+    }
 }
 
 -(void) ccTouchCancelled:(UITouch *)touch withEvent:(UIEvent *)event
@@ -385,6 +434,8 @@ enum {
 
     [objectsToPlace release];
 
+    [disasters release];
+    
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }
