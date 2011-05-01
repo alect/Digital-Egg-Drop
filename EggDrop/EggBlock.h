@@ -13,7 +13,9 @@
 #import "PlaceableNode.h"
 
 @interface EggBlock : PlaceableNode <PhysicalObject> {
+@public
     b2Body *body;
+@protected
     CCSprite *mySprite;
     float width;
     float height;

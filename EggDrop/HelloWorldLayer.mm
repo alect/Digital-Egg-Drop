@@ -9,12 +9,12 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
-#import "EggBlock.h"
 #import "EggNail.h"
 #import "EggHinge.h"
 #import "EggCompoundBlock.h"
 #import "WindRayCastCallback.h"
 #import "WindDisaster.h"
+#import "QuakeDisaster.h"
 #import <math.h>
 
 // enums that will be used as tags
@@ -31,6 +31,12 @@ enum {
 
 @synthesize windy;
 @synthesize windStrength;
+
+@synthesize quakeVelocity;
+@synthesize quakeFrequency;
+@synthesize quakeFloor;
+@synthesize quake;
+
 @synthesize timeSinceLastDisaster;
 
 +(CCScene *) scene
@@ -65,6 +71,7 @@ enum {
         state = placingObjects;
         timeSinceLastDisaster = 0;
         disasters = [[NSMutableArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:2 andDuration:4] autorelease],
+                    [[[QuakeDisaster alloc] initWithDelay:3 andStrength:50 andFrequency:1 andFriction:3 andDuration:10] autorelease],
                     [[[WindDisaster alloc] initWithDelay:3 andStrength:3  andDuration:2] autorelease],
                     nil] retain];
         
@@ -134,10 +141,16 @@ enum {
 		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
 		groundBody->CreateFixture(&groundBox,0);
 		
-		//Set up sprite
-		
+		//Set up the floor for the quakes
+        quakeFloor = [[[EggBlock alloc] initWithRect:CGRectMake(screenSize.width/2, 15, 400, 30)] autorelease];
+        [self addChild:quakeFloor];
+        [quakeFloor addToPhysicsWorld:world];
+        quakeFloor->body->SetType(b2_staticBody);
+        quake = NO;
+        
+        
 		//[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
-        myEgg = [[[Egg alloc] initWithPos:ccp(200, 20)] autorelease];
+        myEgg = [[[Egg alloc] initWithPos:ccp(200, 50)] autorelease];
         [myEgg addToPhysicsWorld:world];
         [self addChild:myEgg];
         eggAlreadyBroken = NO;
@@ -229,6 +242,16 @@ enum {
     
 }
 
+
+-(void) applyQuake
+{
+    //we need to shake the quakefloor back and forth for the quake. 
+    //using the timeSinceLastDisaster as a reference for the frequency.
+    float dir = sinf(M_PI*2*quakeFrequency*timeSinceLastDisaster);
+    quakeFloor->body->SetLinearVelocity(b2Vec2(dir*quakeVelocity, 0));
+}
+
+
 -(void) draw
 {
 	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
@@ -266,6 +289,8 @@ enum {
 
 	if(windy)
         [self applyWind];
+    if(quake)
+        [self applyQuake];
     
 	//Iterate over the bodies in the physics world. This is where we call the updatePhysics function. 
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())

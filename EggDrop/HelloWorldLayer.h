@@ -15,6 +15,7 @@
 #import "Egg.h"
 #import "PlaceableNode.h"
 #import "EggDisaster.h"
+#import "EggBlock.h"
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
@@ -30,6 +31,13 @@ typedef enum {paused, placingObjects, runningDisasters} gameState;
 	GLESDebugDraw *m_debugDraw;
     CCLabelTTF *stateLabel;
     CCLabelTTF *eggLabel;
+    
+    //the block used to represent the floor for earthquakes
+    EggBlock * quakeFloor;
+    BOOL quake;
+    float quakeFrequency;
+    float quakeVelocity;
+    
     Egg *myEgg;
     BOOL eggAlreadyBroken;
     BOOL windy;
@@ -55,6 +63,12 @@ typedef enum {paused, placingObjects, runningDisasters} gameState;
 
 @property BOOL windy;
 @property float windStrength;
+
+@property BOOL quake;
+@property float quakeVelocity;
+@property float quakeFrequency;
+@property(readonly) EggBlock* quakeFloor;
+
 @property float timeSinceLastDisaster;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
