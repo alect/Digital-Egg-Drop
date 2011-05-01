@@ -1,0 +1,33 @@
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.SwingUtilities;
+
+public class LevelEditorGUI extends JFrame {
+
+	final JList currentBlocksList;
+	final JList blocksToAddList;
+	final JList disastersList;
+	
+	
+	public LevelEditorGUI()
+	{
+		super("Egg Drop Level Editor");
+		
+		this.setBounds(0, 0, 800, 600);
+		
+		
+	}
+	
+	
+	
+	public static void main(String[] args)
+	{
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run()
+			{
+				new LevelEditorGUI().setVisible(true);
+			}
+		});
+	}
+	
+}

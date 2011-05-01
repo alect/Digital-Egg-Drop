@@ -1,0 +1,6 @@
+import java.awt.Canvas;
+
+
+public class LevelEditorView extends Canvas {
+
+}

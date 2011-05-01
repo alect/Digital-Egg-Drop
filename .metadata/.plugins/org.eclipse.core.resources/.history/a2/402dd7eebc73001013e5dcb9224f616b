@@ -1,0 +1,13 @@
+import java.awt.Canvas;
+
+
+public class LevelEditorView extends Canvas {
+
+	public LevelEditorView(int x, int y)
+	{
+		super();
+		
+		this.setBounds(x, y, 480, 320);
+	}
+	
+}
