@@ -96,11 +96,11 @@ enum {
 		world->SetDebugDraw(m_debugDraw);
 		
 		uint32 flags = 0;
-		flags += b2DebugDraw::e_shapeBit;
-		flags += b2DebugDraw::e_jointBit;
-		flags += b2DebugDraw::e_aabbBit;
-		flags += b2DebugDraw::e_pairBit;
-		flags += b2DebugDraw::e_centerOfMassBit;
+//		flags += b2DebugDraw::e_shapeBit;
+//		flags += b2DebugDraw::e_jointBit;
+//		flags += b2DebugDraw::e_aabbBit;
+//		flags += b2DebugDraw::e_pairBit;
+//		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
 		
@@ -304,6 +304,7 @@ enum {
                 [disasters removeObjectAtIndex:0];
                 timeSinceLastDisaster = 0;
                 [currentDisaster addDisasterToGame:self withWorld:world];
+                [stateLabel setString:currentDisaster.disasterName];
             }
 
         }
@@ -316,6 +317,10 @@ enum {
                 [currentDisaster release];
                 currentDisaster = nil;
             }
+        }
+        else if([disasters count] == 0)
+        {
+            [stateLabel setString:@"Level Complete!"];
         }
     }
     
@@ -433,7 +438,6 @@ enum {
 	delete m_debugDraw;
 
     [objectsToPlace release];
-
     [disasters release];
     
 	// don't forget to call "super dealloc"

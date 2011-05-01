@@ -18,6 +18,7 @@
         self->delay = myDelay;
         windStrength = strength;
         windDuration = duration;
+        disasterName = @"Wind";
     }
     return self;
 }

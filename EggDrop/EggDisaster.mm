@@ -12,6 +12,16 @@
 @implementation EggDisaster
 
 @synthesize delay;
+@synthesize disasterName;
+
+-(id) init
+{
+    if((self = [super init]))
+    {
+        disasterName = @"disaster";
+    }
+    return self;
+}
 
 -(void) addDisasterToGame:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
 {

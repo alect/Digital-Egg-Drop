@@ -15,10 +15,12 @@
 
 @interface EggDisaster : NSObject {
     float delay;
+    NSString *disasterName;
 }
 
 
 @property(readonly) float delay;
+@property(readonly) NSString* disasterName;
 
 -(void) addDisasterToGame:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 -(BOOL) isDisasterActive:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
