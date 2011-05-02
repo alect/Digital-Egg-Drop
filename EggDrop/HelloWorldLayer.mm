@@ -68,7 +68,8 @@ enum {
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
-                
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        
 		// enable touches
 		self.isTouchEnabled = YES;
 		
@@ -88,13 +89,49 @@ enum {
 //		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
+        //set up our UI
+        /*
+         CCMenuItem *starMenuItem = [CCMenuItemImage 
+         itemFromNormalImage:@"ButtonStar.png" selectedImage:@"ButtonStarSel.png" 
+         target:self selector:@selector(starButtonTapped:)];
+         starMenuItem.position = ccp(60, 60);
+         CCMenu *starMenu = [CCMenu menuWithItems:starMenuItem, nil];
+         starMenu.position = CGPointZero;
+         [self addChild:starMenu];
+         */
+        CCMenuItem *resetButton = [CCMenuItemImage 
+                                  itemFromNormalImage:@"reset_button.png" selectedImage:@"reset_button.png" 
+                                  target:self selector:@selector(resetButtonPressed: )];
+        resetButton.position = ccp(screenSize.width-25, 25);
+        myUI = [[CCMenu menuWithItems:resetButton, nil] retain];
+        myUI.position = CGPointZero;
+        
+        currentLevel = [[ResourceManager levelList] objectAtIndex:0];
+        
 		//now here is where we load our initial level 
-        [self loadFromLevel:[[ResourceManager levelList] objectAtIndex:0]]; 
+        [self loadFromLevel:currentLevel]; 
         
         
-		[self schedule: @selector(tick:)];
+		
 	}
 	return self;
+}
+
+
+-(void) playButtonPressed:(id)sender
+{
+    NSLog(@"PLAY BUTTON PRESSED: ");
+}
+
+-(void) resetButtonPressed:(id)sender
+{
+    [self clearLevel];
+    //[self loadFromLevel:currentLevel];
+    
+    currentLevel = [[ResourceManager levelList] objectAtIndex:0];
+    NSLog(@"Problem? %@, %d", [currentLevel description], [currentLevel.objectsToPlace count]);
+    [self loadFromLevel:currentLevel]; 
+    NSLog(@"Reset Level!");
 }
 
 -(void) applyWind
@@ -344,6 +381,7 @@ enum {
     [disasters release];
     
     [self removeAllChildrenWithCleanup:YES];
+    [self unscheduleAllSelectors];
 }
 
 -(void) loadFromLevel:(EggLevel *)level
@@ -455,7 +493,12 @@ enum {
     [self addChild:nextObjectToPlace];
 
     
+    //and load up our menu again
+    [self addChild:myUI];
+    
     state = placingObjects;
+    
+    [self schedule: @selector(tick:)];
 }
 
  
@@ -470,7 +513,7 @@ enum {
 
     [objectsToPlace release];
     [disasters release];
-    
+    [myUI release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

@@ -59,6 +59,10 @@ typedef enum {paused, placingObjects, runningDisasters} gameState;
     EggDisaster *currentDisaster;
     
     gameState state;
+    EggLevel * currentLevel;
+    
+    //keeping a reference of our menu here
+    CCMenu *myUI;
     
 }
 

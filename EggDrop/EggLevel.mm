@@ -21,9 +21,9 @@
     if((self=[super init]))
     {
     
-        objectsInPlace = [firstArray retain];
-        objectsToPlace = [secondArray retain];
-        disasters = [thirdArray retain];
+        self->objectsInPlace = [firstArray retain];
+        self->objectsToPlace = [secondArray retain];
+        self->disasters = [thirdArray retain];
         myEgg = [egg retain];
     }
     return self;
@@ -31,6 +31,7 @@
 
 -(void) dealloc
 {
+    NSLog(@"OH SHIT!!!");
     [objectsInPlace release];
     [objectsToPlace release];
     [disasters release];

@@ -21,6 +21,8 @@
 		411286CD136E15E000D7CA7C /* QuakeDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286CC136E15DE00D7CA7C /* QuakeDisaster.mm */; };
 		411286D0136E20A300D7CA7C /* EggLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286CF136E20A200D7CA7C /* EggLevel.mm */; };
 		411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286DA136E511300D7CA7C /* ResourceManager.mm */; };
+		411286DE136F417D00D7CA7C /* play_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DC136F417D00D7CA7C /* play_button.png */; };
+		411286DF136F417D00D7CA7C /* reset_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DD136F417D00D7CA7C /* reset_button.png */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
@@ -206,6 +208,8 @@
 		411286CF136E20A200D7CA7C /* EggLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggLevel.mm; sourceTree = "<group>"; };
 		411286D9136E511200D7CA7C /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
 		411286DA136E511300D7CA7C /* ResourceManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceManager.mm; sourceTree = "<group>"; };
+		411286DC136F417D00D7CA7C /* play_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play_button.png; path = Resources/play_button.png; sourceTree = "<group>"; };
+		411286DD136F417D00D7CA7C /* reset_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reset_button.png; path = Resources/reset_button.png; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
@@ -625,6 +629,8 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				411286DC136F417D00D7CA7C /* play_button.png */,
+				411286DD136F417D00D7CA7C /* reset_button.png */,
 				411286A61368F31700D7CA7C /* concrete_block.png */,
 				411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */,
 				411286A21368F2AD00D7CA7C /* woodblock.png */,
@@ -1039,6 +1045,8 @@
 				411286A41368F2AD00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png in Resources */,
 				411286A51368F2AD00D7CA7C /* woodblock.png in Resources */,
 				411286A71368F31700D7CA7C /* concrete_block.png in Resources */,
+				411286DE136F417D00D7CA7C /* play_button.png in Resources */,
+				411286DF136F417D00D7CA7C /* reset_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
