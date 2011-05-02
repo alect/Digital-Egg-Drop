@@ -127,4 +127,11 @@
     [super dealloc];
 }
 
+-(id) copyWithZone:(NSZone*)zone
+{
+    EggNail * clone = [[EggNail allocWithZone:zone] init];
+    return clone;
+}
+
+
 @end

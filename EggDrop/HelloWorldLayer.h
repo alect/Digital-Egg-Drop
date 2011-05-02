@@ -16,6 +16,7 @@
 #import "PlaceableNode.h"
 #import "EggDisaster.h"
 #import "EggBlock.h"
+#import "EggLevel.h"
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
@@ -73,5 +74,12 @@ typedef enum {paused, placingObjects, runningDisasters} gameState;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
+
+
+//clears the current level so that we can load the next one
+-(void) clearLevel;
+//loads all relevant objects from a level.
+-(void) loadFromLevel:(EggLevel*)level;
+
 
 @end

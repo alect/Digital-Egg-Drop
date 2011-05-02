@@ -39,4 +39,10 @@
     return mainLayer.timeSinceLastDisaster < windDuration;
 }
 
+-(id) copyWithZone:(NSZone*)zone
+{
+    WindDisaster * clone = [[WindDisaster allocWithZone:zone] initWithDelay:delay andStrength:windStrength andDuration:windDuration];
+    return clone;
+}
+
 @end

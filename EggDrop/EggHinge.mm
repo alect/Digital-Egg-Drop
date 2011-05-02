@@ -78,5 +78,10 @@
 }
 
 
+-(id) copyWithZone:(NSZone*)zone
+{
+    EggHinge * clone = [[EggHinge allocWithZone:zone] init];
+    return clone;
+}
 
 @end

@@ -60,4 +60,10 @@
     
 }
 
+-(id) copyWithZone:(NSZone*)zone
+{
+    QuakeDisaster * clone = [[QuakeDisaster allocWithZone:zone] initWithDelay:delay andStrength:quakeVelocity andFrequency:quakeFrequency andFriction:quakeFriction andDuration:quakeDuration];
+    return clone;
+}
+
 @end

@@ -15,6 +15,7 @@
 #import "WindRayCastCallback.h"
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
+#import "ResourceManager.h"
 #import <math.h>
 
 // enums that will be used as tags
@@ -67,40 +68,17 @@ enum {
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
 		
-        //set up state
-        state = placingObjects;
-        timeSinceLastDisaster = 0;
-        disasters = [[NSMutableArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:2 andDuration:4] autorelease],
-                    [[[QuakeDisaster alloc] initWithDelay:3 andStrength:50 andFrequency:1 andFriction:3 andDuration:10] autorelease],
-                    [[[WindDisaster alloc] initWithDelay:3 andStrength:3  andDuration:2] autorelease],
-                    nil] retain];
-        
+                
 		// enable touches
 		self.isTouchEnabled = YES;
 		
 		// enable accelerometer
 		self.isAccelerometerEnabled = YES;
 		
-		CGSize screenSize = [CCDirector sharedDirector].winSize;
-		CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
 		
-		// Define the gravity vector.
-		b2Vec2 gravity;
-		gravity.Set(0.0f, -10.0f);
-		
-		// Do we want to let bodies sleep?
-		// This will speed up the physics simulation
-		bool doSleep = true;
-		
-		// Construct a world object, which will hold and simulate the rigid bodies.
-		world = new b2World(gravity, doSleep);
-		
-        //Alec: I believe this should avoid the problem of tunneling, but decrease performance. Something to keep in min. 
-		world->SetContinuousPhysics(true);
 		
 		// Debug Draw functions
 		m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-		world->SetDebugDraw(m_debugDraw);
 		
 		uint32 flags = 0;
 //		flags += b2DebugDraw::e_shapeBit;
@@ -110,108 +88,9 @@ enum {
 //		flags += b2DebugDraw::e_centerOfMassBit;
 		m_debugDraw->SetFlags(flags);		
 		
-		
+		//now here is where we load our initial level 
+        [self loadFromLevel:[[ResourceManager levelList] objectAtIndex:0]]; 
         
-        //Here is where we create the boundaries of the world
-		// Define the ground body.
-		b2BodyDef groundBodyDef;
-		groundBodyDef.position.Set(0, 0); // bottom-left corner
-		
-		// Call the body factory which allocates memory for the ground body
-		// from a pool and creates the ground box shape (also from a pool).
-		// The body is also added to the world.
-		b2Body* groundBody = world->CreateBody(&groundBodyDef);
-		
-		// Define the ground box shape.
-		b2PolygonShape groundBox;		
-		
-		// bottom
-		groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2(screenSize.width/PTM_RATIO,0));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		// top
-		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		// left
-		groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,0));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		// right
-		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
-		groundBody->CreateFixture(&groundBox,0);
-		
-		//Set up the floor for the quakes
-        quakeFloor = [[[EggBlock alloc] initWithRect:CGRectMake(screenSize.width/2, 15, 400, 30)] autorelease];
-        [self addChild:quakeFloor];
-        [quakeFloor addToPhysicsWorld:world];
-        quakeFloor->body->SetType(b2_staticBody);
-        quake = NO;
-        
-        
-		//[self addNewSpriteWithCoords:ccp(screenSize.width/2, screenSize.height/2)];
-        myEgg = [[[Egg alloc] initWithPos:ccp(200, 50)] autorelease];
-        [myEgg addToPhysicsWorld:world];
-        [self addChild:myEgg];
-        eggAlreadyBroken = NO;
-        
-        //WIND
-        windy = NO;
-        windStrength = 2;
-        
-		//stateLabel = [CCLabelTTF labelWithString:@"place objects" fontName:@"Arial" fontSize:22];
-		stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
-        
-        [self addChild:stateLabel z:0];
-		[stateLabel setColor:ccc3(255,255,255)];
-		stateLabel.position = ccp( screenSize.width/2, screenSize.height-60);
-		
-        //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" fontName:@"Arial" fontSize:18];
-        eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
-        [self addChild:eggLabel z:0];
-        [eggLabel setColor:ccc3(255, 255, 255)];
-        eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
-        
-        
-        
-        //compound blocks test
-        //create a compound block to test it out
-        /*
-        EggBlock * block1 = [[[EggBlock alloc] initWithRect:CGRectMake(25, 0, 12, 50)] autorelease];
-        EggBlock * block2 = [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease];
-        EggBlock * block3 = [[[EggBlock alloc] initWithRect:CGRectMake(-25, 0, 12, 50)] autorelease];
-        EggBlock * block4 = [[[EggBlock alloc] initWithRect:CGRectMake(-15, 15, 30, 12)] autorelease];
-        EggCompoundBlock *cBlock = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block1, block2, block3, nil]] autorelease];
-        
-        EggCompoundBlock *cBlock2 = [[[EggCompoundBlock alloc] initWithBlocks:[NSArray arrayWithObjects:block4, cBlock, nil]] autorelease];
-        */
-        
-        //create a simple Array to test out the various kinds of objects we can add to the game
-        /*objectsToPlace = [[NSMutableArray arrayWithObjects:
-                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
-                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
-                            cBlock2,
-                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
-                            [[[EggNail alloc] init] autorelease],
-                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
-                            
-                            nil] retain];
-        */
-        objectsToPlace = [[NSMutableArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 200)] autorelease],
-                           [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 60, 60)] autorelease],
-                           [[[EggNail alloc] init] autorelease],
-                           [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
-                           nil] retain];
-        
-        
-        nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
-        [self addChild:nextLabel z:0];
-        [nextLabel setColor:ccc3(255, 255, 255)];
-        nextLabel.position = ccp(460, 300);
-        
-        nextObjectToPlace = [objectsToPlace objectAtIndex:0];
-        nextObjectToPlace.position = ccp(440, 270);
-        [self addChild:nextObjectToPlace];
         
 		[self schedule: @selector(tick:)];
 	}
@@ -452,6 +331,133 @@ enum {
 	world->SetGravity( gravity );
 }
 */
+
+-(void) clearLevel
+{
+    if(world != NULL)
+    {
+        delete world;
+        world = NULL;
+    }
+    
+    [objectsToPlace release];
+    [disasters release];
+    
+    [self removeAllChildrenWithCleanup:YES];
+}
+
+-(void) loadFromLevel:(EggLevel *)level
+{
+    //first set up the physics again. 
+    
+    timeSinceLastDisaster = 0;
+    
+    
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
+    
+    // Define the gravity vector.
+    b2Vec2 gravity;
+    gravity.Set(0.0f, -10.0f);
+    
+    // Do we want to let bodies sleep?
+    // This will speed up the physics simulation
+    bool doSleep = true;
+    
+    // Construct a world object, which will hold and simulate the rigid bodies.
+    world = new b2World(gravity, doSleep);
+    
+    //Alec: I believe this should avoid the problem of tunneling, but decrease performance. Something to keep in min. 
+    world->SetContinuousPhysics(true);
+    world->SetDebugDraw(m_debugDraw);
+    
+    //Here is where we create the boundaries of the world
+    // Define the ground body.
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position.Set(0, 0); // bottom-left corner
+    
+    // Call the body factory which allocates memory for the ground body
+    // from a pool and creates the ground box shape (also from a pool).
+    // The body is also added to the world.
+    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+    
+    // Define the ground box shape.
+    b2PolygonShape groundBox;		
+    
+    // bottom
+    groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2(screenSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // top
+    groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // left
+    groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // right
+    groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    //Set up the floor for the quakes
+    quakeFloor = [[[EggBlock alloc] initWithRect:CGRectMake(screenSize.width/2, 15, 400, 30)] autorelease];
+    [self addChild:quakeFloor];
+    [quakeFloor addToPhysicsWorld:world];
+    quakeFloor->body->SetType(b2_staticBody);
+    quake = NO;
+
+    
+    //WIND
+    windy = NO;
+    windStrength = 2;
+    
+    //stateLabel = [CCLabelTTF labelWithString:@"place objects" fontName:@"Arial" fontSize:22];
+    stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
+    
+    [self addChild:stateLabel z:0];
+    [stateLabel setColor:ccc3(255,255,255)];
+    stateLabel.position = ccp( screenSize.width/2, screenSize.height-60);
+    
+    //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" fontName:@"Arial" fontSize:18];
+    eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
+    [self addChild:eggLabel z:0];
+    [eggLabel setColor:ccc3(255, 255, 255)];
+    eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
+    
+    nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
+    [self addChild:nextLabel z:0];
+    [nextLabel setColor:ccc3(255, 255, 255)];
+    nextLabel.position = ccp(460, 300);
+    
+        
+    //now load our level relevant stuff
+    objectsToPlace = [[NSMutableArray array] retain];
+    for(PlaceableNode * p in level.objectsToPlace)
+        [objectsToPlace addObject:[[p copy] autorelease] ];
+    disasters = [[NSMutableArray array] retain];
+    for(EggDisaster * d in level.disasters)
+        [disasters addObject:[[d copy] autorelease]];
+    
+    for(CCNode <PhysicalObject> * p in level.objectsInPlace)
+    {
+        CCNode <PhysicalObject> * clone = [[p copy] autorelease];
+        [self addChild:clone];
+        [clone addToPhysicsWorld:world];
+    }
+    
+    myEgg = [[level myEgg] copy];
+    [self addChild:myEgg];
+    [myEgg addToPhysicsWorld:world];
+    
+    nextObjectToPlace = [objectsToPlace objectAtIndex:0];
+    nextObjectToPlace.position = ccp(440, 270);
+    [self addChild:nextObjectToPlace];
+
+    
+    state = placingObjects;
+}
+
  
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc

@@ -132,5 +132,11 @@
     return YES;
 }
 
+-(id) copyWithZone:(NSZone*)zone
+{
+    EggBlock * clone = [[EggBlock allocWithZone:zone] initWithRect:CGRectMake(self.position.x, self.position.y, self.width, self.height)];
+    return clone;
+}
+
 
 @end

@@ -75,4 +75,10 @@
 }
 
 
+-(id) copyWithZone:(NSZone*)zone
+{
+    Egg * clone = [[Egg allocWithZone:zone] initWithPos:ccp(mySprite.position.x, mySprite.position.y)] ;
+    return clone;
+}
+
 @end
