@@ -49,10 +49,14 @@ static NSArray *levelArray;
                                                               andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]
                              ] autorelease];
     
+    EggLevel *thirdLevel = [[[EggLevel alloc] initWithObjectsInPlace: [NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(100, 200, 30, 100)] autorelease], 
+                                                                       [[[EggBlock alloc] initWithRect:CGRectMake(300, 200, 30, 100)] autorelease], nil]
+                                                   andObjectsToPlace:[NSArray arrayWithObjects:[[[EggNail alloc] init] autorelease], nil]
+                                                        andDisasters:[NSArray arrayWithObjects:[[[QuakeDisaster alloc] initWithDelay:3 andStrength:50 andFrequency:2 andFriction:4 andDuration:5] autorelease], nil] 
+                                                              andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]] autorelease];
     
     
-    
-    levelArray = [[NSArray arrayWithObjects:levelZero, firstLevel, nil] retain];
+    levelArray = [[NSArray arrayWithObjects:levelZero, firstLevel, thirdLevel, nil] retain];
 }
 
 +(NSArray*)levelList {return levelArray;}

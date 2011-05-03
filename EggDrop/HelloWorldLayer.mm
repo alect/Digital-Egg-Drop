@@ -526,7 +526,7 @@ enum {
 
     
     //and load up our menu again
-    [self addChild:myUI];
+    [self addChild:myUI z:1];
     
     state = placingObjects;
     
