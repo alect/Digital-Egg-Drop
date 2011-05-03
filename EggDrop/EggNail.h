@@ -28,4 +28,6 @@
     b2Vec2 localA, localB;
 }
 
+-(id) initWithAnchor1:(CGPoint)anchor1 andAnchor2:(CGPoint)anchor2;
+
 @end

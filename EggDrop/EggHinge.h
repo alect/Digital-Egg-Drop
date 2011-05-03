@@ -15,4 +15,5 @@
 @interface EggHinge : EggNail {
 }
 
+
 @end

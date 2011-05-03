@@ -12,7 +12,28 @@
 
 @implementation Egg
 
-@synthesize broken;
+-(void) setBroken:(BOOL)newBroken
+{
+    if(newBroken != broken)
+    {
+        broken = newBroken;
+        CGPoint oldPos = mySprite.position;
+        float oldRot = mySprite.rotation;
+        [self removeChild:mySprite cleanup:YES];
+        if(broken)
+            mySprite = brokenSprite;
+        else
+            mySprite = normalSprite;
+        mySprite.position = oldPos;
+        mySprite.rotation = oldRot;
+        [self addChild:mySprite];
+    }
+}
+
+-(BOOL) broken
+{
+    return broken;
+}
 
 
 -(id) initWithPos:(CGPoint)position
@@ -20,13 +41,17 @@
     if((self = [super init]))
     {
         broken = NO;
-        mySprite = [CCSprite spriteWithFile:@"LonLonEggSprite4.png"];
+        normalSprite = [[CCSprite spriteWithFile:@"egg.png"] retain];
+        brokenSprite = [[CCSprite spriteWithFile:@"cracked_egg.png"] retain];
+        mySprite = normalSprite;
         mySprite.position = ccp(position.x, position.y);
         radius = fminf(mySprite.contentSize.width, mySprite.contentSize.height)/2;
         [self addChild:mySprite];
     }
     return self;
 }
+
+
 
 -(BOOL) addToPhysicsWorld:(b2World*)world
 {
@@ -67,10 +92,10 @@
         }
         
     }
-    if(fabsf(max_impulse) > 5)
+    if(fabsf(max_impulse) > 9)
     {
         NSLog(@"Egg Broken!!!: %f", max_impulse);
-        broken = YES;
+        self.broken = YES;
     }
 }
 
@@ -79,6 +104,13 @@
 {
     Egg * clone = [[Egg allocWithZone:zone] initWithPos:ccp(mySprite.position.x, mySprite.position.y)] ;
     return clone;
+}
+
+-(void) dealloc
+{
+    [normalSprite release];
+    [brokenSprite release];
+    [super dealloc];
 }
 
 @end

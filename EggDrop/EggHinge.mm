@@ -12,7 +12,7 @@
 
 @implementation EggHinge
 
--(id) init
+-(id) initWithAnchor1:(CGPoint)anchor1 andAnchor2:(CGPoint)anchor2
 {
     if((self=[super init]))
     {
@@ -25,8 +25,8 @@
         strapEnd = [[CCSprite spriteWithFile:@"woodblock.png"] retain];
         strapEnd.scale = 10/strapEnd.contentSize.width;
         
-        firstAnchor = ccp(0, 0);
-        secondAnchor = ccp(30, 0);
+        firstAnchor = ccp(anchor1.x, anchor1.y);
+        secondAnchor = ccp(anchor2.x, anchor2.y);
         desiredZ = 1;
     }
     return self;

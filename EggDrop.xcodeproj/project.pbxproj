@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B531D74136A87A300EB7F59 /* testxml.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B531D73136A87A300EB7F59 /* testxml.xml */; };
 		0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B531D75136CEC8D00EB7F59 /* LevelParser.mm */; };
 		4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286891360E3B100D7CA7C /* EggBlock.mm */; };
 		4112869F1365108B00D7CA7C /* EggNail.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4112869E1365108B00D7CA7C /* EggNail.mm */; };
@@ -25,6 +24,8 @@
 		411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286DA136E511300D7CA7C /* ResourceManager.mm */; };
 		411286DE136F417D00D7CA7C /* play_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DC136F417D00D7CA7C /* play_button.png */; };
 		411286DF136F417D00D7CA7C /* reset_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DD136F417D00D7CA7C /* reset_button.png */; };
+		411286E61370697400D7CA7C /* cracked_egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286E41370697400D7CA7C /* cracked_egg.png */; };
+		411286E71370697400D7CA7C /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286E51370697400D7CA7C /* egg.png */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
@@ -215,6 +216,8 @@
 		411286DA136E511300D7CA7C /* ResourceManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceManager.mm; sourceTree = "<group>"; };
 		411286DC136F417D00D7CA7C /* play_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play_button.png; path = Resources/play_button.png; sourceTree = "<group>"; };
 		411286DD136F417D00D7CA7C /* reset_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reset_button.png; path = Resources/reset_button.png; sourceTree = "<group>"; };
+		411286E41370697400D7CA7C /* cracked_egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cracked_egg.png; path = Resources/cracked_egg.png; sourceTree = "<group>"; };
+		411286E51370697400D7CA7C /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = egg.png; path = Resources/egg.png; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
@@ -636,6 +639,8 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				411286E41370697400D7CA7C /* cracked_egg.png */,
+				411286E51370697400D7CA7C /* egg.png */,
 				411286DC136F417D00D7CA7C /* play_button.png */,
 				411286DD136F417D00D7CA7C /* reset_button.png */,
 				411286A61368F31700D7CA7C /* concrete_block.png */,
@@ -1055,6 +1060,8 @@
 				411286A71368F31700D7CA7C /* concrete_block.png in Resources */,
 				411286DE136F417D00D7CA7C /* play_button.png in Resources */,
 				411286DF136F417D00D7CA7C /* reset_button.png in Resources */,
+				411286E61370697400D7CA7C /* cracked_egg.png in Resources */,
+				411286E71370697400D7CA7C /* egg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,7 +1220,7 @@
 				411286CA136BC8A600D7CA7C /* WindDisaster.mm in Sources */,
 				411286CD136E15E000D7CA7C /* QuakeDisaster.mm in Sources */,
 				411286D0136E20A300D7CA7C /* EggLevel.mm in Sources */,
-				411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */,s
+				411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

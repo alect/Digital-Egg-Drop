@@ -12,6 +12,8 @@
 #import "Box2D.h"
 
 @interface Egg : CCNode <PhysicalObject> {
+    CCSprite* normalSprite;
+    CCSprite* brokenSprite;
     CCSprite* mySprite;
     b2Body* body;
     float radius;
