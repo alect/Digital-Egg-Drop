@@ -116,9 +116,6 @@ enum {
         
 		//now here is where we load our initial level 
         [self loadFromLevel:currentLevel]; 
-        
-        
-		
 	}
 	return self;
 }
@@ -368,6 +365,7 @@ enum {
 
     objectToPlace = nil;
 }
+
 
 /*
 //in case we ever want to actually use the accelerometer, I'm leaving this function in here. 

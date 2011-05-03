@@ -13,6 +13,7 @@
 #import "GLES-Render.h"
 #import "PhysicalObject.h"
 #import "Egg.h"
+#import "LevelParser.h"
 #import "PlaceableNode.h"
 #import "EggDisaster.h"
 #import "EggBlock.h"
@@ -32,6 +33,7 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
 	GLESDebugDraw *m_debugDraw;
     CCLabelTTF *stateLabel;
     CCLabelTTF *eggLabel;
+    LevelParser *myParser;
     
     //the block used to represent the floor for earthquakes
     EggBlock * quakeFloor;

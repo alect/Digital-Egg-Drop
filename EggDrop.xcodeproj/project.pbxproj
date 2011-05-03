@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B531D74136A87A300EB7F59 /* testxml.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B531D73136A87A300EB7F59 /* testxml.xml */; };
+		0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B531D75136CEC8D00EB7F59 /* LevelParser.mm */; };
 		4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286891360E3B100D7CA7C /* EggBlock.mm */; };
 		4112869F1365108B00D7CA7C /* EggNail.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4112869E1365108B00D7CA7C /* EggNail.mm */; };
 		411286A41368F2AD00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */; };
@@ -183,6 +185,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B531D73136A87A300EB7F59 /* testxml.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testxml.xml; path = Resources/testxml.xml; sourceTree = "<group>"; };
+		0B531D75136CEC8D00EB7F59 /* LevelParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelParser.mm; sourceTree = "<group>"; };
+		0BC29B7E1367A38B00880138 /* LevelParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelParser.h; sourceTree = "<group>"; };
 		411286881360E3B100D7CA7C /* EggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggBlock.h; sourceTree = "<group>"; };
 		411286891360E3B100D7CA7C /* EggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggBlock.mm; sourceTree = "<group>"; };
 		4112869D1365108B00D7CA7C /* EggNail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggNail.h; sourceTree = "<group>"; };
@@ -608,8 +613,10 @@
 				41DE7340135B76FD00A118A1 /* AppDelegate.h */,
 				41DE7341135B76FD00A118A1 /* AppDelegate.mm */,
 				41DE7343135B76FD00A118A1 /* RootViewController.h */,
+				0BC29B7E1367A38B00880138 /* LevelParser.h */,
 				41DE7344135B76FD00A118A1 /* RootViewController.m */,
 				41DE7346135B76FD00A118A1 /* HelloWorldLayer.h */,
+				0B531D75136CEC8D00EB7F59 /* LevelParser.mm */,
 				41DE7347135B76FD00A118A1 /* HelloWorldLayer.mm */,
 				41DE7349135B76FD00A118A1 /* GLES-Render.h */,
 				41DE734A135B76FD00A118A1 /* GLES-Render.mm */,
@@ -638,6 +645,7 @@
 				41401DD7135CB0A000EEA005 /* woodblocktexture.png */,
 				41DE718A135B76F800A118A1 /* Default.png */,
 				41DE718C135B76F800A118A1 /* fps_images.png */,
+				0B531D73136A87A300EB7F59 /* testxml.xml */,
 				41DE718E135B76F800A118A1 /* Icon-72.png */,
 				41DE7190135B76F800A118A1 /* Icon-Small-50.png */,
 				41DE7192135B76F800A118A1 /* Icon-Small.png */,
@@ -1196,6 +1204,7 @@
 				41401DE0135CF64A00EEA005 /* Egg.mm in Sources */,
 				4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */,
 				4112869F1365108B00D7CA7C /* EggNail.mm in Sources */,
+				0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */,
 				411286AA136918F600D7CA7C /* PlaceableNode.m in Sources */,
 				411286AD1369CDE500D7CA7C /* EggHinge.mm in Sources */,
 				411286B0136B238200D7CA7C /* EggCompoundBlock.mm in Sources */,
@@ -1204,7 +1213,7 @@
 				411286CA136BC8A600D7CA7C /* WindDisaster.mm in Sources */,
 				411286CD136E15E000D7CA7C /* QuakeDisaster.mm in Sources */,
 				411286D0136E20A300D7CA7C /* EggLevel.mm in Sources */,
-				411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */,
+				411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */,s
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
