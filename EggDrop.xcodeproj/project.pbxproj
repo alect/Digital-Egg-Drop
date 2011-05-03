@@ -11,6 +11,20 @@
 		0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B531D75136CEC8D00EB7F59 /* LevelParser.mm */; };
 		4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286891360E3B100D7CA7C /* EggBlock.mm */; };
 		4112869F1365108B00D7CA7C /* EggNail.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4112869E1365108B00D7CA7C /* EggNail.mm */; };
+		411286A41368F2AD00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */; };
+		411286A51368F2AD00D7CA7C /* woodblock.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A21368F2AD00D7CA7C /* woodblock.png */; };
+		411286A71368F31700D7CA7C /* concrete_block.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A61368F31700D7CA7C /* concrete_block.png */; };
+		411286AA136918F600D7CA7C /* PlaceableNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 411286A9136918F400D7CA7C /* PlaceableNode.m */; };
+		411286AD1369CDE500D7CA7C /* EggHinge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286AC1369CDE300D7CA7C /* EggHinge.mm */; };
+		411286B0136B238200D7CA7C /* EggCompoundBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286AF136B238100D7CA7C /* EggCompoundBlock.mm */; };
+		411286B3136B752F00D7CA7C /* EggDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286B2136B752C00D7CA7C /* EggDisaster.mm */; };
+		411286C6136BA02D00D7CA7C /* WindRayCastCallback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 411286C4136BA02D00D7CA7C /* WindRayCastCallback.cpp */; };
+		411286CA136BC8A600D7CA7C /* WindDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286C9136BC8A500D7CA7C /* WindDisaster.mm */; };
+		411286CD136E15E000D7CA7C /* QuakeDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286CC136E15DE00D7CA7C /* QuakeDisaster.mm */; };
+		411286D0136E20A300D7CA7C /* EggLevel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286CF136E20A200D7CA7C /* EggLevel.mm */; };
+		411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286DA136E511300D7CA7C /* ResourceManager.mm */; };
+		411286DE136F417D00D7CA7C /* play_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DC136F417D00D7CA7C /* play_button.png */; };
+		411286DF136F417D00D7CA7C /* reset_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DD136F417D00D7CA7C /* reset_button.png */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
@@ -178,6 +192,29 @@
 		411286891360E3B100D7CA7C /* EggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggBlock.mm; sourceTree = "<group>"; };
 		4112869D1365108B00D7CA7C /* EggNail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggNail.h; sourceTree = "<group>"; };
 		4112869E1365108B00D7CA7C /* EggNail.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggNail.mm; sourceTree = "<group>"; };
+		411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = old_yellow_brick_spiney_opengameart_PD_64px.png; path = Resources/old_yellow_brick_spiney_opengameart_PD_64px.png; sourceTree = "<group>"; };
+		411286A21368F2AD00D7CA7C /* woodblock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblock.png; path = Resources/woodblock.png; sourceTree = "<group>"; };
+		411286A61368F31700D7CA7C /* concrete_block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = concrete_block.png; path = Resources/concrete_block.png; sourceTree = "<group>"; };
+		411286A8136918F300D7CA7C /* PlaceableNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceableNode.h; sourceTree = "<group>"; };
+		411286A9136918F400D7CA7C /* PlaceableNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceableNode.m; sourceTree = "<group>"; };
+		411286AB1369CDE000D7CA7C /* EggHinge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggHinge.h; sourceTree = "<group>"; };
+		411286AC1369CDE300D7CA7C /* EggHinge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggHinge.mm; sourceTree = "<group>"; };
+		411286AE136B237E00D7CA7C /* EggCompoundBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggCompoundBlock.h; sourceTree = "<group>"; };
+		411286AF136B238100D7CA7C /* EggCompoundBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggCompoundBlock.mm; sourceTree = "<group>"; };
+		411286B1136B752900D7CA7C /* EggDisaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggDisaster.h; sourceTree = "<group>"; };
+		411286B2136B752C00D7CA7C /* EggDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggDisaster.mm; sourceTree = "<group>"; };
+		411286C4136BA02D00D7CA7C /* WindRayCastCallback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WindRayCastCallback.cpp; sourceTree = "<group>"; };
+		411286C5136BA02D00D7CA7C /* WindRayCastCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindRayCastCallback.h; sourceTree = "<group>"; };
+		411286C8136BC8A500D7CA7C /* WindDisaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindDisaster.h; sourceTree = "<group>"; };
+		411286C9136BC8A500D7CA7C /* WindDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WindDisaster.mm; sourceTree = "<group>"; };
+		411286CB136E15DD00D7CA7C /* QuakeDisaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuakeDisaster.h; sourceTree = "<group>"; };
+		411286CC136E15DE00D7CA7C /* QuakeDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QuakeDisaster.mm; sourceTree = "<group>"; };
+		411286CE136E20A100D7CA7C /* EggLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggLevel.h; sourceTree = "<group>"; };
+		411286CF136E20A200D7CA7C /* EggLevel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggLevel.mm; sourceTree = "<group>"; };
+		411286D9136E511200D7CA7C /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
+		411286DA136E511300D7CA7C /* ResourceManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourceManager.mm; sourceTree = "<group>"; };
+		411286DC136F417D00D7CA7C /* play_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play_button.png; path = Resources/play_button.png; sourceTree = "<group>"; };
+		411286DD136F417D00D7CA7C /* reset_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reset_button.png; path = Resources/reset_button.png; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
@@ -548,6 +585,24 @@
 		41DE7188135B76F800A118A1 /* EggDrop */ = {
 			isa = PBXGroup;
 			children = (
+				411286D9136E511200D7CA7C /* ResourceManager.h */,
+				411286DA136E511300D7CA7C /* ResourceManager.mm */,
+				411286CE136E20A100D7CA7C /* EggLevel.h */,
+				411286CF136E20A200D7CA7C /* EggLevel.mm */,
+				411286CB136E15DD00D7CA7C /* QuakeDisaster.h */,
+				411286CC136E15DE00D7CA7C /* QuakeDisaster.mm */,
+				411286C8136BC8A500D7CA7C /* WindDisaster.h */,
+				411286C9136BC8A500D7CA7C /* WindDisaster.mm */,
+				411286C4136BA02D00D7CA7C /* WindRayCastCallback.cpp */,
+				411286C5136BA02D00D7CA7C /* WindRayCastCallback.h */,
+				411286B1136B752900D7CA7C /* EggDisaster.h */,
+				411286B2136B752C00D7CA7C /* EggDisaster.mm */,
+				411286AE136B237E00D7CA7C /* EggCompoundBlock.h */,
+				411286AF136B238100D7CA7C /* EggCompoundBlock.mm */,
+				411286AB1369CDE000D7CA7C /* EggHinge.h */,
+				411286AC1369CDE300D7CA7C /* EggHinge.mm */,
+				411286A8136918F300D7CA7C /* PlaceableNode.h */,
+				411286A9136918F400D7CA7C /* PlaceableNode.m */,
 				4112869D1365108B00D7CA7C /* EggNail.h */,
 				4112869E1365108B00D7CA7C /* EggNail.mm */,
 				41401DDE135CF64900EEA005 /* Egg.h */,
@@ -581,6 +636,11 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				411286DC136F417D00D7CA7C /* play_button.png */,
+				411286DD136F417D00D7CA7C /* reset_button.png */,
+				411286A61368F31700D7CA7C /* concrete_block.png */,
+				411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */,
+				411286A21368F2AD00D7CA7C /* woodblock.png */,
 				41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */,
 				41401DD7135CB0A000EEA005 /* woodblocktexture.png */,
 				41DE718A135B76F800A118A1 /* Default.png */,
@@ -990,7 +1050,11 @@
 				41DE734E135B76FD00A118A1 /* blocks.png in Resources */,
 				41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */,
 				41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */,
-				0B531D74136A87A300EB7F59 /* testxml.xml in Resources */,
+				411286A41368F2AD00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png in Resources */,
+				411286A51368F2AD00D7CA7C /* woodblock.png in Resources */,
+				411286A71368F31700D7CA7C /* concrete_block.png in Resources */,
+				411286DE136F417D00D7CA7C /* play_button.png in Resources */,
+				411286DF136F417D00D7CA7C /* reset_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,6 +1205,15 @@
 				4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */,
 				4112869F1365108B00D7CA7C /* EggNail.mm in Sources */,
 				0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */,
+				411286AA136918F600D7CA7C /* PlaceableNode.m in Sources */,
+				411286AD1369CDE500D7CA7C /* EggHinge.mm in Sources */,
+				411286B0136B238200D7CA7C /* EggCompoundBlock.mm in Sources */,
+				411286B3136B752F00D7CA7C /* EggDisaster.mm in Sources */,
+				411286C6136BA02D00D7CA7C /* WindRayCastCallback.cpp in Sources */,
+				411286CA136BC8A600D7CA7C /* WindDisaster.mm in Sources */,
+				411286CD136E15E000D7CA7C /* QuakeDisaster.mm in Sources */,
+				411286D0136E20A300D7CA7C /* EggLevel.mm in Sources */,
+				411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */,s
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

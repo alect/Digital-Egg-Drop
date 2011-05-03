@@ -14,6 +14,7 @@
 
 @synthesize broken;
 
+
 -(id) initWithPos:(CGPoint)position
 {
     if((self = [super init]))
@@ -27,7 +28,7 @@
     return self;
 }
 
--(void) addToPhysicsWorld:(b2World*)world
+-(BOOL) addToPhysicsWorld:(b2World*)world
 {
     b2BodyDef eggBody;
     eggBody.type = b2_dynamicBody;
@@ -42,6 +43,7 @@
     eggFixture.density = 1.0f;
     eggFixture.friction = 0.3f;
     body->CreateFixture(&eggFixture);
+    return YES;
 }
 
 -(void) updatePhysics
@@ -65,12 +67,18 @@
         }
         
     }
-    if(max_impulse > 5)
+    if(fabsf(max_impulse) > 5)
     {
         NSLog(@"Egg Broken!!!: %f", max_impulse);
         broken = YES;
     }
 }
 
+
+-(id) copyWithZone:(NSZone*)zone
+{
+    Egg * clone = [[Egg allocWithZone:zone] initWithPos:ccp(mySprite.position.x, mySprite.position.y)] ;
+    return clone;
+}
 
 @end

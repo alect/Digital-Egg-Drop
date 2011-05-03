@@ -11,39 +11,110 @@
 
 @implementation EggBlock
 
+@synthesize width;
+@synthesize height;
+
+-(void) updateAddToWorld:(CGPoint)location
+{
+    self.position = location;
+}
+
+
+//various delegate methods
 -(void) setPosition:(CGPoint)position
 {
     mySprite.position = position;
+}
+
+-(CGPoint)position
+{
+    return mySprite.position;
+}
+
+-(void) setRotation:(float)rotation
+{
+    mySprite.rotation = rotation;
+}
+
+-(float) rotation
+{
+    return mySprite.rotation;
+}
+
+-(void) setAnchorPoint:(CGPoint)anchorPoint
+{
+    mySprite.anchorPoint = anchorPoint;
+}
+
+-(CGPoint) anchorPoint
+{
+    return mySprite.anchorPoint;
+}
+
+-(void) initiateAnchorPoint:(CGPoint)bodyGlobalCenter
+{
+    self.anchorPoint = ccp( (bodyGlobalCenter.x-self.position.x)/width+0.5, (bodyGlobalCenter.y-self.position.y)/height+0.5);
+}
+
+-(void) resolveAnchorPoint
+{
+    self.position = ccp(self.position.x + width*(self.anchorPoint.x-0.5), self.position.y+ height*(self.anchorPoint.y-0.5));
 }
 
 -(id) initWithRect:(CGRect)blockRect
 {
     if((self = [super init]))
     {
-        mySprite = [CCSprite spriteWithFile:@"woodblocktexture.png"];
+        mySprite = [CCSprite spriteWithFile:@"woodblock.png"];
         mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
         width = blockRect.size.width;
         height = blockRect.size.height;
         mySprite.scaleX = width/mySprite.contentSize.width;
         mySprite.scaleY = height/mySprite.contentSize.height;
-        [self addChild:mySprite];
         
+        [self addChild:mySprite];
+        desiredZ = 0;
     }
     return self;
 }
 
+-(void) setStartRotation:(float)newRotation
+{
+    self->rotation_ = newRotation;
+	isTransformDirty_ = isInverseDirty_ = YES;
+#if CC_NODE_TRANSFORM_USING_AFFINE_MATRIX
+	isTransformGLDirty_ = YES;
+#endif
+}
 
+-(float) startRotation
+{
+    return rotation_;
+}
 
 -(void) updatePhysics
 {
-    //myActor.position = CGPointMake( b->GetPosition().x * PTM_RATIO, b->GetPosition().y * PTM_RATIO);
-    //myActor.rotation = -1 * CC_RADIANS_TO_DEGREES(b->GetAngle());
+    
     
     mySprite.position = CGPointMake(body->GetPosition().x*PTM_RATIO, body->GetPosition().y*PTM_RATIO);
     mySprite.rotation = -1*CC_RADIANS_TO_DEGREES(body->GetAngle());
 }
 
--(void) addToPhysicsWorld:(b2World*)world
+-(void)createFixture:(b2Body*)someBody
+{
+    b2PolygonShape blockShape;
+    b2Vec2 center(mySprite.position.x/PTM_RATIO-someBody->GetPosition().x, mySprite.position.y/PTM_RATIO-someBody->GetPosition().y);
+    blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2, center, -1*CC_DEGREES_TO_RADIANS(self.startRotation));
+    //blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
+    b2FixtureDef blockFixture;
+    blockFixture.shape = &blockShape;
+    blockFixture.density = 1.5f;
+    blockFixture.friction = 0.3f;
+    blockFixture.userData = self;
+    someBody->CreateFixture(&blockFixture);
+}
+
+-(BOOL) addToPhysicsWorld:(b2World*)world
 {
     b2BodyDef blockBody;
     blockBody.type = b2_dynamicBody;
@@ -58,6 +129,13 @@
     blockFixture.density = 1.5f;
     blockFixture.friction = 0.3f;
     body->CreateFixture(&blockFixture);
+    return YES;
+}
+
+-(id) copyWithZone:(NSZone*)zone
+{
+    EggBlock * clone = [[EggBlock allocWithZone:zone] initWithRect:CGRectMake(self.position.x, self.position.y, self.width, self.height)];
+    return clone;
 }
 
 

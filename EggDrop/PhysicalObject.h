@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Box2D.h"
 
+//physical objects 
 @protocol PhysicalObject <NSObject>
 
--(void) addToPhysicsWorld:(b2World*)world;
+-(BOOL) addToPhysicsWorld:(b2World*)world;
 -(void) updatePhysics;
 
 @end
