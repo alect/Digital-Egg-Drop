@@ -7,6 +7,7 @@
 //
 
 #import "EggHinge.h"
+#import "Egg.h"
 #import <math.h>
 
 @implementation EggHinge
@@ -60,6 +61,20 @@
     }
     if(!isAnchor1 || !isAnchor2)
         return NO;
+    
+    
+    //check quickly to see if we just nailed an egg
+    if([(id)bodyAnchor1->GetUserData() class] == [Egg class] )
+    {
+        Egg* myEgg = (Egg*)bodyAnchor1->GetUserData();
+        myEgg.broken = YES;
+    }
+    if([(id)bodyAnchor2->GetUserData() class] == [Egg class] )
+    {
+        Egg* myEgg = (Egg*)bodyAnchor2->GetUserData();
+        myEgg.broken = YES;
+    }
+    
     
     //need to find the mid-point between the two anchors
     b2Vec2 relAnchor = anchor2-anchor1;

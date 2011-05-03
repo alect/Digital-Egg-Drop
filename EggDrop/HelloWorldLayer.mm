@@ -530,7 +530,7 @@ enum {
     
     state = placingObjects;
     
-    [self schedule: @selector(tick:)];
+    [self schedule: @selector(tick:) interval:.01];
 }
 
  
