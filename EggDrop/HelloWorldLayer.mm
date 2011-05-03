@@ -117,6 +117,10 @@ enum {
 		groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
 		groundBody->CreateFixture(&groundBox,0);
 		
+        //Parse Level
+        CCLOG(@"Starting to parse");
+        myParser = [LevelParser alloc];
+        [myParser loadDataFromXML];
 		
 		//Set up sprite
 		
@@ -142,10 +146,12 @@ enum {
         
         
         //create a simple Array to test out the various kinds of objects we can add to the game
-        objectsToPlace = [[NSMutableArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
-                                                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
-                                                            [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease], 
-                           nil] retain];
+        //objectsToPlace = [[NSMutableArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 12)] autorelease],
+        //                                                    [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 50)] autorelease],
+        //                                                    [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease], 
+        //                   nil] retain];
+        
+        objectsToPlace = [myParser getObjectDetails];
         
         nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
         [self addChild:nextLabel z:0];
@@ -270,6 +276,7 @@ enum {
     [self removeChild:objectToPlace cleanup:YES];
     objectToPlace = nil;
 }
+
 
 /*
 //in case we ever want to actually use the accelerometer, I'm leaving this function in here. 
