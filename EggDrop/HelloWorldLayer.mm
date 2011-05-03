@@ -103,10 +103,16 @@ enum {
                                   itemFromNormalImage:@"reset_button.png" selectedImage:@"reset_button.png" 
                                   target:self selector:@selector(resetButtonPressed: )];
         resetButton.position = ccp(screenSize.width-25, 25);
-        myUI = [[CCMenu menuWithItems:resetButton, nil] retain];
-        myUI.position = CGPointZero;
         
-        currentLevel = [[ResourceManager levelList] objectAtIndex:0];
+        nextLevelButton = [CCMenuItemImage 
+                                       itemFromNormalImage:@"play_button.png" selectedImage:@"play_button.png"
+                                       target:self selector:@selector(nextLevelButtonPressed: )];
+        nextLevelButton.position = ccp(screenSize.width/2, screenSize.height/2);
+        myUI = [[CCMenu menuWithItems:resetButton, nextLevelButton, nil] retain];
+        myUI.position = CGPointZero;
+
+        currentLevelIndex = 0;
+        currentLevel = [[ResourceManager levelList] objectAtIndex:currentLevelIndex];
         
 		//now here is where we load our initial level 
         [self loadFromLevel:currentLevel]; 
@@ -126,12 +132,25 @@ enum {
 -(void) resetButtonPressed:(id)sender
 {
     [self clearLevel];
-    //[self loadFromLevel:currentLevel];
-    
-    currentLevel = [[ResourceManager levelList] objectAtIndex:0];
-    NSLog(@"Problem? %@, %d", [currentLevel description], [currentLevel.objectsToPlace count]);
     [self loadFromLevel:currentLevel]; 
-    NSLog(@"Reset Level!");
+}
+
+-(void) nextLevelButtonPressed:(id)sender
+{
+    //try to load the next level of the game. 
+    if(currentLevelIndex+1 < [[ResourceManager levelList] count])
+    {
+        currentLevelIndex++;
+        currentLevel = [[ResourceManager levelList] objectAtIndex:currentLevelIndex];
+        [self clearLevel];
+        [self loadFromLevel:currentLevel];
+    }
+    else
+    {
+        NSLog(@"Out of levels!");
+    }
+    
+    NSLog(@"NEXT LEVEL!!!");
 }
 
 -(void) applyWind
@@ -193,7 +212,7 @@ enum {
 	//You need to make an informed choice, the following URL is useful
 	//http://gafferongames.com/game-physics/fix-your-timestep/
 	
-	if(state == paused)
+	if(state == paused || state == levelWon || state == eggBroken)
         return;
     
     int32 velocityIterations = 8;
@@ -227,6 +246,7 @@ enum {
     {
         [eggLabel setString:@"Egg: broken!!"];
         eggAlreadyBroken = YES;
+        state = eggBroken;
     }
     
 
@@ -262,6 +282,9 @@ enum {
         else if([disasters count] == 0)
         {
             [stateLabel setString:@"Level Complete!"];
+            state = levelWon;
+            [nextLevelButton setIsEnabled:YES];
+            nextLevelButton.visible = YES;
         }
     }
     
@@ -380,16 +403,25 @@ enum {
     [objectsToPlace release];
     [disasters release];
     
+    
     [self removeAllChildrenWithCleanup:YES];
     [self unscheduleAllSelectors];
+    
+    currentDisaster = nil;
+    objectToPlace = nil;
+    
 }
 
 -(void) loadFromLevel:(EggLevel *)level
 {
+    
+    nextLevelButton.visible = NO;
+    [nextLevelButton setIsEnabled:NO];
+    
     //first set up the physics again. 
     
     timeSinceLastDisaster = 0;
-    
+    eggAlreadyBroken = NO;
     
     CGSize screenSize = [CCDirector sharedDirector].winSize;
     CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);

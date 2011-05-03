@@ -23,7 +23,7 @@
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
 
-typedef enum {paused, placingObjects, runningDisasters} gameState;
+typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gameState;
 
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer
@@ -60,9 +60,11 @@ typedef enum {paused, placingObjects, runningDisasters} gameState;
     
     gameState state;
     EggLevel * currentLevel;
+    int currentLevelIndex;
     
     //keeping a reference of our menu here
     CCMenu *myUI;
+    CCMenuItem *nextLevelButton;
     
 }
 

@@ -23,8 +23,20 @@ static NSArray *levelArray;
 
 +(void) initialize
 {
+    
+    //zeroth level here. 
+    EggLevel *levelZero = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray array] 
+                                                                     andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                                                                [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                                                                [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                                                                [[[EggNail alloc] init] autorelease], nil] 
+                                                                     andDisasters:[NSArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:5 andDuration:5] autorelease], nil] 
+                                                                     andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]
+                                                                     ] autorelease];
+    
+    
     //first level right here
-    EggLevel *firstLevel = [[[EggLevel alloc] initWithObjectsInPlace:[[NSArray array] autorelease]
+    EggLevel *firstLevel = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray array]
                                                    andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 12, 200)] autorelease],
                                                                        [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 60, 60)] autorelease],
                                                                        [[[EggNail alloc] init] autorelease],
@@ -38,7 +50,9 @@ static NSArray *levelArray;
                              ] autorelease];
     
     
-    levelArray = [[NSArray arrayWithObjects:firstLevel, nil] retain];
+    
+    
+    levelArray = [[NSArray arrayWithObjects:levelZero, firstLevel, nil] retain];
 }
 
 +(NSArray*)levelList {return levelArray;}
