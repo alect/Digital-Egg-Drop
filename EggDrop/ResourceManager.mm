@@ -25,7 +25,7 @@ static NSArray *levelArray;
 {
     
     //easy intro level here
-    EggLevel *easyLevel = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(100, 200, 30, 150)] autorelease], nil] 
+    EggLevel *easyLevel = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(100, 110, 30, 150)] autorelease], nil] 
                                                   andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 40)] autorelease],
                                                                      [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 40)] autorelease],
                                                                      [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 40)] autorelease],nil]  
