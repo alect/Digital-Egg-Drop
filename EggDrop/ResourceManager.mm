@@ -20,12 +20,13 @@
 
 
 static NSArray *levelArray;
+static NSArray *xmlLevelArray;
 
 +(void) initialize
 {
     
     //easy intro level here
-    EggLevel *easyLevel = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(100, 110, 30, 150)] autorelease], nil] 
+    /*EggLevel *easyLevel = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(100, 110, 30, 150)] autorelease], nil] 
                                                   andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 40)] autorelease],
                                                                      [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 40)] autorelease],
                                                                      [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 40)] autorelease],nil]  
@@ -35,26 +36,26 @@ static NSArray *levelArray;
     
     //zeroth level here. 
     EggLevel *levelZero = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray array] 
-                                                                     andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
-                                                                                                                [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
-                                                                                                                [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
-                                                                                                                [[[EggNail alloc] init] autorelease], nil] 
-                                                                     andDisasters:[NSArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:5 andDuration:5] autorelease], nil] 
-                                                                     andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]
-                                                                     ] autorelease];
+                                                  andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                     [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                     [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                     [[[EggNail alloc] init] autorelease], nil] 
+                                                       andDisasters:[NSArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:5 andDuration:5] autorelease], nil] 
+                                                             andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]
+                            ] autorelease];
     
     
     //first level right here
     EggLevel *firstLevel = [[[EggLevel alloc] initWithObjectsInPlace:[NSArray array]
                                                    andObjectsToPlace:[NSArray arrayWithObjects:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 30, 100)] autorelease],
-                                                                       [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 60, 60)] autorelease],
-                                                                       [[[EggNail alloc] init] autorelease],
-                                                                       [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
-                                                                       nil]
+                                                                      [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 60, 60)] autorelease],
+                                                                      [[[EggNail alloc] init] autorelease],
+                                                                      [[[EggBlock alloc] initWithRect:CGRectMake(0, 0, 50, 50)] autorelease],
+                                                                      nil]
                                                         andDisasters:[NSArray arrayWithObjects:[[[WindDisaster alloc] initWithDelay:3 andStrength:2 andDuration:4] autorelease],
-                                                                       [[[QuakeDisaster alloc] initWithDelay:3 andStrength:50 andFrequency:2 andFriction:3 andDuration:10] autorelease],
-                                                                       [[[WindDisaster alloc] initWithDelay:3 andStrength:3  andDuration:2] autorelease],
-                                                                       nil]
+                                                                      [[[QuakeDisaster alloc] initWithDelay:3 andStrength:50 andFrequency:2 andFriction:3 andDuration:10] autorelease],
+                                                                      [[[WindDisaster alloc] initWithDelay:3 andStrength:3  andDuration:2] autorelease],
+                                                                      nil]
                                                               andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]
                              ] autorelease];
     
@@ -65,9 +66,12 @@ static NSArray *levelArray;
                                                               andEgg:[[[Egg alloc] initWithPos:ccp(200, 60)] autorelease]] autorelease];
     
     
-    levelArray = [[NSArray arrayWithObjects:easyLevel, levelZero, firstLevel, thirdLevel, nil] retain];
+    levelArray = [[NSArray arrayWithObjects:easyLevel, levelZero, firstLevel, thirdLevel, nil] retain];*/
+    xmlLevelArray = [[NSArray arrayWithObjects:@"easy", @"firstLevel", nil] retain];
 }
 
 +(NSArray*)levelList {return levelArray;}
+
++(NSArray*)xmlLevelList{return xmlLevelArray;}
 
 @end

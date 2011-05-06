@@ -1,0 +1,10 @@
+<level>
+  <block length="50" width="50" />
+  <block length="50" width="50" />
+  <block length="50" width="50" />
+  <nail />
+  
+  <disaster type="wind" strength="5" duration="5" />
+  
+  <egg posx="200" posy="60" />
+</level>

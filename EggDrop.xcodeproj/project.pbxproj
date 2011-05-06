@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B531D75136CEC8D00EB7F59 /* LevelParser.mm */; };
+		0B80A6E01374BC400020D795 /* easy.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B80A6DE1374BC400020D795 /* easy.xml */; };
+		0B80A6E11374BC400020D795 /* firstLevel.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B80A6DF1374BC400020D795 /* firstLevel.xml */; };
 		4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286891360E3B100D7CA7C /* EggBlock.mm */; };
 		4112869F1365108B00D7CA7C /* EggNail.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4112869E1365108B00D7CA7C /* EggNail.mm */; };
 		411286A41368F2AD00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */; };
@@ -188,8 +190,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0B531D73136A87A300EB7F59 /* testxml.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = testxml.xml; path = Resources/testxml.xml; sourceTree = "<group>"; };
 		0B531D75136CEC8D00EB7F59 /* LevelParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelParser.mm; sourceTree = "<group>"; };
+		0B80A6DE1374BC400020D795 /* easy.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = easy.xml; path = Resources/easy.xml; sourceTree = "<group>"; };
+		0B80A6DF1374BC400020D795 /* firstLevel.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = firstLevel.xml; path = Resources/firstLevel.xml; sourceTree = "<group>"; };
 		0BC29B7E1367A38B00880138 /* LevelParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelParser.h; sourceTree = "<group>"; };
 		411286881360E3B100D7CA7C /* EggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggBlock.h; sourceTree = "<group>"; };
 		411286891360E3B100D7CA7C /* EggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggBlock.mm; sourceTree = "<group>"; };
@@ -646,6 +649,8 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0B80A6DE1374BC400020D795 /* easy.xml */,
+				0B80A6DF1374BC400020D795 /* firstLevel.xml */,
 				41591EB513730FD1005CBAEE /* meteor.png */,
 				411286E41370697400D7CA7C /* cracked_egg.png */,
 				411286E51370697400D7CA7C /* egg.png */,
@@ -658,7 +663,6 @@
 				41401DD7135CB0A000EEA005 /* woodblocktexture.png */,
 				41DE718A135B76F800A118A1 /* Default.png */,
 				41DE718C135B76F800A118A1 /* fps_images.png */,
-				0B531D73136A87A300EB7F59 /* testxml.xml */,
 				41DE718E135B76F800A118A1 /* Icon-72.png */,
 				41DE7190135B76F800A118A1 /* Icon-Small-50.png */,
 				41DE7192135B76F800A118A1 /* Icon-Small.png */,
@@ -1071,6 +1075,8 @@
 				411286E61370697400D7CA7C /* cracked_egg.png in Resources */,
 				411286E71370697400D7CA7C /* egg.png in Resources */,
 				41591EB613730FD1005CBAEE /* meteor.png in Resources */,
+				0B80A6E01374BC400020D795 /* easy.xml in Resources */,
+				0B80A6E11374BC400020D795 /* firstLevel.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,5 +15,6 @@
 
 
 +(NSArray*)levelList;
++(NSArray*)xmlLevelList;
 
 @end
