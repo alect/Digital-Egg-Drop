@@ -41,6 +41,7 @@
 		41B1470D1375EBB300C49619 /* BrickEggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41B1470C1375EBB300C49619 /* BrickEggBlock.mm */; };
 		41B1470F1375EEC900C49619 /* cushiontexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B1470E1375EEC900C49619 /* cushiontexture.png */; };
 		41B147141375EF2A00C49619 /* CushionEggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41B147131375EF2900C49619 /* CushionEggBlock.mm */; };
+		41B147161376022D00C49619 /* straw2.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B147151376022D00C49619 /* straw2.png */; };
 		41DE7179135B76F800A118A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE7178135B76F800A118A1 /* QuartzCore.framework */; };
 		41DE717B135B76F800A118A1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE717A135B76F800A118A1 /* OpenGLES.framework */; };
 		41DE717D135B76F800A118A1 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE717C135B76F800A118A1 /* OpenAL.framework */; };
@@ -251,6 +252,7 @@
 		41B1470E1375EEC900C49619 /* cushiontexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cushiontexture.png; path = Resources/cushiontexture.png; sourceTree = "<group>"; };
 		41B147101375EEE000C49619 /* CushionEggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CushionEggBlock.h; sourceTree = "<group>"; };
 		41B147131375EF2900C49619 /* CushionEggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CushionEggBlock.mm; sourceTree = "<group>"; };
+		41B147151376022D00C49619 /* straw2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = straw2.png; path = Resources/straw2.png; sourceTree = "<group>"; };
 		41DE7174135B76F800A118A1 /* EggDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EggDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DE7178135B76F800A118A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41DE717A135B76F800A118A1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -676,6 +678,7 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				41B147151376022D00C49619 /* straw2.png */,
 				41B1470E1375EEC900C49619 /* cushiontexture.png */,
 				413A694F1375031C00127EA4 /* meteortest.xml */,
 				416644BD1374EECA007F9C01 /* lamont_level_test.xml */,
@@ -1114,6 +1117,7 @@
 				416644BE1374EECA007F9C01 /* lamont_level_test.xml in Resources */,
 				413A69501375031C00127EA4 /* meteortest.xml in Resources */,
 				41B1470F1375EEC900C49619 /* cushiontexture.png in Resources */,
+				41B147161376022D00C49619 /* straw2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

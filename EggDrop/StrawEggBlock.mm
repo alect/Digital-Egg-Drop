@@ -28,7 +28,7 @@
 
 -(void) loadGraphics:(CGRect)blockRect
 {
-    mySprite = [CCSprite spriteWithFile:@"woodblocktexture.png"];
+    mySprite = [CCSprite spriteWithFile:@"straw2.png"];
     mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
     width = blockRect.size.width;
     height = blockRect.size.height;
