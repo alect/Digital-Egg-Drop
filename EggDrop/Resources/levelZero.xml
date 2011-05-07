@@ -1,0 +1,11 @@
+<level>
+  <block posx="100" posy="110" length="30" width="150" initAtStart="yes" />
+
+  <block length="50" width="40" initAtStart="no"/>
+  <block length="50" width="40" initAtStart="no"/>
+  <block length="50" width="40" initAtStart="no"/>
+
+  <disaster type="wind" strength="2.5" duration="5"/>
+
+  <egg posx="250" posy="60"/>
+</level>

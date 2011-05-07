@@ -31,6 +31,8 @@
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
+		4147B6FD1374E25500F02AFF /* levelZero.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4147B6FC1374E25500F02AFF /* levelZero.xml */; };
+		4147B7001374E54C00F02AFF /* thirdLevel.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4147B6FF1374E54C00F02AFF /* thirdLevel.xml */; };
 		41591EB313730CC6005CBAEE /* MeteorDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41591EB213730CC6005CBAEE /* MeteorDisaster.mm */; };
 		41591EB613730FD1005CBAEE /* meteor.png in Resources */ = {isa = PBXBuildFile; fileRef = 41591EB513730FD1005CBAEE /* meteor.png */; };
 		41DE7179135B76F800A118A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE7178135B76F800A118A1 /* QuartzCore.framework */; };
@@ -228,6 +230,8 @@
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
 		41401DDF135CF64900EEA005 /* Egg.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Egg.mm; sourceTree = "<group>"; };
 		41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LonLonEggSprite4.png; path = Resources/LonLonEggSprite4.png; sourceTree = "<group>"; };
+		4147B6FC1374E25500F02AFF /* levelZero.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = levelZero.xml; path = Resources/levelZero.xml; sourceTree = "<group>"; };
+		4147B6FF1374E54C00F02AFF /* thirdLevel.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = thirdLevel.xml; path = Resources/thirdLevel.xml; sourceTree = "<group>"; };
 		41591EB113730CC6005CBAEE /* MeteorDisaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeteorDisaster.h; sourceTree = "<group>"; };
 		41591EB213730CC6005CBAEE /* MeteorDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MeteorDisaster.mm; sourceTree = "<group>"; };
 		41591EB513730FD1005CBAEE /* meteor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meteor.png; path = Resources/meteor.png; sourceTree = "<group>"; };
@@ -649,6 +653,8 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4147B6FF1374E54C00F02AFF /* thirdLevel.xml */,
+				4147B6FC1374E25500F02AFF /* levelZero.xml */,
 				0B80A6DE1374BC400020D795 /* easy.xml */,
 				0B80A6DF1374BC400020D795 /* firstLevel.xml */,
 				41591EB513730FD1005CBAEE /* meteor.png */,
@@ -1077,6 +1083,8 @@
 				41591EB613730FD1005CBAEE /* meteor.png in Resources */,
 				0B80A6E01374BC400020D795 /* easy.xml in Resources */,
 				0B80A6E11374BC400020D795 /* firstLevel.xml in Resources */,
+				4147B6FD1374E25500F02AFF /* levelZero.xml in Resources */,
+				4147B7001374E54C00F02AFF /* thirdLevel.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

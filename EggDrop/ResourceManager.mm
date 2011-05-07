@@ -67,7 +67,7 @@ static NSArray *xmlLevelArray;
     
     
     levelArray = [[NSArray arrayWithObjects:easyLevel, levelZero, firstLevel, thirdLevel, nil] retain];*/
-    xmlLevelArray = [[NSArray arrayWithObjects:@"easy", @"firstLevel", nil] retain];
+    xmlLevelArray = [[NSArray arrayWithObjects:@"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
 }
 
 +(NSArray*)levelList {return levelArray;}

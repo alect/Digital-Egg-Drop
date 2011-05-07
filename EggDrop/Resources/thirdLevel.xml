@@ -1,0 +1,7 @@
+<level>
+  <block posx="100" posy="200" length="30" width="200" initAtStart="yes"/>
+  <block posx="300" posy="200" length="30" width="200" initAtStart="yes"/>
+  <nail />
+  <disaster type="quake" strength="50" frequency="2" friction="4" duration="5"/>
+  <egg posx="200" posy="60"/>
+</level>

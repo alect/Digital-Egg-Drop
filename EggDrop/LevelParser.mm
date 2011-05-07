@@ -62,15 +62,15 @@
     
     if ([elementName isEqualToString:@"block"]) {
         
-        int length = [[attributeDict valueForKey:@"length"] intValue];    
-        int width = [[attributeDict valueForKey:@"width"] intValue];
+        float length = [[attributeDict valueForKey:@"length"] floatValue];    
+        float width = [[attributeDict valueForKey:@"width"] floatValue];
         NSString* initStart = [attributeDict valueForKey:@"initAtStart"];
         
-        NSLog(@"Length: %i, Width: %i, Exist at init:%@", length, width, initStart);
+        NSLog(@"Length: %f, Width: %f, Exist at init:%@", length, width, initStart);
         
         if ([initStart isEqualToString:@"yes"]){
-            int x = [[attributeDict valueForKey:@"posx"] intValue];
-            int y = [[attributeDict valueForKey:@"posy"] intValue];
+            float x = [[attributeDict valueForKey:@"posx"] floatValue];
+            float y = [[attributeDict valueForKey:@"posy"] floatValue];
             [initObjectDetails addObject:[[[EggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease]];
         }
         else{
@@ -90,28 +90,31 @@
     
     else if ([elementName isEqualToString:@"disaster"]) {
         NSString* type = [attributeDict valueForKey:@"type"];
-        
+        float delay = 3;
+        if([attributeDict valueForKey:@"delay"])
+            delay = [[attributeDict valueForKey:@"delay"] floatValue];
         if ([type isEqualToString:@"quake"]){
-            int strength = [[attributeDict valueForKey:@"strength"] intValue];
-            int duration = [[attributeDict valueForKey:@"duration"] intValue];
-            int frequency = [[attributeDict valueForKey:@"frequency"] intValue];
-            int friction = [[attributeDict valueForKey:@"friction"] intValue];
-            [disasterDetails addObject:[[[QuakeDisaster alloc] initWithDelay:3 andStrength:strength andFrequency:frequency andFriction:friction andDuration:duration] autorelease]];
-            NSLog(@"Quake, strength: %i, duration: %i, frequency: %i, friction: %i", strength, duration, frequency, friction);
+            float strength = [[attributeDict valueForKey:@"strength"] floatValue];
+            float duration = [[attributeDict valueForKey:@"duration"] floatValue];
+            float frequency = [[attributeDict valueForKey:@"frequency"] floatValue];
+            float friction = [[attributeDict valueForKey:@"friction"] floatValue];
+            
+            [disasterDetails addObject:[[[QuakeDisaster alloc] initWithDelay:delay andStrength:strength andFrequency:frequency andFriction:friction andDuration:duration] autorelease]];
+            NSLog(@"Quake, strength: %f, duration: %f, frequency: %f, friction: %f", strength, duration, frequency, friction);
         }
         else if ([type isEqualToString:@"wind"]) {
-            int strength = [[attributeDict valueForKey:@"strength"] intValue];
-            int duration = [[attributeDict valueForKey:@"duration"] intValue];
-            [disasterDetails addObject:[[[WindDisaster alloc] initWithDelay:3 andStrength:strength andDuration:duration] autorelease]];
-            NSLog(@"Wind, strength: %i, duration: %i", strength, duration);
+            float strength = [[attributeDict valueForKey:@"strength"] floatValue];
+            float duration = [[attributeDict valueForKey:@"duration"] floatValue];
+            [disasterDetails addObject:[[[WindDisaster alloc] initWithDelay:delay andStrength:strength andDuration:duration] autorelease]];
+            NSLog(@"Wind, strength: %f, duration: %f", strength, duration);
         }
     }
     
     else if ([elementName isEqualToString:@"egg"]) {
-        int x = [[attributeDict valueForKey:@"posx"] intValue];
-        int y = [[attributeDict valueForKey:@"posy"] intValue];
+        float x = [[attributeDict valueForKey:@"posx"] floatValue];
+        float y = [[attributeDict valueForKey:@"posy"] floatValue];
         myEgg = [[Egg alloc] initWithPos:ccp(x, y)];
-        NSLog(@"Egg, posx: %i, posy: %i", x, y);
+        NSLog(@"Egg, posx: %f, posy: %f", x, y);
     }
     
 }
