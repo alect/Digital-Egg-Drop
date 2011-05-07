@@ -12,6 +12,7 @@
 #import "EggCompoundBlock.h"
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
+#import "MeteorDisaster.h"
 
 @implementation LevelParser
 
@@ -107,6 +108,11 @@
             float duration = [[attributeDict valueForKey:@"duration"] floatValue];
             [disasterDetails addObject:[[[WindDisaster alloc] initWithDelay:delay andStrength:strength andDuration:duration] autorelease]];
             NSLog(@"Wind, strength: %f, duration: %f", strength, duration);
+        }
+        else if([type isEqualToString:@"meteor"]) {
+            float duration = [[attributeDict valueForKey:@"duration"] floatValue];
+            [disasterDetails addObject:[[[MeteorDisaster alloc] initWithDelay:delay andDuration:duration] autorelease]];
+            NSLog(@"Meteor, duration: %f", duration);
         }
     }
     

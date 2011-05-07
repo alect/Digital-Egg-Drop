@@ -28,6 +28,7 @@
 		411286DF136F417D00D7CA7C /* reset_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286DD136F417D00D7CA7C /* reset_button.png */; };
 		411286E61370697400D7CA7C /* cracked_egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286E41370697400D7CA7C /* cracked_egg.png */; };
 		411286E71370697400D7CA7C /* egg.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286E51370697400D7CA7C /* egg.png */; };
+		413A69501375031C00127EA4 /* meteortest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 413A694F1375031C00127EA4 /* meteortest.xml */; };
 		41401DD8135CB0A000EEA005 /* woodblocktexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DD7135CB0A000EEA005 /* woodblocktexture.png */; };
 		41401DE0135CF64A00EEA005 /* Egg.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41401DDF135CF64900EEA005 /* Egg.mm */; };
 		41401DE2135CFB4300EEA005 /* LonLonEggSprite4.png in Resources */ = {isa = PBXBuildFile; fileRef = 41401DE1135CFB4300EEA005 /* LonLonEggSprite4.png */; };
@@ -226,6 +227,7 @@
 		411286DD136F417D00D7CA7C /* reset_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = reset_button.png; path = Resources/reset_button.png; sourceTree = "<group>"; };
 		411286E41370697400D7CA7C /* cracked_egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cracked_egg.png; path = Resources/cracked_egg.png; sourceTree = "<group>"; };
 		411286E51370697400D7CA7C /* egg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = egg.png; path = Resources/egg.png; sourceTree = "<group>"; };
+		413A694F1375031C00127EA4 /* meteortest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = meteortest.xml; path = Resources/meteortest.xml; sourceTree = "<group>"; };
 		41401DD7135CB0A000EEA005 /* woodblocktexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = woodblocktexture.png; path = Resources/woodblocktexture.png; sourceTree = "<group>"; };
 		41401DDA135CD01400EEA005 /* PhysicalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicalObject.h; sourceTree = "<group>"; };
 		41401DDE135CF64900EEA005 /* Egg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Egg.h; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				413A694F1375031C00127EA4 /* meteortest.xml */,
 				416644BD1374EECA007F9C01 /* lamont_level_test.xml */,
 				4147B6FF1374E54C00F02AFF /* thirdLevel.xml */,
 				4147B6FC1374E25500F02AFF /* levelZero.xml */,
@@ -1089,6 +1092,7 @@
 				4147B6FD1374E25500F02AFF /* levelZero.xml in Resources */,
 				4147B7001374E54C00F02AFF /* thirdLevel.xml in Resources */,
 				416644BE1374EECA007F9C01 /* lamont_level_test.xml in Resources */,
+				413A69501375031C00127EA4 /* meteortest.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

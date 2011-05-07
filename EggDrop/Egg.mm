@@ -12,6 +12,12 @@
 
 @implementation Egg
 
+-(CGPoint) position
+{
+    return mySprite.position;
+}
+
+
 -(void) setBroken:(BOOL)newBroken
 {
     if(newBroken != broken)

@@ -1,0 +1,11 @@
+
+<level>
+  <block length="30" width="100"/>
+  <block length="30" width="100"/>
+  <block length="100" width="30"/>
+
+  <disaster type="meteor" delay="4" duration="15"/>
+
+  <egg posx="250" posy="60"/>
+
+</level>

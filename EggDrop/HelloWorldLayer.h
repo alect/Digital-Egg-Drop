@@ -40,7 +40,7 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     float quakeFrequency;
     float quakeVelocity;
     
-    Egg *myEgg;
+   
     BOOL eggAlreadyBroken;
     BOOL windy;
     
@@ -67,6 +67,9 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     //keeping a reference of our menu here
     CCMenu *myUI;
     CCMenuItem *nextLevelButton;
+    
+@public
+    Egg *myEgg;
     
 }
 
