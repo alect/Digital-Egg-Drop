@@ -38,6 +38,7 @@
 		41591EB313730CC6005CBAEE /* MeteorDisaster.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41591EB213730CC6005CBAEE /* MeteorDisaster.mm */; };
 		41591EB613730FD1005CBAEE /* meteor.png in Resources */ = {isa = PBXBuildFile; fileRef = 41591EB513730FD1005CBAEE /* meteor.png */; };
 		416644BE1374EECA007F9C01 /* lamont_level_test.xml in Resources */ = {isa = PBXBuildFile; fileRef = 416644BD1374EECA007F9C01 /* lamont_level_test.xml */; };
+		41B1470D1375EBB300C49619 /* BrickEggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41B1470C1375EBB300C49619 /* BrickEggBlock.mm */; };
 		41DE7179135B76F800A118A1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE7178135B76F800A118A1 /* QuartzCore.framework */; };
 		41DE717B135B76F800A118A1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE717A135B76F800A118A1 /* OpenGLES.framework */; };
 		41DE717D135B76F800A118A1 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE717C135B76F800A118A1 /* OpenAL.framework */; };
@@ -243,6 +244,8 @@
 		41591EB213730CC6005CBAEE /* MeteorDisaster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MeteorDisaster.mm; sourceTree = "<group>"; };
 		41591EB513730FD1005CBAEE /* meteor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meteor.png; path = Resources/meteor.png; sourceTree = "<group>"; };
 		416644BD1374EECA007F9C01 /* lamont_level_test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = lamont_level_test.xml; path = Resources/lamont_level_test.xml; sourceTree = "<group>"; };
+		41B1470B1375EBB300C49619 /* BrickEggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrickEggBlock.h; sourceTree = "<group>"; };
+		41B1470C1375EBB300C49619 /* BrickEggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BrickEggBlock.mm; sourceTree = "<group>"; };
 		41DE7174135B76F800A118A1 /* EggDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EggDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DE7178135B76F800A118A1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		41DE717A135B76F800A118A1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -608,6 +611,8 @@
 		41DE7188135B76F800A118A1 /* EggDrop */ = {
 			isa = PBXGroup;
 			children = (
+				41B1470B1375EBB300C49619 /* BrickEggBlock.h */,
+				41B1470C1375EBB300C49619 /* BrickEggBlock.mm */,
 				413A69521375DCC900127EA4 /* StrawEggBlock.h */,
 				413A69531375DCC900127EA4 /* StrawEggBlock.mm */,
 				41591EB113730CC6005CBAEE /* MeteorDisaster.h */,
@@ -1261,6 +1266,7 @@
 				411286DB136E511600D7CA7C /* ResourceManager.mm in Sources */,
 				41591EB313730CC6005CBAEE /* MeteorDisaster.mm in Sources */,
 				413A69541375DCC900127EA4 /* StrawEggBlock.mm in Sources */,
+				41B1470D1375EBB300C49619 /* BrickEggBlock.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

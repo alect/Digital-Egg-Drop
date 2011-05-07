@@ -67,6 +67,8 @@
     if((self = [super init]))
     {
         blockType = @"wood";
+        friction = 0.5;
+        density = 1.5f;
         [self loadGraphics:blockRect];
     }
     return self;
@@ -116,8 +118,8 @@
     //blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
     b2FixtureDef blockFixture;
     blockFixture.shape = &blockShape;
-    blockFixture.density = 1.5f;
-    blockFixture.friction = 0.3f;
+    blockFixture.density = density;
+    blockFixture.friction = friction;
     blockFixture.userData = self;
     someBody->CreateFixture(&blockFixture);
 }
@@ -134,8 +136,8 @@
     blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
     b2FixtureDef blockFixture;
     blockFixture.shape = &blockShape;
-    blockFixture.density = 1.5f;
-    blockFixture.friction = 0.3f;
+    blockFixture.density = density;
+    blockFixture.friction = friction;
     body->CreateFixture(&blockFixture);
     return YES;
 }

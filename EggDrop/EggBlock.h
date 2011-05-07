@@ -21,7 +21,8 @@
     float height;
     float startRotation;
     NSString *blockType;
-    
+    float density;
+    float friction;
 }
 
 @property(readonly) float width;

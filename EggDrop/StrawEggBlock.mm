@@ -16,6 +16,8 @@
     if((self=[super initWithRect:blockRect]))
     {
         blockType = @"straw";
+        density = 0.5;
+        friction = 1;
         impulseLimit = 20;
         totalImpulse = 0;
         baseImpulse = -1;
@@ -25,7 +27,6 @@
 
 -(void) loadGraphics:(CGRect)blockRect
 {
-    NSLog(@"LOADING GRAPHICS");
     mySprite = [CCSprite spriteWithFile:@"woodblocktexture.png"];
     mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
     width = blockRect.size.width;

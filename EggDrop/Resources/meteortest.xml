@@ -2,8 +2,8 @@
 <level>
   <block length="30" width="100"/>
   <block length="30" width="100"/>
-  <block length="100" width="30"/>
   <block length="100" width="30" type="straw"/>
+  <block length="100" width="30" type="brick"/>
     
   <disaster type="meteor" delay="4" duration="4"/>
 
