@@ -18,6 +18,7 @@
     NSMutableArray *objectDetails;
     NSMutableArray *disasterDetails;
     NSMutableArray *initObjectDetails;
+    EggDisaster *cloudDisaster;
     Egg *myEgg;
     EggLevel *level;
 }

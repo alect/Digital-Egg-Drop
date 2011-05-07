@@ -16,7 +16,7 @@
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
 #import "MeteorDisaster.h"
-
+#import "CloudBlockDisaster.h"
 
 @implementation LevelParser
 
@@ -30,6 +30,7 @@
         objectDetails = [[NSMutableArray array] retain];
         disasterDetails = [[NSMutableArray array] retain];
         myEgg = nil;
+        cloudDisaster = nil;
     }
     return self;
 }
@@ -49,7 +50,8 @@
     initObjectDetails = [[NSMutableArray array] retain];
     objectDetails = [[NSMutableArray array] retain];
     disasterDetails = [[NSMutableArray array] retain];
-    
+    cloudDisaster = nil;
+    myEgg = nil;
     
     [parser setDelegate:self];
     [parser parse];
@@ -100,6 +102,15 @@
         else if([type isEqualToString:@"cushion"])
         {
             blockToAdd = [[[CushionEggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];
+        }
+        else if([type isEqualToString:@"cloud"])
+        {
+            blockToAdd = [[[CloudEggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];
+            if(cloudDisaster == nil)
+            {
+                cloudDisaster = [[[CloudBlockDisaster alloc] initWithDelay:3 andDuration:4] autorelease];
+                [disasterDetails addObject:cloudDisaster];
+            }
         }
         else{
             blockToAdd = [[[EggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];

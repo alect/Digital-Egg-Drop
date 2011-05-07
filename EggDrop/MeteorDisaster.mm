@@ -16,6 +16,7 @@
 {
     if((self=[super init]))
     {
+        disasterName = @"!!!!!";
         delay = metDelay;
         duration = metDuration;
         meteorSprite = [[CCSprite spriteWithFile:@"meteor.png"] retain];

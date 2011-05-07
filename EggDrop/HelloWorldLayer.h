@@ -71,6 +71,9 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     //a list of objects to retain. Used mainly by meteor disaster. Helps us avoid the meteor memory management bug. 
     NSMutableArray *objectsToRetain;
     
+    //the clouds used by the cloud disaster
+    NSMutableArray *myClouds;
+    
 @public
     Egg *myEgg;
     
@@ -87,6 +90,7 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
 @property float timeSinceLastDisaster;
 
 @property(readonly) NSMutableArray *objectsToRetain;
+@property(readonly) NSMutableArray *myClouds;
 
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

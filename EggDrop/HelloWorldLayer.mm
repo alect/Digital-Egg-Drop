@@ -17,6 +17,7 @@
 #import "QuakeDisaster.h"
 #import "ResourceManager.h"
 #import "BreakablePhysicalObject.h"
+#import "CloudEggBlock.h"
 #import <math.h>
 
 // enums that will be used as tags
@@ -42,6 +43,7 @@ enum {
 @synthesize timeSinceLastDisaster;
 
 @synthesize objectsToRetain;
+@synthesize myClouds;
 
 +(CCScene *) scene
 {
@@ -431,6 +433,7 @@ enum {
     }
     
     [objectsToRetain release];
+    [myClouds release];
     [objectsToPlace release];
     [disasters release];
     
@@ -447,6 +450,7 @@ enum {
 {
     
     objectsToRetain = [[NSMutableArray array] retain];
+    myClouds = [[NSMutableArray array] retain];
     
     nextLevelButton.visible = NO;
     [nextLevelButton setIsEnabled:NO];
@@ -537,7 +541,12 @@ enum {
     //now load our level relevant stuff
     objectsToPlace = [[NSMutableArray array] retain];
     for(PlaceableNode * p in level.objectsToPlace)
-        [objectsToPlace addObject:[[p copy] autorelease] ];
+    {
+        PlaceableNode * clone = [[p copy] autorelease];
+        [objectsToPlace addObject:clone ];
+        if([clone class] == [CloudEggBlock class])
+            [myClouds addObject:clone];
+    }
     disasters = [[NSMutableArray array] retain];
     for(EggDisaster * d in level.disasters)
         [disasters addObject:[[d copy] autorelease]];
@@ -547,6 +556,9 @@ enum {
         CCNode <PhysicalObject> * clone = [[p copy] autorelease];
         [self addChild:clone];
         [clone addToPhysicsWorld:world];
+        //a little bit sloppy here, but this seemed like the easiest way to accomplish this
+        if([clone class] == [CloudEggBlock class])
+            [myClouds addObject:clone];
     }
     
     myEgg = [[level myEgg] copy];
@@ -576,6 +588,7 @@ enum {
 	
 	delete m_debugDraw;
     [objectsToRetain release];
+    [myClouds release];
     [objectsToPlace release];
     [disasters release];
     [myUI release];

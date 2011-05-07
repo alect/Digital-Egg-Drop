@@ -1,5 +1,6 @@
 
 <level>
+    <block length="30" width="100" type="cloud"/>
   <block length="30" width="100"/>
   <block length="30" width="100"/>
   <block length="100" width="30" type="straw"/>
