@@ -1,0 +1,12 @@
+<level>
+  <block length="30" width="100" initAtStart="no" />
+  <block length="60" width="60" initAtStart="no" />
+  <nail />
+  <block length="50" width="50" initAtStart="no" />
+
+  <disaster type="wind" strength="2" duration="4" />
+  <disaster type="quake" strength="50" frequency="2" friction="3" duration="10" />
+  <disaster type="wind" strength="3" duration="2" />
+
+  <egg posx="200" posy="60" />
+</level>

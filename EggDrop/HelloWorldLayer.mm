@@ -111,8 +111,16 @@ enum {
         myUI = [[CCMenu menuWithItems:resetButton, nextLevelButton, nil] retain];
         myUI.position = CGPointZero;
 
+        myParser = [LevelParser alloc];
+        
         currentLevelIndex = 0;
-        currentLevel = [[ResourceManager levelList] objectAtIndex:currentLevelIndex];
+        NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
+        [myParser loadDataFromXML:[[NSBundle mainBundle] pathForResource: level ofType: @"xml"]];
+        currentLevel  = [[[EggLevel alloc] initWithObjectsInPlace:[myParser getObjectInit]
+                                                              andObjectsToPlace:[myParser getObjects]
+                                                                   andDisasters:[myParser getDisasters]
+                                                                         andEgg:[myParser getEgg]
+                                        ] retain];
         
 		//now here is where we load our initial level 
         [self loadFromLevel:currentLevel]; 
@@ -135,10 +143,16 @@ enum {
 -(void) nextLevelButtonPressed:(id)sender
 {
     //try to load the next level of the game. 
-    if(currentLevelIndex+1 < [[ResourceManager levelList] count])
+    if(currentLevelIndex+1 < [[ResourceManager xmlLevelList] count])
     {
         currentLevelIndex++;
-        currentLevel = [[ResourceManager levelList] objectAtIndex:currentLevelIndex];
+        NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
+        [myParser loadDataFromXML:[[NSBundle mainBundle] pathForResource: level ofType: @"xml"]];
+        currentLevel = [[[EggLevel alloc] initWithObjectsInPlace:[myParser getObjectInit]
+                                               andObjectsToPlace:[myParser getObjects]
+                                                    andDisasters:[myParser getDisasters]
+                                                          andEgg:[myParser getEgg]
+                         ] retain];
         [self clearLevel];
         [self loadFromLevel:currentLevel];
     }

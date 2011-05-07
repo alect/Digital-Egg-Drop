@@ -33,7 +33,6 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
 	GLESDebugDraw *m_debugDraw;
     CCLabelTTF *stateLabel;
     CCLabelTTF *eggLabel;
-    LevelParser *myParser;
     
     //the block used to represent the floor for earthquakes
     EggBlock * quakeFloor;
@@ -61,6 +60,7 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     EggDisaster *currentDisaster;
     
     gameState state;
+    LevelParser *myParser;
     EggLevel * currentLevel;
     int currentLevelIndex;
     
