@@ -27,6 +27,7 @@
         mySprite.position = oldPos;
         mySprite.rotation = oldRot;
         [self addChild:mySprite];
+        
     }
 }
 
@@ -47,6 +48,7 @@
         mySprite.position = ccp(position.x, position.y);
         radius = fminf(mySprite.contentSize.width, mySprite.contentSize.height)/2;
         [self addChild:mySprite];
+        baseImpulse = -1;
     }
     return self;
 }
@@ -92,7 +94,13 @@
         }
         
     }
-    if(fabsf(max_impulse) > 9)
+    //need to wait until the transient impulse disapears before allowing the egg to be broken.
+    if(baseImpulse == -1 || baseImpulse > 9)
+    {
+        NSLog(@"starting Impulse: %f", max_impulse);
+        baseImpulse = max_impulse;
+    }
+    else if(fabsf(max_impulse) > 9)
     {
         NSLog(@"Egg Broken!!!: %f", max_impulse);
         self.broken = YES;
