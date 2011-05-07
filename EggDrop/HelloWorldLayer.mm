@@ -111,16 +111,12 @@ enum {
         myUI = [[CCMenu menuWithItems:resetButton, nextLevelButton, nil] retain];
         myUI.position = CGPointZero;
 
-        myParser = [LevelParser alloc];
+        myParser = [[LevelParser alloc] init];
         
         currentLevelIndex = 0;
         NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
-        [myParser loadDataFromXML:[[NSBundle mainBundle] pathForResource: level ofType: @"xml"]];
-        currentLevel  = [[[EggLevel alloc] initWithObjectsInPlace:[myParser getObjectInit]
-                                                              andObjectsToPlace:[myParser getObjects]
-                                                                   andDisasters:[myParser getDisasters]
-                                                                         andEgg:[myParser getEgg]
-                                        ] retain];
+        [myParser loadDataFromXML:level];
+        currentLevel = myParser.level;
         
 		//now here is where we load our initial level 
         [self loadFromLevel:currentLevel]; 
@@ -147,12 +143,8 @@ enum {
     {
         currentLevelIndex++;
         NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
-        [myParser loadDataFromXML:[[NSBundle mainBundle] pathForResource: level ofType: @"xml"]];
-        currentLevel = [[[EggLevel alloc] initWithObjectsInPlace:[myParser getObjectInit]
-                                               andObjectsToPlace:[myParser getObjects]
-                                                    andDisasters:[myParser getDisasters]
-                                                          andEgg:[myParser getEgg]
-                         ] retain];
+        [myParser loadDataFromXML:level];
+        currentLevel = myParser.level;
         [self clearLevel];
         [self loadFromLevel:currentLevel];
     }
@@ -558,6 +550,7 @@ enum {
     [objectsToPlace release];
     [disasters release];
     [myUI release];
+    [myParser release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

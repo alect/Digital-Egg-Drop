@@ -19,17 +19,14 @@
     NSMutableArray *disasterDetails;
     NSMutableArray *initObjectDetails;
     Egg *myEgg;
-    
+    EggLevel *level;
 }
 
 -(void)loadDataFromXML:(NSString *)path;
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict;
 
--(NSMutableArray*) getObjectInit;
--(NSMutableArray*) getObjects;
--(NSMutableArray*) getDisasters;
--(Egg*) getEgg;
+@property(readonly) EggLevel* level;
 
 @end
 

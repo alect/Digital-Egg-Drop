@@ -15,35 +15,50 @@
 
 @implementation LevelParser
 
+@synthesize level;
+
+-(id) init
+{
+    if((self=[super init]))
+    {
+        initObjectDetails = [[NSMutableArray array] retain];
+        objectDetails = [[NSMutableArray array] retain];
+        disasterDetails = [[NSMutableArray array] retain];
+        myEgg = nil;
+    }
+    return self;
+}
+
 -(void)loadDataFromXML:(NSString *)path{
     
-    NSData* data = [NSData dataWithContentsOfFile: path];
+    
+    NSString* actualPath = [[NSBundle mainBundle] pathForResource:path ofType:@"xml"];
+    
+    NSData* data = [NSData dataWithContentsOfFile: actualPath];
     NSXMLParser* parser = [[NSXMLParser alloc] initWithData: data];
     
-    //Clear vars
-    initObjectDetails = [[NSMutableArray arrayWithCapacity:5] retain];
-    objectDetails = [[NSMutableArray arrayWithCapacity:5] retain];
-    disasterDetails = [[NSMutableArray arrayWithCapacity:5] retain];
+    //need to release our stuff first
+    
+    if(level != nil)
+        [level release];
+    initObjectDetails = [[NSMutableArray array] retain];
+    objectDetails = [[NSMutableArray array] retain];
+    disasterDetails = [[NSMutableArray array] retain];
     
     
     [parser setDelegate:self];
     [parser parse];
     [parser release];
+    
+    level = [[EggLevel alloc] initWithObjectsInPlace:initObjectDetails andObjectsToPlace:objectDetails andDisasters:disasterDetails andEgg:myEgg];
+    [initObjectDetails release];
+    [objectDetails release];
+    [disasterDetails release];
+    [myEgg release];
+    
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName attributes:(NSDictionary *)attributeDict{
-    
-    if (!initObjectDetails){
-        initObjectDetails = [[NSMutableArray arrayWithCapacity:5] retain];
-    }
-    
-    if (!objectDetails){
-        objectDetails = [[NSMutableArray arrayWithCapacity:5] retain];
-    }
-    
-    if (!disasterDetails){
-        disasterDetails = [[NSMutableArray arrayWithCapacity:5] retain];
-    }
     
     if ([elementName isEqualToString:@"block"]) {
         
@@ -95,19 +110,18 @@
     else if ([elementName isEqualToString:@"egg"]) {
         int x = [[attributeDict valueForKey:@"posx"] intValue];
         int y = [[attributeDict valueForKey:@"posy"] intValue];
-        myEgg = [[[Egg alloc] initWithPos:ccp(x, y)] autorelease];
+        myEgg = [[Egg alloc] initWithPos:ccp(x, y)];
         NSLog(@"Egg, posx: %i, posy: %i", x, y);
     }
     
 }
 
-
-
--(NSMutableArray*) getObjectInit {return initObjectDetails;}
--(NSMutableArray*) getObjects {return objectDetails;}
--(NSMutableArray*) getDisasters {return disasterDetails;}
--(Egg*) getEgg {return myEgg;}
-
+-(void) dealloc
+{
+    if(level != nil)
+        [level release];
+    [super dealloc];
+}
 
 @end
 
