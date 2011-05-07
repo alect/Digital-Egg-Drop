@@ -12,7 +12,6 @@
 @implementation MeteorDisaster
 
 
-//test
 -(id) initWithDelay:(float)metDelay andDuration:(float)metDuration
 {
     if((self=[super init]))
