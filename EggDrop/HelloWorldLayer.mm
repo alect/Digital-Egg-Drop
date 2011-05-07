@@ -41,6 +41,8 @@ enum {
 
 @synthesize timeSinceLastDisaster;
 
+@synthesize objectsToRetain;
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -253,6 +255,12 @@ enum {
         if(j->GetUserData() != NULL && [((id)j->GetUserData()) conformsToProtocol:@protocol(PhysicalObject)]) {
             id <PhysicalObject> myObject = (id <PhysicalObject>)j->GetUserData();
             [myObject updatePhysics];
+            if([myObject conformsToProtocol:@protocol(BreakablePhysicalObject)])
+            {
+                id <BreakablePhysicalObject> breakableObject = (id <BreakablePhysicalObject>)myObject;
+                if([breakableObject shouldRemoveFromPhysics])
+                    [objectsToDestroy addObject:breakableObject];
+            }
         }
     }
     //now destroy our breakable objects. 
@@ -422,6 +430,7 @@ enum {
         world = NULL;
     }
     
+    [objectsToRetain release];
     [objectsToPlace release];
     [disasters release];
     
@@ -436,6 +445,8 @@ enum {
 
 -(void) loadFromLevel:(EggLevel *)level
 {
+    
+    objectsToRetain = [[NSMutableArray array] retain];
     
     nextLevelButton.visible = NO;
     [nextLevelButton setIsEnabled:NO];
@@ -564,7 +575,7 @@ enum {
 	world = NULL;
 	
 	delete m_debugDraw;
-
+    [objectsToRetain release];
     [objectsToPlace release];
     [disasters release];
     [myUI release];

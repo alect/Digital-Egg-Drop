@@ -7,7 +7,8 @@
 //
 
 #import "StrawEggBlock.h"
-
+#import "CushionEggBlock.h"
+#import "EggNail.h"
 
 @implementation StrawEggBlock
 
@@ -41,13 +42,32 @@
 -(BOOL) shouldRemoveFromPhysics
 {
     return totalImpulse >= impulseLimit;
+    
+    
 }
 
 //for removing this object from physics
 -(void) removeFromPhysicsWorld:(b2World*)world
 {
+    //need to make sure we didn't just destroy a joint as well.
+    for(b2JointEdge *j = body->GetJointList(); j; j=j->next)
+    {
+        b2Joint *joint = j->joint;
+        if(joint->GetUserData() != NULL)
+        {
+            id myID = (id)joint->GetUserData();
+            if( [[myID class] isSubclassOfClass:[EggNail class]] || [myID class] == [EggNail class])
+            {
+                EggNail* myNail = (EggNail*)(myID);
+                [myNail removeFromPhysicsWorld:world];
+            }
+        }
+    }
+    
+    
     //simply destroy our body
     world->DestroyBody(body);
+     
 }
 
 -(void)updatePhysics
@@ -58,8 +78,14 @@
     float max_impulse = 0;
     for (b2ContactEdge* ce = body->GetContactList(); ce; ce = ce->next)
     {
-        //first make sure we're actually touching something that's not a cushion
-        //TODO: cushion stuff in here. 
+
+        //check to see if we're dealing with a cushion first. If so, we don't apply any impulse. 
+        //this code is a little sloppy, but I think it's acceptable. 
+        if(ce->other->GetUserData() != NULL && [(id)(ce->other->GetUserData()) class] == [CushionEggBlock class])
+        {
+            continue;
+        }
+        
         
         b2Contact* c = ce->contact;
         

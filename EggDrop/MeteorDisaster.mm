@@ -25,6 +25,9 @@
 
 -(void) addDisasterToGame:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
 {
+    //need to get our mainLayer to retain a copy of us. Have to be a little tricky here. 
+    [mainLayer.objectsToRetain addObject:self];
+    
     meteorSprite.position = ccp(mainLayer->myEgg.position.x, 600); 
     [mainLayer addChild:meteorSprite];
     [self addToPhysicsWorld:world];

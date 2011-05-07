@@ -12,9 +12,11 @@
 #import "EggCompoundBlock.h"
 #import "StrawEggBlock.h"
 #import "BrickEggBlock.h"
+#import "CushionEggBlock.h"
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
 #import "MeteorDisaster.h"
+
 
 @implementation LevelParser
 
@@ -94,6 +96,10 @@
         else if([type isEqualToString:@"brick"])
         {
             blockToAdd = [[[BrickEggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];
+        }
+        else if([type isEqualToString:@"cushion"])
+        {
+            blockToAdd = [[[CushionEggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];
         }
         else{
             blockToAdd = [[[EggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];

@@ -9,6 +9,7 @@
 #import "Egg.h"
 #import <Math.h>
 #import "HelloWorldLayer.h"
+#import "CushionEggBlock.h"
 
 @implementation Egg
 
@@ -87,6 +88,13 @@
     //now we want to test for impulses that would break the egg. 
     for (b2ContactEdge* ce = body->GetContactList(); ce; ce = ce->next)
     {
+        //check to see if we're dealing with a cushion first. If so, we don't apply any impulse. 
+        //this code is a little sloppy, but I think it's acceptable. 
+        if(ce->other->GetUserData() != NULL && [(id)(ce->other->GetUserData()) class] == [CushionEggBlock class])
+        {
+            continue;
+        }
+        
         
         b2Contact* c = ce->contact;
         
