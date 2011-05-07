@@ -20,14 +20,17 @@
     float width;
     float height;
     float startRotation;
+    NSString *blockType;
     
 }
 
 @property(readonly) float width;
 @property(readonly) float height;
 @property float startRotation;
+@property(readonly) NSString *blockType;
 
 -(id) initWithRect:(CGRect)blockRect;
+-(void) loadGraphics:(CGRect)blockRect;
 -(void) createFixture:(b2Body*)someBody;
 -(void) initiateAnchorPoint:(CGPoint)bodyGlobalCenter;
 -(void) resolveAnchorPoint;

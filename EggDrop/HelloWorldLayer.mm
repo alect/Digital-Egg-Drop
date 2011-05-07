@@ -16,6 +16,7 @@
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
 #import "ResourceManager.h"
+#import "BreakablePhysicalObject.h"
 #import <math.h>
 
 // enums that will be used as tags
@@ -229,6 +230,8 @@ enum {
         [self applyWind];
     if(quake)
         [self applyQuake];
+    //create our list of guys to remove
+    NSMutableArray *objectsToDestroy = [[NSMutableArray array] retain];
     
 	//Iterate over the bodies in the physics world. This is where we call the updatePhysics function. 
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
@@ -236,6 +239,13 @@ enum {
 		if (b->GetUserData() != NULL && [((id)b->GetUserData()) conformsToProtocol:@protocol(PhysicalObject) ]) {
             id <PhysicalObject> myObject = (id <PhysicalObject>)b->GetUserData();
             [myObject updatePhysics];
+            //now check for breakable objects
+            if([myObject conformsToProtocol:@protocol(BreakablePhysicalObject)])
+            {
+                id <BreakablePhysicalObject> breakableObject = (id <BreakablePhysicalObject>)myObject;
+                if([breakableObject shouldRemoveFromPhysics])
+                    [objectsToDestroy addObject:breakableObject];
+            }
 		}	
 	}
     for (b2Joint* j = world->GetJointList(); j; j=j->GetNext())
@@ -245,6 +255,14 @@ enum {
             [myObject updatePhysics];
         }
     }
+    //now destroy our breakable objects. 
+    for(CCNode <BreakablePhysicalObject> *objectToDestroy in objectsToDestroy)
+    {
+        [self removeChild:objectToDestroy cleanup:YES];
+        [objectToDestroy removeFromPhysicsWorld:world];
+    }
+    [objectsToDestroy release];
+    
     if(myEgg.broken && !eggAlreadyBroken)
     {
         [eggLabel setString:@"Egg: broken!!"];

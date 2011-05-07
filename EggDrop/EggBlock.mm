@@ -13,6 +13,7 @@
 
 @synthesize width;
 @synthesize height;
+@synthesize blockType;
 
 -(void) updateAddToWorld:(CGPoint)location
 {
@@ -65,17 +66,24 @@
 {
     if((self = [super init]))
     {
-        mySprite = [CCSprite spriteWithFile:@"woodblock.png"];
-        mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
-        width = blockRect.size.width;
-        height = blockRect.size.height;
-        mySprite.scaleX = width/mySprite.contentSize.width;
-        mySprite.scaleY = height/mySprite.contentSize.height;
-        
-        [self addChild:mySprite];
-        desiredZ = 0;
+        blockType = @"wood";
+        [self loadGraphics:blockRect];
     }
     return self;
+}
+
+-(void) loadGraphics:(CGRect)blockRect
+{
+    mySprite = [CCSprite spriteWithFile:@"woodblock.png"];
+    mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
+    width = blockRect.size.width;
+    height = blockRect.size.height;
+    mySprite.scaleX = width/mySprite.contentSize.width;
+    mySprite.scaleY = height/mySprite.contentSize.height;
+    
+    [self addChild:mySprite];
+    desiredZ = 0;
+
 }
 
 -(void) setStartRotation:(float)newRotation
@@ -131,6 +139,8 @@
     body->CreateFixture(&blockFixture);
     return YES;
 }
+
+
 
 -(id) copyWithZone:(NSZone*)zone
 {

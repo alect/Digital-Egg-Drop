@@ -43,22 +43,6 @@
 
 -(BOOL) addToPhysicsWorld:(b2World*)world
 {
-    /*b2BodyDef eggBody;
-    eggBody.type = b2_dynamicBody;
-    eggBody.position.Set(mySprite.position.x/PTM_RATIO, mySprite.position.y/PTM_RATIO);
-    eggBody.userData = self;
-    body = world->CreateBody(&eggBody);
-    
-    b2CircleShape eggShape;
-    eggShape.m_radius = radius/PTM_RATIO;
-    b2FixtureDef eggFixture;
-    eggFixture.shape = &eggShape;
-    eggFixture.density = 1.0f;
-    eggFixture.friction = 0.3f;
-    body->CreateFixture(&eggFixture);*/
-    
-    
-    
     b2BodyDef meteorBody;
     meteorBody.type = b2_dynamicBody;
     meteorBody.position.Set(meteorSprite.position.x/PTM_RATIO, meteorSprite.position.y/PTM_RATIO);

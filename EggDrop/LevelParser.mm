@@ -10,6 +10,7 @@
 #import "EggNail.h"
 #import "EggHinge.h"
 #import "EggCompoundBlock.h"
+#import "StrawEggBlock.h"
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
 #import "MeteorDisaster.h"
@@ -65,18 +66,33 @@
         
         float length = [[attributeDict valueForKey:@"length"] floatValue];    
         float width = [[attributeDict valueForKey:@"width"] floatValue];
+        float x = 0;
+        float y = 0;
+        NSString *type = @"wood";
         NSString* initStart = [attributeDict valueForKey:@"initAtStart"];
         
         NSLog(@"Length: %f, Width: %f, Exist at init:%@", length, width, initStart);
         
+        //now handle special types of blocks
+        if([attributeDict valueForKey:@"type"])
+        {
+            type = [attributeDict valueForKey:@"type"];
+        }
+        
         if ([initStart isEqualToString:@"yes"]){
-            float x = [[attributeDict valueForKey:@"posx"] floatValue];
-            float y = [[attributeDict valueForKey:@"posy"] floatValue];
-            [initObjectDetails addObject:[[[EggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease]];
+            x = [[attributeDict valueForKey:@"posx"] floatValue];
+            y = [[attributeDict valueForKey:@"posy"] floatValue];
+        }
+        EggBlock *blockToAdd;
+        if([type isEqualToString:@"straw"])
+        {
+            NSLog(@"STRAW!!");
+            blockToAdd = [[[StrawEggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];
         }
         else{
-            [objectDetails addObject:[[[EggBlock alloc] initWithRect:CGRectMake(0, 0, length, width)] autorelease]];
+            blockToAdd = [[[EggBlock alloc] initWithRect:CGRectMake(x, y, length, width)] autorelease];
         }
+        [objectDetails addObject:blockToAdd];
     }
     
     else if ([elementName isEqualToString:@"nail"]) {
