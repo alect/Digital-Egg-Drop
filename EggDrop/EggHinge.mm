@@ -14,7 +14,7 @@
 
 -(id) initWithAnchor1:(CGPoint)anchor1 andAnchor2:(CGPoint)anchor2
 {
-    if((self=[super init]))
+    if((self=[super initWithAnchor1:anchor1 andAnchor2:anchor2]))
     {
         //release the images used by our parent because we need to use different images
         //HACK: this is kind of sloppy code, but it allows a lot of reuse of the EggNail code. 
