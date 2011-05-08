@@ -74,6 +74,12 @@
     secondAnchor = ccp(location.x, location.y);
 }
 
+-(void) resetToPosition:(CGSize)size atPoint:(CGPoint)location
+{
+    firstAnchor = location;
+    secondAnchor = ccp(firstAnchor.x+30, firstAnchor.y);
+}
+
 
 -(BOOL) addToPhysicsWorld:(b2World*)world
 {
