@@ -45,4 +45,9 @@
     return clone;
 }
 
+-(NSString*) disasterDescription:(HelloWorldLayer *)mainLayer
+{
+    return [NSString stringWithFormat:@"Wind strength= %dnewtons ends in: %d", (int)windStrength, (int)roundf(windDuration-mainLayer.timeSinceLastDisaster)]; 
+}
+
 @end

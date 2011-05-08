@@ -15,7 +15,7 @@
 {
     if((self = [super init]))
     {
-        disasterName = @"Clouds Disappear!";
+        disasterName = @"Cloud";
         delay = _delay;
         duration = _duration;
     }
@@ -46,6 +46,11 @@
 {
     CloudBlockDisaster* clone = [[CloudBlockDisaster allocWithZone:zone] initWithDelay:delay andDuration:duration];
     return clone;
+}
+
+-(NSString*) disasterDescription:(HelloWorldLayer *)mainLayer
+{
+    return [NSString stringWithFormat:@"Clouds Disappear! Survive for: %d", (int)roundf(duration-mainLayer.timeSinceLastDisaster)];
 }
 
 -(void) dealloc

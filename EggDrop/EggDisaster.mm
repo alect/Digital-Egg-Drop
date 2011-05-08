@@ -38,5 +38,10 @@
     
 }
 
+-(NSString*) disasterDescription:(HelloWorldLayer*)mainLayer
+{
+    return @"Disaster!";
+}
+
 
 @end

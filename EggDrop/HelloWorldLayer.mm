@@ -296,12 +296,13 @@ enum {
                 [disasters removeObjectAtIndex:0];
                 timeSinceLastDisaster = 0;
                 [currentDisaster addDisasterToGame:self withWorld:world];
-                [stateLabel setString:currentDisaster.disasterName];
+                [stateLabel setString:[currentDisaster disasterDescription:self]];
             }
 
         }
         else if(currentDisaster != nil)
         {
+            [stateLabel setString:[currentDisaster disasterDescription:self]];
             if(![currentDisaster isDisasterActive:self withWorld:world])
             {
                 [currentDisaster removeDisasterFromGame:self withWorld:world];

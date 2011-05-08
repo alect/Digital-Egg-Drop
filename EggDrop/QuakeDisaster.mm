@@ -20,7 +20,7 @@
         quakeFrequency = frequency;
         quakeFriction = friction;
         quakeDuration = duration;
-        disasterName = @"Quake!";
+        disasterName = @"Quake";
         oldFriction = 0.2;
     }
     return self;
@@ -64,6 +64,11 @@
 {
     QuakeDisaster * clone = [[QuakeDisaster allocWithZone:zone] initWithDelay:delay andStrength:quakeVelocity andFrequency:quakeFrequency andFriction:quakeFriction andDuration:quakeDuration];
     return clone;
+}
+
+-(NSString*)disasterDescription:(HelloWorldLayer *)mainLayer
+{
+    return [NSString stringWithFormat:@"Quake with frequency: %dhz ends in: %d", (int)quakeFrequency, (int)roundf(quakeDuration-mainLayer.timeSinceLastDisaster)]; 
 }
 
 @end

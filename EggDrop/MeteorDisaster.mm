@@ -16,7 +16,7 @@
 {
     if((self=[super init]))
     {
-        disasterName = @"!!!!!";
+        disasterName = @"Meteor";
         delay = metDelay;
         duration = metDuration;
         meteorSprite = [[CCSprite spriteWithFile:@"meteor.png"] retain];
@@ -77,6 +77,12 @@
 {
     [meteorSprite release];
     [super dealloc];
+}
+
+
+-(NSString*) disasterDescription:(HelloWorldLayer *)mainLayer
+{
+    return [NSString stringWithFormat:@"Meteor! survive for: %d", (int)roundf(duration-mainLayer.timeSinceLastDisaster)];
 }
 
 -(id) copyWithZone:(NSZone*)zone

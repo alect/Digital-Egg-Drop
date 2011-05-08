@@ -26,4 +26,6 @@
 -(BOOL) isDisasterActive:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 -(void) removeDisasterFromGame:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 
+-(NSString*) disasterDescription:(HelloWorldLayer*)mainLayer;
+
 @end
