@@ -1128,9 +1128,7 @@
 				41591EB613730FD1005CBAEE /* meteor.png in Resources */,
 				0B80A6E01374BC400020D795 /* easy.xml in Resources */,
 				0B80A6E11374BC400020D795 /* firstLevel.xml in Resources */,
-<<<<<<< HEAD
 				0B92E3371377108800F915B5 /* background.png in Resources */,
-=======
 				4147B6FD1374E25500F02AFF /* levelZero.xml in Resources */,
 				4147B7001374E54C00F02AFF /* thirdLevel.xml in Resources */,
 				416644BE1374EECA007F9C01 /* lamont_level_test.xml in Resources */,
@@ -1138,7 +1136,6 @@
 				41B1470F1375EEC900C49619 /* cushiontexture.png in Resources */,
 				41B147161376022D00C49619 /* straw2.png in Resources */,
 				41B1471E13760D1800C49619 /* cloudtexture.png in Resources */,
->>>>>>> 0a03978e2f93d9a725b77de483e07705a50c5dcb
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
