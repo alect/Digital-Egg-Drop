@@ -12,6 +12,8 @@
 
 @implementation EggNail
 
+@synthesize isBroken;
+
 -(id) initWithAnchor1:(CGPoint)anchor1 andAnchor2:(CGPoint)anchor2
 {
     if((self=[super init]))
@@ -24,7 +26,7 @@
         firstAnchor = ccp(anchor1.x, anchor1.y);
         secondAnchor = ccp(anchor2.x, anchor2.y);
         desiredZ = 1;
-        
+        isBroken = NO;
     }
     return self;
 }
@@ -137,6 +139,20 @@
     firstAnchor = ccp(globalA.x*PTM_RATIO, globalA.y*PTM_RATIO);
     secondAnchor = ccp(globalB.x*PTM_RATIO, globalB.y*PTM_RATIO);
 }
+
+
+-(BOOL) shouldRemoveFromPhysics
+{
+    return isBroken;
+}
+
+-(void) removeFromPhysicsWorld:(b2World*)world
+{
+    //don't actually need to do anything here. the removal of bodies should take care of this. 
+    //just need to remove ourselves from the image
+    [self removeFromParentAndCleanup:YES];
+}
+
 
 
 -(void) dealloc

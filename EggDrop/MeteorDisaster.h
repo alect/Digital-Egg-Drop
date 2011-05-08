@@ -11,12 +11,13 @@
 #import "PhysicalObject.h"
 #import "Box2D.h"
 #import "cocos2d.h"
+#import "HelloWorldLayer.h"
 
 
 //A simple disaster that represents a meteor. 
 //Right now, it simply spawns a meteor above the player. 
 @interface MeteorDisaster : EggDisaster <PhysicalObject> {
-    b2Body *meteorBody;
+    b2Body *body;
     CCSprite *meteorSprite;
     float duration;
 }

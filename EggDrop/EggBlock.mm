@@ -13,6 +13,7 @@
 
 @synthesize width;
 @synthesize height;
+@synthesize blockType;
 
 -(void) updateAddToWorld:(CGPoint)location
 {
@@ -65,17 +66,26 @@
 {
     if((self = [super init]))
     {
-        mySprite = [CCSprite spriteWithFile:@"woodblock.png"];
-        mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
-        width = blockRect.size.width;
-        height = blockRect.size.height;
-        mySprite.scaleX = width/mySprite.contentSize.width;
-        mySprite.scaleY = height/mySprite.contentSize.height;
-        
-        [self addChild:mySprite];
-        desiredZ = 0;
+        blockType = @"wood";
+        friction = 0.5;
+        density = 1.5f;
+        [self loadGraphics:blockRect];
     }
     return self;
+}
+
+-(void) loadGraphics:(CGRect)blockRect
+{
+    mySprite = [CCSprite spriteWithFile:@"woodblock.png"];
+    mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
+    width = blockRect.size.width;
+    height = blockRect.size.height;
+    mySprite.scaleX = width/mySprite.contentSize.width;
+    mySprite.scaleY = height/mySprite.contentSize.height;
+    
+    [self addChild:mySprite];
+    desiredZ = 0;
+
 }
 
 -(void) setStartRotation:(float)newRotation
@@ -108,8 +118,8 @@
     //blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
     b2FixtureDef blockFixture;
     blockFixture.shape = &blockShape;
-    blockFixture.density = 1.5f;
-    blockFixture.friction = 0.3f;
+    blockFixture.density = density;
+    blockFixture.friction = friction;
     blockFixture.userData = self;
     someBody->CreateFixture(&blockFixture);
 }
@@ -126,11 +136,13 @@
     blockShape.SetAsBox(width/PTM_RATIO/2, height/PTM_RATIO/2);
     b2FixtureDef blockFixture;
     blockFixture.shape = &blockShape;
-    blockFixture.density = 1.5f;
-    blockFixture.friction = 0.3f;
+    blockFixture.density = density;
+    blockFixture.friction = friction;
     body->CreateFixture(&blockFixture);
     return YES;
 }
+
+
 
 -(id) copyWithZone:(NSZone*)zone
 {

@@ -16,6 +16,8 @@
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
 #import "ResourceManager.h"
+#import "BreakablePhysicalObject.h"
+#import "CloudEggBlock.h"
 #import <math.h>
 
 // enums that will be used as tags
@@ -39,6 +41,9 @@ enum {
 @synthesize quake;
 
 @synthesize timeSinceLastDisaster;
+
+@synthesize objectsToRetain;
+@synthesize myClouds;
 
 +(CCScene *) scene
 {
@@ -111,16 +116,12 @@ enum {
         myUI = [[CCMenu menuWithItems:resetButton, nextLevelButton, nil] retain];
         myUI.position = CGPointZero;
 
-        myParser = [LevelParser alloc];
+        myParser = [[LevelParser alloc] init];
         
         currentLevelIndex = 0;
         NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
-        [myParser loadDataFromXML:[[NSBundle mainBundle] pathForResource: level ofType: @"xml"]];
-        currentLevel  = [[[EggLevel alloc] initWithObjectsInPlace:[myParser getObjectInit]
-                                                              andObjectsToPlace:[myParser getObjects]
-                                                                   andDisasters:[myParser getDisasters]
-                                                                         andEgg:[myParser getEgg]
-                                        ] retain];
+        [myParser loadDataFromXML:level];
+        currentLevel = myParser.level;
         
 		//now here is where we load our initial level 
         [self loadFromLevel:currentLevel]; 
@@ -147,12 +148,8 @@ enum {
     {
         currentLevelIndex++;
         NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
-        [myParser loadDataFromXML:[[NSBundle mainBundle] pathForResource: level ofType: @"xml"]];
-        currentLevel = [[[EggLevel alloc] initWithObjectsInPlace:[myParser getObjectInit]
-                                               andObjectsToPlace:[myParser getObjects]
-                                                    andDisasters:[myParser getDisasters]
-                                                          andEgg:[myParser getEgg]
-                         ] retain];
+        [myParser loadDataFromXML:level];
+        currentLevel = myParser.level;
         [self clearLevel];
         [self loadFromLevel:currentLevel];
     }
@@ -237,6 +234,8 @@ enum {
         [self applyWind];
     if(quake)
         [self applyQuake];
+    //create our list of guys to remove
+    NSMutableArray *objectsToDestroy = [[NSMutableArray array] retain];
     
 	//Iterate over the bodies in the physics world. This is where we call the updatePhysics function. 
 	for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
@@ -244,6 +243,13 @@ enum {
 		if (b->GetUserData() != NULL && [((id)b->GetUserData()) conformsToProtocol:@protocol(PhysicalObject) ]) {
             id <PhysicalObject> myObject = (id <PhysicalObject>)b->GetUserData();
             [myObject updatePhysics];
+            //now check for breakable objects
+            if([myObject conformsToProtocol:@protocol(BreakablePhysicalObject)])
+            {
+                id <BreakablePhysicalObject> breakableObject = (id <BreakablePhysicalObject>)myObject;
+                if([breakableObject shouldRemoveFromPhysics])
+                    [objectsToDestroy addObject:breakableObject];
+            }
 		}	
 	}
     for (b2Joint* j = world->GetJointList(); j; j=j->GetNext())
@@ -251,8 +257,22 @@ enum {
         if(j->GetUserData() != NULL && [((id)j->GetUserData()) conformsToProtocol:@protocol(PhysicalObject)]) {
             id <PhysicalObject> myObject = (id <PhysicalObject>)j->GetUserData();
             [myObject updatePhysics];
+            if([myObject conformsToProtocol:@protocol(BreakablePhysicalObject)])
+            {
+                id <BreakablePhysicalObject> breakableObject = (id <BreakablePhysicalObject>)myObject;
+                if([breakableObject shouldRemoveFromPhysics])
+                    [objectsToDestroy addObject:breakableObject];
+            }
         }
     }
+    //now destroy our breakable objects. 
+    for(CCNode <BreakablePhysicalObject> *objectToDestroy in objectsToDestroy)
+    {
+        [self removeChild:objectToDestroy cleanup:YES];
+        [objectToDestroy removeFromPhysicsWorld:world];
+    }
+    [objectsToDestroy release];
+    
     if(myEgg.broken && !eggAlreadyBroken)
     {
         [eggLabel setString:@"Egg: broken!!"];
@@ -412,6 +432,8 @@ enum {
         world = NULL;
     }
     
+    [objectsToRetain release];
+    [myClouds release];
     [objectsToPlace release];
     [disasters release];
     
@@ -441,6 +463,10 @@ enum {
         //add the sprite object to the layer
         [self addChild:background];
     }
+
+    objectsToRetain = [[NSMutableArray array] retain];
+    myClouds = [[NSMutableArray array] retain];
+
     
     nextLevelButton.visible = NO;
     [nextLevelButton setIsEnabled:NO];
@@ -486,8 +512,8 @@ enum {
     groundBody->CreateFixture(&groundBox,0);
     
     // top
-    groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
+    //groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
+    //groundBody->CreateFixture(&groundBox,0);
     
     // left
     groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,0));
@@ -531,7 +557,12 @@ enum {
     //now load our level relevant stuff
     objectsToPlace = [[NSMutableArray array] retain];
     for(PlaceableNode * p in level.objectsToPlace)
-        [objectsToPlace addObject:[[p copy] autorelease] ];
+    {
+        PlaceableNode * clone = [[p copy] autorelease];
+        [objectsToPlace addObject:clone ];
+        if([clone class] == [CloudEggBlock class])
+            [myClouds addObject:clone];
+    }
     disasters = [[NSMutableArray array] retain];
     for(EggDisaster * d in level.disasters)
         [disasters addObject:[[d copy] autorelease]];
@@ -558,6 +589,9 @@ enum {
         CCNode <PhysicalObject> * clone = [[p copy] autorelease];
         [self addChild:clone];
         [clone addToPhysicsWorld:world];
+        //a little bit sloppy here, but this seemed like the easiest way to accomplish this
+        if([clone class] == [CloudEggBlock class])
+            [myClouds addObject:clone];
     }
     
     myEgg = [[level myEgg] copy];
@@ -586,10 +620,12 @@ enum {
 	world = NULL;
 	
 	delete m_debugDraw;
-
+    [objectsToRetain release];
+    [myClouds release];
     [objectsToPlace release];
     [disasters release];
     [myUI release];
+    [myParser release];
 	// don't forget to call "super dealloc"
 	[super dealloc];
 }

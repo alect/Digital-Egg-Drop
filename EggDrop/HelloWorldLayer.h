@@ -41,7 +41,7 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     float quakeFrequency;
     float quakeVelocity;
     
-    Egg *myEgg;
+   
     BOOL eggAlreadyBroken;
     BOOL windy;
     
@@ -68,6 +68,15 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     //keeping a reference of our menu here
     CCMenu *myUI;
     CCMenuItem *nextLevelButton;
+
+    //a list of objects to retain. Used mainly by meteor disaster. Helps us avoid the meteor memory management bug. 
+    NSMutableArray *objectsToRetain;
+    
+    //the clouds used by the cloud disaster
+    NSMutableArray *myClouds;
+    
+@public
+    Egg *myEgg;
     
 }
 
@@ -80,6 +89,10 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
 @property(readonly) EggBlock* quakeFloor;
 
 @property float timeSinceLastDisaster;
+
+@property(readonly) NSMutableArray *objectsToRetain;
+@property(readonly) NSMutableArray *myClouds;
+
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
