@@ -24,7 +24,7 @@
 
 -(void) loadGraphics:(CGRect)blockRect
 {
-    mySprite = [CCSprite spriteWithFile:@"cloud2.png"];
+    mySprite = [CCSprite spriteWithFile:@"rottingwood.png"];
     mySprite.position = ccp(blockRect.origin.x, blockRect.origin.y);
     width = blockRect.size.width;
     height = blockRect.size.height;

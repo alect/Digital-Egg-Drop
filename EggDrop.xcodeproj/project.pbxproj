@@ -40,6 +40,7 @@
 		41591EB613730FD1005CBAEE /* meteor.png in Resources */ = {isa = PBXBuildFile; fileRef = 41591EB513730FD1005CBAEE /* meteor.png */; };
 		416644BE1374EECA007F9C01 /* lamont_level_test.xml in Resources */ = {isa = PBXBuildFile; fileRef = 416644BD1374EECA007F9C01 /* lamont_level_test.xml */; };
 		416A1E53137724B700DB4DCD /* cloud2.png in Resources */ = {isa = PBXBuildFile; fileRef = 416A1E52137724B700DB4DCD /* cloud2.png */; };
+		416A1E561377271500DB4DCD /* rottingwood.png in Resources */ = {isa = PBXBuildFile; fileRef = 416A1E551377271500DB4DCD /* rottingwood.png */; };
 		41B1470D1375EBB300C49619 /* BrickEggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41B1470C1375EBB300C49619 /* BrickEggBlock.mm */; };
 		41B1470F1375EEC900C49619 /* cushiontexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 41B1470E1375EEC900C49619 /* cushiontexture.png */; };
 		41B147141375EF2A00C49619 /* CushionEggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 41B147131375EF2900C49619 /* CushionEggBlock.mm */; };
@@ -254,6 +255,7 @@
 		41591EB513730FD1005CBAEE /* meteor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = meteor.png; path = Resources/meteor.png; sourceTree = "<group>"; };
 		416644BD1374EECA007F9C01 /* lamont_level_test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = lamont_level_test.xml; path = Resources/lamont_level_test.xml; sourceTree = "<group>"; };
 		416A1E52137724B700DB4DCD /* cloud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud2.png; path = Resources/cloud2.png; sourceTree = "<group>"; };
+		416A1E551377271500DB4DCD /* rottingwood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rottingwood.png; path = Resources/rottingwood.png; sourceTree = "<group>"; };
 		41B1470B1375EBB300C49619 /* BrickEggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrickEggBlock.h; sourceTree = "<group>"; };
 		41B1470C1375EBB300C49619 /* BrickEggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BrickEggBlock.mm; sourceTree = "<group>"; };
 		41B1470E1375EEC900C49619 /* cushiontexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cushiontexture.png; path = Resources/cushiontexture.png; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				416A1E551377271500DB4DCD /* rottingwood.png */,
 				416A1E52137724B700DB4DCD /* cloud2.png */,
 				0B92E3361377108800F915B5 /* background.png */,
 				41B1471D13760D1800C49619 /* cloudtexture.png */,
@@ -1140,6 +1143,7 @@
 				41B147161376022D00C49619 /* straw2.png in Resources */,
 				41B1471E13760D1800C49619 /* cloudtexture.png in Resources */,
 				416A1E53137724B700DB4DCD /* cloud2.png in Resources */,
+				416A1E561377271500DB4DCD /* rottingwood.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

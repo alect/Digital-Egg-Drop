@@ -600,8 +600,9 @@ enum {
     [myEgg addToPhysicsWorld:world];
     
     nextObjectToPlace = [objectsToPlace objectAtIndex:0];
+    
     nextObjectToPlace.position = ccp(440, 270);
-    [self addChild:nextObjectToPlace];
+    
 
     
     //and load up our menu again

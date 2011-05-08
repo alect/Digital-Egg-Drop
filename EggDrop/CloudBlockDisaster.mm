@@ -15,7 +15,7 @@
 {
     if((self = [super init]))
     {
-        disasterName = @"Cloud";
+        disasterName = @"Termites";
         delay = _delay;
         duration = _duration;
     }
@@ -50,7 +50,7 @@
 
 -(NSString*) disasterDescription:(HelloWorldLayer *)mainLayer
 {
-    return [NSString stringWithFormat:@"Clouds Disappear! Survive for: %d", (int)roundf(duration-mainLayer.timeSinceLastDisaster)];
+    return [NSString stringWithFormat:@"Termites eat your rotting blocks! Survive for: %d", (int)roundf(duration-mainLayer.timeSinceLastDisaster)];
 }
 
 -(void) dealloc
