@@ -427,6 +427,21 @@ enum {
 -(void) loadFromLevel:(EggLevel *)level
 {
     
+    if (self != nil) {
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        
+        //load the image files
+        CCSprite *background = [CCSprite spriteWithFile:@"background.png"];
+        
+        NSLog(@"background: %@", background);
+        
+        //place the image in the center of the screen
+        background.position = ccp(screenSize.width/2, screenSize.height/2);
+        
+        //add the sprite object to the layer
+        [self addChild:background];
+    }
+    
     nextLevelButton.visible = NO;
     [nextLevelButton setIsEnabled:NO];
     
@@ -498,18 +513,18 @@ enum {
     stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
     
     [self addChild:stateLabel z:0];
-    [stateLabel setColor:ccc3(255,255,255)];
+    [stateLabel setColor:ccc3(50,50,50)];
     stateLabel.position = ccp( screenSize.width/2, screenSize.height-60);
     
     //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" fontName:@"Arial" fontSize:18];
-    eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
-    [self addChild:eggLabel z:0];
-    [eggLabel setColor:ccc3(255, 255, 255)];
-    eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
+    //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
+    //[self addChild:eggLabel z:0];
+    //[eggLabel setColor:ccc3(255, 255, 255)];
+    //eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
     
     nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
     [self addChild:nextLabel z:0];
-    [nextLabel setColor:ccc3(255, 255, 255)];
+    [nextLabel setColor:ccc3(50, 50, 50)];
     nextLabel.position = ccp(460, 300);
     
         
@@ -520,6 +535,23 @@ enum {
     disasters = [[NSMutableArray array] retain];
     for(EggDisaster * d in level.disasters)
         [disasters addObject:[[d copy] autorelease]];
+    
+    NSMutableString* disastersString = [[NSMutableString alloc] initWithString:@"Disasters: "];
+    int n;
+     
+    for(n = 0; n < [disasters count]; n++){
+        EggDisaster *disaster = [disasters objectAtIndex:n];
+        [disastersString appendString:(disaster.disasterName)];
+        
+        if(n < [disasters count] - 1){
+            [disastersString appendString:@", "];
+        }
+    }
+    
+    disasterLabel = [CCLabelTTF labelWithString:disastersString dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18]; 
+    [self addChild:disasterLabel z:0];
+    [disasterLabel setColor:ccc3(50, 50, 50)];
+    disasterLabel.position = ccp(screenSize.width/2, screenSize.height-40);
     
     for(CCNode <PhysicalObject> * p in level.objectsInPlace)
     {
