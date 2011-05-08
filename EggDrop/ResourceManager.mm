@@ -25,7 +25,7 @@ static NSArray *xmlLevelArray;
 +(void) initialize
 {
     
-    xmlLevelArray = [[NSArray arrayWithObjects:@"meteortest", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
+    xmlLevelArray = [[NSArray arrayWithObjects:@"level1", @"level2", @"level3", @"level4", @"meteortest", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
 }
 
 +(NSArray*)levelList {return levelArray;}

@@ -1,0 +1,31 @@
+<level>
+
+<!-- Level 3: Show users that straw is weak, plus meteor, wind and quake disaster-->
+
+  <block length="30" width="100" type="straw"/>
+
+  <block length="30" width="100" type="straw"/>
+
+  <block length="100" width="30" type="brick"/>
+
+  <nail />
+
+  <block length="30" width="100"/>
+
+  <block length="30" width="100"/>
+
+  <block length="100" width="30" type="brick"/>
+  
+  <nail />
+
+  <nail />
+
+  <disaster type="meteor" delay="4" duration="4"/>
+
+  <disaster type="wind" strength="5" duration="4" />
+  
+  <disaster type="quake" strength="10" duration="4" frequency="2" friction="1" />
+
+  <egg posx="250" posy="60"/>
+
+</level>
