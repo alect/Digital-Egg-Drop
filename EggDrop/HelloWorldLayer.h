@@ -18,13 +18,14 @@
 #import "EggDisaster.h"
 #import "EggBlock.h"
 #import "EggLevel.h"
+#import "EggTutorial.h"
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
 
-typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gameState;
+typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon, tut} gameState;
 
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer
@@ -62,18 +63,28 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
     
     gameState state;
     LevelParser *myParser;
+    NSString* levelString;
     EggLevel * currentLevel;
+    EggTutorial * currentTutorial;
     int currentLevelIndex;
+    int currentTutorialIndex;
+    int currentSceneIndex;
     
     //keeping a reference of our menu here
     CCMenu *myUI;
     CCMenuItem *nextLevelButton;
+    CCMenuItem *resetButton;
+    CCMenuItem *nextTutorialButton;
 
     //a list of objects to retain. Used mainly by meteor disaster. Helps us avoid the meteor memory management bug. 
     NSMutableArray *objectsToRetain;
     
     //the clouds used by the cloud disaster
     NSMutableArray *myClouds;
+    
+    //the list of scenes used in the current tutorial
+    
+    NSMutableArray *scenes;
     
 @public
     Egg *myEgg;
@@ -102,6 +113,8 @@ typedef enum {paused, placingObjects, runningDisasters, eggBroken, levelWon} gam
 -(void) clearLevel;
 //loads all relevant objects from a level.
 -(void) loadFromLevel:(EggLevel*)level;
+//loads all relevant objects from a level.
+-(void) loadFromTutorial:(EggTutorial*)tutorial;
 
 
 @end

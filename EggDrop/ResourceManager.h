@@ -16,5 +16,6 @@
 
 +(NSArray*)levelList;
 +(NSArray*)xmlLevelList;
++(NSArray*)tutorialList;
 
 @end

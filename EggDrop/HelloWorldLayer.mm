@@ -104,7 +104,7 @@ enum {
          starMenu.position = CGPointZero;
          [self addChild:starMenu];
          */
-        CCMenuItem *resetButton = [CCMenuItemImage 
+        resetButton = [CCMenuItemImage 
                                   itemFromNormalImage:@"reset_button.png" selectedImage:@"reset_button.png" 
                                   target:self selector:@selector(resetButtonPressed: )];
         resetButton.position = ccp(screenSize.width-25, 25);
@@ -113,18 +113,36 @@ enum {
                                        itemFromNormalImage:@"play_button.png" selectedImage:@"play_button.png"
                                        target:self selector:@selector(nextLevelButtonPressed: )];
         nextLevelButton.position = ccp(screenSize.width/2, screenSize.height/2);
-        myUI = [[CCMenu menuWithItems:resetButton, nextLevelButton, nil] retain];
+        
+        nextTutorialButton = [CCMenuItemImage 
+                              itemFromNormalImage:@"play_button.png" selectedImage:@"play_button.png"
+                              target:self selector:@selector(nextTutorialButtonPressed: )];
+        nextTutorialButton.position = ccp(screenSize.width-25, 25);
+        
+        myUI = [[CCMenu menuWithItems:resetButton, nextLevelButton, nextTutorialButton, nil] retain];
         myUI.position = CGPointZero;
 
         myParser = [[LevelParser alloc] init];
         
         currentLevelIndex = 0;
-        NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
-        [myParser loadDataFromXML:level];
-        currentLevel = myParser.level;
+        currentTutorialIndex = 0;
+        levelString = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
         
-		//now here is where we load our initial level 
-        [self loadFromLevel:currentLevel]; 
+        if ([levelString isEqualToString:@"Tutorial"]) {
+            currentTutorial = [[ResourceManager tutorialList] objectAtIndex:currentTutorialIndex];
+            currentTutorialIndex++;
+            
+            //load our initial tutorial
+            [self loadFromTutorial:currentTutorial];
+        }
+        else{
+            [myParser loadDataFromXML:levelString];
+            currentLevel = myParser.level;
+            
+            //now here is where we load our initial level 
+            [self loadFromLevel:currentLevel]; 
+        }
+        
 	}
 	return self;
 }
@@ -147,11 +165,21 @@ enum {
     if(currentLevelIndex+1 < [[ResourceManager xmlLevelList] count])
     {
         currentLevelIndex++;
-        NSString* level = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
-        [myParser loadDataFromXML:level];
-        currentLevel = myParser.level;
-        [self clearLevel];
-        [self loadFromLevel:currentLevel];
+        levelString = [[ResourceManager xmlLevelList] objectAtIndex:currentLevelIndex];
+        if ([levelString isEqualToString:@"Tutorial"]) {
+            currentTutorial = [[ResourceManager tutorialList] objectAtIndex:currentTutorialIndex];
+            currentTutorialIndex++;
+            
+            [self clearLevel];
+            [self loadFromTutorial:currentTutorial];
+        }
+        else{
+            [myParser loadDataFromXML:levelString];
+            currentLevel = myParser.level;
+            
+            [self clearLevel];
+            [self loadFromLevel:currentLevel]; 
+        }
     }
     else
     {
@@ -159,6 +187,39 @@ enum {
     }
     
     NSLog(@"NEXT LEVEL!!!");
+}
+
+-(void) nextTutorialButtonPressed:(id)sender
+{
+    //try to load the next level of the game. 
+    if(currentSceneIndex+1 < [scenes count])
+    {
+        currentSceneIndex++;
+        if (self != nil) {
+            CGSize screenSize = [CCDirector sharedDirector].winSize;
+            
+            //load the first scene
+            
+            NSString* curScene = [scenes objectAtIndex:currentSceneIndex];
+            
+            CCSprite *background = [CCSprite spriteWithFile:curScene];
+            
+            NSLog(@"background: %@", background);
+            
+            //place the image in the center of the screen
+            background.position = ccp(screenSize.width/2, screenSize.height/2);
+            
+            //add the sprite object to the layer
+            [self addChild:background];
+        }
+    }
+    else
+    {
+        NSLog(@"Out of Screens!");
+        [self nextLevelButtonPressed:sender];
+    }
+    
+    NSLog(@"NEXT SCREEN!!!");
 }
 
 -(void) applyWind
@@ -220,7 +281,7 @@ enum {
 	//You need to make an informed choice, the following URL is useful
 	//http://gafferongames.com/game-physics/fix-your-timestep/
 	
-	if(state == paused || state == levelWon || state == eggBroken)
+	if(state == paused || state == levelWon || state == eggBroken || state == tut)
         return;
     
     int32 velocityIterations = 8;
@@ -433,11 +494,17 @@ enum {
         world = NULL;
     }
     
-    [objectsToRetain release];
-    [myClouds release];
-    [objectsToPlace release];
-    [disasters release];
-    
+    if ([levelString isEqualToString:@"Tutorial"]){
+        [scenes release];
+    }
+    else{
+        [objectsToRetain release];
+        [myClouds release];
+        [objectsToPlace release];
+        [disasters release];
+        
+        
+    }
     
     [self removeAllChildrenWithCleanup:YES];
     [self unscheduleAllSelectors];
@@ -471,6 +538,12 @@ enum {
     
     nextLevelButton.visible = NO;
     [nextLevelButton setIsEnabled:NO];
+    
+    resetButton.visible = YES;
+    [resetButton setIsEnabled:YES];
+    
+    nextTutorialButton.visible = NO;
+    [nextTutorialButton setIsEnabled:NO];
     
     //first set up the physics again. 
     
@@ -613,6 +686,103 @@ enum {
     [self schedule: @selector(tick:) interval:.01];
 }
 
+-(void) loadFromTutorial:(EggTutorial *)tutorial
+{
+    
+    currentSceneIndex = 0;
+    
+    scenes = [[NSMutableArray array] retain];
+    for(NSString* s in tutorial.scenes)
+        [scenes addObject:[[s copy] autorelease]];
+    
+    if (self != nil) {
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        
+        //load the first scene
+        
+        NSString* curScene = [scenes objectAtIndex:currentSceneIndex];
+        
+        CCSprite *background = [CCSprite spriteWithFile:curScene];
+        
+        NSLog(@"background: %@", background);
+        
+        //place the image in the center of the screen
+        background.position = ccp(screenSize.width/2, screenSize.height/2);
+        
+        //add the sprite object to the layer
+        [self addChild:background];
+    }
+    
+    //first set up the physics again. 
+    
+    timeSinceLastDisaster = 0;
+    eggAlreadyBroken = NO;
+    
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    CCLOG(@"Screen width %0.2f screen height %0.2f",screenSize.width,screenSize.height);
+    
+    // Define the gravity vector.
+    b2Vec2 gravity;
+    gravity.Set(0.0f, -10.0f);
+    
+    // Do we want to let bodies sleep?
+    // This will speed up the physics simulation
+    bool doSleep = true;
+    
+    // Construct a world object, which will hold and simulate the rigid bodies.
+    world = new b2World(gravity, doSleep);
+    
+    //Alec: I believe this should avoid the problem of tunneling, but decrease performance. Something to keep in min. 
+    world->SetContinuousPhysics(true);
+    world->SetDebugDraw(m_debugDraw);
+    
+    //Here is where we create the boundaries of the world
+    // Define the ground body.
+    b2BodyDef groundBodyDef;
+    groundBodyDef.position.Set(0, 0); // bottom-left corner
+    
+    // Call the body factory which allocates memory for the ground body
+    // from a pool and creates the ground box shape (also from a pool).
+    // The body is also added to the world.
+    b2Body* groundBody = world->CreateBody(&groundBodyDef);
+    
+    // Define the ground box shape.
+    b2PolygonShape groundBox;		
+    
+    // bottom
+    groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2(screenSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // top
+    //groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
+    //groundBody->CreateFixture(&groundBox,0);
+    
+    // left
+    groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(0,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    // right
+    groundBox.SetAsEdge(b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,0));
+    groundBody->CreateFixture(&groundBox,0);
+    
+    
+    nextLevelButton.visible = NO;
+    [nextLevelButton setIsEnabled:NO];
+    
+    resetButton.visible = NO;
+    [resetButton setIsEnabled:NO];
+    
+    nextTutorialButton.visible = YES;
+    [nextTutorialButton setIsEnabled:YES];
+
+    
+    //and load up our menu again
+    [self addChild:myUI z:1];
+    
+    state = tut;
+    
+    [self schedule: @selector(tick:) interval:.01];
+}
  
 // on "dealloc" you need to release all your retained objects
 - (void) dealloc
@@ -626,6 +796,7 @@ enum {
     [myClouds release];
     [objectsToPlace release];
     [disasters release];
+    [scenes release];
     [myUI release];
     [myParser release];
 	// don't forget to call "super dealloc"

@@ -8,6 +8,7 @@
 
 #import "ResourceManager.h"
 #import "EggLevel.h"
+#import "EggTutorial.h"
 #import "EggBlock.h"
 #import "Egg.h"
 #import "EggNail.h"
@@ -21,15 +22,25 @@
 
 static NSArray *levelArray;
 static NSArray *xmlLevelArray;
+static NSArray *tutorialArray;
 
 +(void) initialize
 {
     
-    xmlLevelArray = [[NSArray arrayWithObjects:@"meteortest", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
+    EggTutorial* tutorialEasy = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"background.png", @"background.png", nil] 
+                                    ]autorelease];
+    
+    xmlLevelArray = [[NSArray arrayWithObjects:@"Tutorial", @"meteortest", @"Tutorial", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
+    
+    tutorialArray = [[NSArray arrayWithObjects:tutorialEasy, tutorialEasy, nil] retain];
+    
+    
 }
 
 +(NSArray*)levelList {return levelArray;}
 
 +(NSArray*)xmlLevelList{return xmlLevelArray;}
+
++(NSArray*)tutorialList{return tutorialArray;}
 
 @end
