@@ -445,7 +445,7 @@ enum {
         [self addChild:nextObjectToPlace];
     }
     objectToPlace = nil;
-    if([objectsToPlace count] == 0)
+    if([objectsToPlace count] == 0 && state != eggBroken)
     {
         [stateLabel setString:@"No more objects. Begin disasters!"];
         state = runningDisasters;

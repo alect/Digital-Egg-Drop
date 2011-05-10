@@ -33,12 +33,21 @@ static NSArray *tutorialArray;
     EggTutorial* tutorial1 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newWoodBlock.png", @"newStrawBlock.png", @"newBrickBlock.png", @"newMeteor.png", nil] 
                                     ]autorelease];
     
-    EggTutorial* tutorial2 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newWind.png", nil] 
+    EggTutorial* tutorial2 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newWind.png", @"newNail.png", nil] 
                                ]autorelease];
     
-    tutorialArray = [[NSArray arrayWithObjects:tutorial0, tutorial1, tutorial2, nil] retain];
+    EggTutorial* tutorial3 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newQuake.png", nil] 
+                               ]autorelease];
     
-    xmlLevelArray = [[NSArray arrayWithObjects:@"Tutorial", @"Tutorial", @"level1", @"Tutorial", @"level2", @"level3", @"level4", @"meteortest", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
+    EggTutorial* tutorial5 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newRottingBlock.png", nil] 
+                               ]autorelease];
+    
+    EggTutorial* tutorial4 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newHinge.png", nil] 
+                               ]autorelease];
+    
+    tutorialArray = [[NSArray arrayWithObjects:tutorial0, tutorial1, tutorial2, tutorial3, tutorial4, tutorial5, nil] retain];
+    
+    xmlLevelArray = [[NSArray arrayWithObjects:@"Tutorial", @"Tutorial", @"level1", @"Tutorial", @"level2", @"Tutorial", @"level3", @"Tutorial", @"level5", @"Tutorial", @"level4", @"meteortest", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
 
 }
 
