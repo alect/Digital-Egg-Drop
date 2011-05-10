@@ -67,6 +67,7 @@
     b2BodyDef eggBody;
     eggBody.type = b2_dynamicBody;
     eggBody.position.Set(mySprite.position.x/PTM_RATIO, mySprite.position.y/PTM_RATIO);
+    eggBody.bullet = true;
     eggBody.userData = self;
     body = world->CreateBody(&eggBody);
     
