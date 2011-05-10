@@ -8,6 +8,8 @@
 
 #import "QuakeDisaster.h"
 #import "HelloWorldLayer.h"
+#import <AudioToolbox/AudioToolbox.h>
+
 
 @implementation QuakeDisaster
 
@@ -44,6 +46,10 @@
 
 -(BOOL) isDisasterActive:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
 {
+    if(mainLayer.timeSinceLastDisaster < quakeDuration)
+    {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
     return mainLayer.timeSinceLastDisaster < quakeDuration;
 }
 
