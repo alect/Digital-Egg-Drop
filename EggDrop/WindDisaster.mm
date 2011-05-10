@@ -50,4 +50,10 @@
     return [NSString stringWithFormat:@"Wind strength= %d Newtons ends in: %d", (int)windStrength, (int)roundf(windDuration-mainLayer.timeSinceLastDisaster)]; 
 }
 
+-(CCSprite*) disasterIcon:(HelloWorldLayer*)mainLayer
+{
+    return [[CCSprite spriteWithFile:@"cloud-icon.png"] autorelease];
+}
+
+
 @end

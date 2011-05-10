@@ -71,4 +71,10 @@
     return [NSString stringWithFormat:@"Quake with frequency: %dhz ends in: %d", (int)quakeFrequency, (int)roundf(quakeDuration-mainLayer.timeSinceLastDisaster)]; 
 }
 
+-(CCSprite*) disasterIcon:(HelloWorldLayer*)mainLayer
+{
+    return [[CCSprite spriteWithFile:@"quake.png"] autorelease];
+}
+
+
 @end

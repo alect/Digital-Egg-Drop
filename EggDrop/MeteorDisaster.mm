@@ -85,6 +85,12 @@
     return [NSString stringWithFormat:@"Meteor! survive for: %d", (int)roundf(duration-mainLayer.timeSinceLastDisaster)];
 }
 
+-(CCSprite*) disasterIcon:(HelloWorldLayer*)mainLayer
+{
+    return [[CCSprite spriteWithFile:@"meteor.png"] autorelease];
+}
+
+
 -(id) copyWithZone:(NSZone*)zone
 {
     MeteorDisaster * clone = [[MeteorDisaster alloc] initWithDelay:delay andDuration:duration];

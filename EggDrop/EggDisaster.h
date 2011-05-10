@@ -22,10 +22,12 @@
 @property(readonly) float delay;
 @property(readonly) NSString* disasterName;
 
+
 -(void) addDisasterToGame:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 -(BOOL) isDisasterActive:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 -(void) removeDisasterFromGame:(HelloWorldLayer*)mainLayer withWorld:(b2World*)world;
 
 -(NSString*) disasterDescription:(HelloWorldLayer*)mainLayer;
+-(CCSprite*) disasterIcon:(HelloWorldLayer*)mainLayer;
 
 @end

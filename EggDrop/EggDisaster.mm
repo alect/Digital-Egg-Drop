@@ -43,5 +43,10 @@
     return @"Disaster!";
 }
 
+-(CCSprite*) disasterIcon:(HelloWorldLayer*)mainLayer
+{
+    return [[CCSprite spriteWithFile:@"meteor.png"] autorelease];
+}
+
 
 @end

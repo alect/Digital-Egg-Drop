@@ -616,7 +616,7 @@ enum {
     windStrength = 2;
     
     //stateLabel = [CCLabelTTF labelWithString:@"place objects" fontName:@"Arial" fontSize:22];
-    stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Arial" fontSize:22];
+    stateLabel = [CCLabelTTF labelWithString:@"place objects" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentCenter fontName:@"Action Man" fontSize:24];
     
     [self addChild:stateLabel z:0];
     [stateLabel setColor:ccc3(50,50,50)];
@@ -628,10 +628,10 @@ enum {
     //[eggLabel setColor:ccc3(255, 255, 255)];
     //eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
     
-    nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
+    nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Action Man" fontSize:18];
     [self addChild:nextLabel z:0];
     [nextLabel setColor:ccc3(50, 50, 50)];
-    nextLabel.position = ccp(460, 300);
+    nextLabel.position = ccp(460, 290);
     
         
     //now load our level relevant stuff
@@ -657,9 +657,11 @@ enum {
         if(n < [disasters count] - 1){
             [disastersString appendString:@", "];
         }
+
     }
     
-    disasterLabel = [CCLabelTTF labelWithString:disastersString dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18]; 
+    
+    disasterLabel = [CCLabelTTF labelWithString:disastersString dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Action Man" fontSize:18]; 
     [disastersString release];
     
     [self addChild:disasterLabel z:0];

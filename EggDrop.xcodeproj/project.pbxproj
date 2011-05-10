@@ -12,6 +12,9 @@
 		0B80A6E11374BC400020D795 /* firstLevel.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B80A6DF1374BC400020D795 /* firstLevel.xml */; };
 		0B92E3371377108800F915B5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B92E3361377108800F915B5 /* background.png */; };
 		0BD813A71378C36B006A8AAD /* EggTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD813A61378C36A006A8AAD /* EggTutorial.m */; };
+		0BD813B61378EC08006A8AAD /* cloud_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BD813B51378EC08006A8AAD /* cloud_icon.png */; };
+		0BD813B91378EC15006A8AAD /* quake_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BD813B81378EC15006A8AAD /* quake_icon.png */; };
+		0BD813BB1379041E006A8AAD /* Action Man.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BD813BA1379041E006A8AAD /* Action Man.ttf */; };
 		4112868A1360E3B100D7CA7C /* EggBlock.mm in Sources */ = {isa = PBXBuildFile; fileRef = 411286891360E3B100D7CA7C /* EggBlock.mm */; };
 		4112869F1365108B00D7CA7C /* EggNail.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4112869E1365108B00D7CA7C /* EggNail.mm */; };
 		411286A41368F2AD00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 411286A11368F2AC00D7CA7C /* old_yellow_brick_spiney_opengameart_PD_64px.png */; };
@@ -217,6 +220,9 @@
 		0BC29B7E1367A38B00880138 /* LevelParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelParser.h; sourceTree = "<group>"; };
 		0BD813A51378C36A006A8AAD /* EggTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggTutorial.h; sourceTree = "<group>"; };
 		0BD813A61378C36A006A8AAD /* EggTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EggTutorial.m; sourceTree = "<group>"; };
+		0BD813B51378EC08006A8AAD /* cloud_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud_icon.png; path = Resources/cloud_icon.png; sourceTree = "<group>"; };
+		0BD813B81378EC15006A8AAD /* quake_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = quake_icon.png; path = Resources/quake_icon.png; sourceTree = "<group>"; };
+		0BD813BA1379041E006A8AAD /* Action Man.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Action Man.ttf"; path = "Resources/Action Man.ttf"; sourceTree = "<group>"; };
 		411286881360E3B100D7CA7C /* EggBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggBlock.h; sourceTree = "<group>"; };
 		411286891360E3B100D7CA7C /* EggBlock.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EggBlock.mm; sourceTree = "<group>"; };
 		4112869D1365108B00D7CA7C /* EggNail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggNail.h; sourceTree = "<group>"; };
@@ -709,6 +715,9 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0BD813BA1379041E006A8AAD /* Action Man.ttf */,
+				0BD813B81378EC15006A8AAD /* quake_icon.png */,
+				0BD813B51378EC08006A8AAD /* cloud_icon.png */,
 				416A1E5713772DA300DB4DCD /* level1.xml */,
 				416A1E5813772DA300DB4DCD /* level2.xml */,
 				416A1E5913772DA300DB4DCD /* level3.xml */,
@@ -1165,6 +1174,9 @@
 				416A1E5C13772DA300DB4DCD /* level2.xml in Resources */,
 				416A1E5D13772DA300DB4DCD /* level3.xml in Resources */,
 				416A1E5E13772DA300DB4DCD /* level4.xml in Resources */,
+				0BD813B61378EC08006A8AAD /* cloud_icon.png in Resources */,
+				0BD813B91378EC15006A8AAD /* quake_icon.png in Resources */,
+				0BD813BB1379041E006A8AAD /* Action Man.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
