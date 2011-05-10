@@ -150,5 +150,13 @@
     return clone;
 }
 
+-(void) resetToPosition:(CGSize)size atPoint:(CGPoint)location
+{
+    //want to be on screen basically.
+    float x = fminf(size.width-width/2-10, location.x);
+    float y = fminf(size.height-height/2-30, location.y);
+    self.position = ccp(x, y);
+    NSLog(@"%f, %f", x, y);
+}
 
 @end

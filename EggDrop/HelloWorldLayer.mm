@@ -406,7 +406,9 @@ enum {
     if([objectsToPlace count] > 1)
     {
         nextObjectToPlace = [objectsToPlace objectAtIndex:1];
-        nextObjectToPlace.position = ccp(440, 270);
+        //nextObjectToPlace.position = ccp(440, 270);
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        [nextObjectToPlace resetToPosition:screenSize atPoint:ccp(440, 270)];
         [self addChild:nextObjectToPlace];
     }
     
@@ -437,7 +439,9 @@ enum {
         [self removeChild:objectToPlace cleanup:YES];
         [self removeChild:nextObjectToPlace cleanup:YES];
         nextObjectToPlace = objectToPlace;
-        nextObjectToPlace.position = ccp(440, 270);
+        //nextObjectToPlace.position = ccp(440, 270);
+        CGSize screenSize = [CCDirector sharedDirector].winSize;
+        [nextObjectToPlace resetToPosition:screenSize atPoint:ccp(440, 270)];
         [self addChild:nextObjectToPlace];
     }
     objectToPlace = nil;
@@ -456,7 +460,8 @@ enum {
     [self removeChild:objectToPlace cleanup:YES];
     [self removeChild:nextObjectToPlace cleanup:YES];
     nextObjectToPlace = objectToPlace;
-    nextObjectToPlace.position = ccp(440, 270);
+    CGSize screenSize = [CCDirector sharedDirector].winSize;
+    [nextObjectToPlace resetToPosition:screenSize atPoint:ccp(440, 270)];
     [self addChild:nextObjectToPlace];
 
     objectToPlace = nil;
@@ -585,6 +590,7 @@ enum {
     groundBox.SetAsEdge(b2Vec2(0,0), b2Vec2(screenSize.width/PTM_RATIO,0));
     groundBody->CreateFixture(&groundBox,0);
     
+    //LOL: no more top for the meteors to come through. 
     // top
     //groundBox.SetAsEdge(b2Vec2(0,screenSize.height/PTM_RATIO), b2Vec2(screenSize.width/PTM_RATIO,screenSize.height/PTM_RATIO));
     //groundBody->CreateFixture(&groundBox,0);
@@ -654,9 +660,11 @@ enum {
     }
     
     disasterLabel = [CCLabelTTF labelWithString:disastersString dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18]; 
+    [disastersString release];
+    
     [self addChild:disasterLabel z:0];
     [disasterLabel setColor:ccc3(50, 50, 50)];
-    disasterLabel.position = ccp(screenSize.width/2, screenSize.height-40);
+    disasterLabel.position = ccp(screenSize.width/2, screenSize.height-30);
     
     for(CCNode <PhysicalObject> * p in level.objectsInPlace)
     {
@@ -674,9 +682,9 @@ enum {
     
     nextObjectToPlace = [objectsToPlace objectAtIndex:0];
     
-    nextObjectToPlace.position = ccp(440, 270);
-    
-
+    //nextObjectToPlace.position = ccp(440, 270);
+    [nextObjectToPlace resetToPosition:screenSize atPoint:ccp(440, 270)];
+    [self addChild:nextObjectToPlace];
     
     //and load up our menu again
     [self addChild:myUI z:1];

@@ -17,6 +17,7 @@
 
 -(void) beginAddToWorld:(CGPoint)location{}
 -(void) updateAddToWorld:(CGPoint)location{}
+-(void) resetToPosition:(CGSize)size atPoint:(CGPoint)location{}
 
 
 @end
