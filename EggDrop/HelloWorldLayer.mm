@@ -336,7 +336,9 @@ enum {
     
     if(myEgg.broken && !eggAlreadyBroken)
     {
-        [eggLabel setString:@"Egg: broken!!"];
+        [eggLabel setString:@"Egg Broken!!"];
+        eggLabel.visible = YES;
+        [self reorderChild:eggLabel z:10];
         eggAlreadyBroken = YES;
         state = eggBroken;
     }
@@ -622,11 +624,12 @@ enum {
     [stateLabel setColor:ccc3(50,50,50)];
     stateLabel.position = ccp( screenSize.width/2, screenSize.height-60);
     
-    //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" fontName:@"Arial" fontSize:18];
-    //eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Arial" fontSize:18];
-    //[self addChild:eggLabel z:0];
-    //[eggLabel setColor:ccc3(255, 255, 255)];
-    //eggLabel.position = ccp(screenSize.width/2, screenSize.height-40);
+    eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" fontName:@"Arial" fontSize:18];
+    eggLabel = [CCLabelTTF labelWithString:@"Egg Status: Okay!" dimensions:CGSizeMake(screenSize.width, 30) alignment:UITextAlignmentLeft fontName:@"Action Man" fontSize:36];
+    [self addChild:eggLabel z:0];
+    [eggLabel setColor:ccc3(50, 50, 50)];
+    eggLabel.position = ccp(screenSize.width/2 + 100, screenSize.height/2);
+    eggLabel.visible = NO;
     
     nextLabel = [CCLabelTTF labelWithString:@"Next:" dimensions:CGSizeMake(100, 30) alignment:UITextAlignmentLeft fontName:@"Action Man" fontSize:18];
     [self addChild:nextLabel z:0];
