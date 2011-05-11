@@ -11,6 +11,7 @@
 #import "HelloWorldLayer.h"
 #import "CushionEggBlock.h"
 #import "SimpleAudioEngine.h"
+#import "CDAudioManager.h"
 
 @implementation Egg
 
@@ -38,8 +39,10 @@
         
         //play the breaking sound
         if(broken)
-            [[SimpleAudioEngine sharedEngine] playEffect:@"breaking_egg_glass.caf" pitch:1.0f pan:0 gain:0.7f];
-        
+        {
+            [[[CDAudioManager sharedManager] soundEngine] stopAllSounds];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"breaking_egg_glass.caf" pitch:1.0f pan:0 gain:0.5f];
+        }
     }
 }
 
@@ -98,7 +101,7 @@
         //this code is a little sloppy, but I think it's acceptable. 
         if(ce->other->GetUserData() != NULL && [(id)(ce->other->GetUserData()) class] == [CushionEggBlock class])
         {
-            continue;
+            break;
         }
         
         

@@ -65,6 +65,11 @@
 		415D4B6A137A101A00129696 /* straw_blowing_away.caf in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B61137A101A00129696 /* straw_blowing_away.caf */; };
 		415D4B6B137A101A00129696 /* wind.caf in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B62137A101A00129696 /* wind.caf */; };
 		415D4B6C137A101A00129696 /* wrong_placement.caf in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B63137A101A00129696 /* wrong_placement.caf */; };
+		415D4B72137B3AE800129696 /* kidlevel1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B6D137B3AE700129696 /* kidlevel1.xml */; };
+		415D4B73137B3AE800129696 /* kidlevel2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B6E137B3AE700129696 /* kidlevel2.xml */; };
+		415D4B74137B3AE800129696 /* kidlevel3.xml in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B6F137B3AE800129696 /* kidlevel3.xml */; };
+		415D4B75137B3AE800129696 /* kidlevel4.xml in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B70137B3AE800129696 /* kidlevel4.xml */; };
+		415D4B76137B3AE800129696 /* kidlevel5.xml in Resources */ = {isa = PBXBuildFile; fileRef = 415D4B71137B3AE800129696 /* kidlevel5.xml */; };
 		416644BE1374EECA007F9C01 /* lamont_level_test.xml in Resources */ = {isa = PBXBuildFile; fileRef = 416644BD1374EECA007F9C01 /* lamont_level_test.xml */; };
 		416A1E53137724B700DB4DCD /* cloud2.png in Resources */ = {isa = PBXBuildFile; fileRef = 416A1E52137724B700DB4DCD /* cloud2.png */; };
 		416A1E561377271500DB4DCD /* rottingwood.png in Resources */ = {isa = PBXBuildFile; fileRef = 416A1E551377271500DB4DCD /* rottingwood.png */; };
@@ -312,6 +317,11 @@
 		415D4B61137A101A00129696 /* straw_blowing_away.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = straw_blowing_away.caf; path = Resources/straw_blowing_away.caf; sourceTree = "<group>"; };
 		415D4B62137A101A00129696 /* wind.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = wind.caf; path = Resources/wind.caf; sourceTree = "<group>"; };
 		415D4B63137A101A00129696 /* wrong_placement.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = wrong_placement.caf; path = Resources/wrong_placement.caf; sourceTree = "<group>"; };
+		415D4B6D137B3AE700129696 /* kidlevel1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = kidlevel1.xml; path = Resources/kidlevel1.xml; sourceTree = "<group>"; };
+		415D4B6E137B3AE700129696 /* kidlevel2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = kidlevel2.xml; path = Resources/kidlevel2.xml; sourceTree = "<group>"; };
+		415D4B6F137B3AE800129696 /* kidlevel3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = kidlevel3.xml; path = Resources/kidlevel3.xml; sourceTree = "<group>"; };
+		415D4B70137B3AE800129696 /* kidlevel4.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = kidlevel4.xml; path = Resources/kidlevel4.xml; sourceTree = "<group>"; };
+		415D4B71137B3AE800129696 /* kidlevel5.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = kidlevel5.xml; path = Resources/kidlevel5.xml; sourceTree = "<group>"; };
 		416644BD1374EECA007F9C01 /* lamont_level_test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = lamont_level_test.xml; path = Resources/lamont_level_test.xml; sourceTree = "<group>"; };
 		416A1E52137724B700DB4DCD /* cloud2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud2.png; path = Resources/cloud2.png; sourceTree = "<group>"; };
 		416A1E551377271500DB4DCD /* rottingwood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rottingwood.png; path = Resources/rottingwood.png; sourceTree = "<group>"; };
@@ -761,6 +771,11 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				415D4B6D137B3AE700129696 /* kidlevel1.xml */,
+				415D4B6E137B3AE700129696 /* kidlevel2.xml */,
+				415D4B6F137B3AE800129696 /* kidlevel3.xml */,
+				415D4B70137B3AE800129696 /* kidlevel4.xml */,
+				415D4B71137B3AE800129696 /* kidlevel5.xml */,
 				415D4B5B137A101A00129696 /* breaking_egg_glass.caf */,
 				415D4B5C137A101A00129696 /* earthquake.caf */,
 				415D4B5D137A101A00129696 /* egg_break.caf */,
@@ -1269,6 +1284,11 @@
 				415D4B6A137A101A00129696 /* straw_blowing_away.caf in Resources */,
 				415D4B6B137A101A00129696 /* wind.caf in Resources */,
 				415D4B6C137A101A00129696 /* wrong_placement.caf in Resources */,
+				415D4B72137B3AE800129696 /* kidlevel1.xml in Resources */,
+				415D4B73137B3AE800129696 /* kidlevel2.xml in Resources */,
+				415D4B74137B3AE800129696 /* kidlevel3.xml in Resources */,
+				415D4B75137B3AE800129696 /* kidlevel4.xml in Resources */,
+				415D4B76137B3AE800129696 /* kidlevel5.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

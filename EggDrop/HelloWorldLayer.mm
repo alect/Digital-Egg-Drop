@@ -19,6 +19,7 @@
 #import "BreakablePhysicalObject.h"
 #import "CloudEggBlock.h"
 #import <math.h>
+#import "CDAudioManager.h"
 
 // enums that will be used as tags
 enum {
@@ -155,6 +156,8 @@ enum {
 
 -(void) resetButtonPressed:(id)sender
 {
+    //stop all the sound effects when we press the reset button
+    [[[CDAudioManager sharedManager] soundEngine] stopAllSounds];
     [self clearLevel];
     [self loadFromLevel:currentLevel]; 
 }
@@ -240,7 +243,7 @@ enum {
         float y = i*rayInterval+10;
         WindRayCastCallback myCallback(windStrength);
         b2Vec2 point1(1, y/PTM_RATIO);
-        b2Vec2 point2(screenSize.width/PTM_RATIO, y/PTM_RATIO);
+        b2Vec2 point2(screenSize.width/PTM_RATIO, y/PTM_RATIO + 0.1);
         world->RayCast(&myCallback, point1, point2);
     }
     
@@ -389,7 +392,7 @@ enum {
 - (BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     NSLog(@"HELLO");
-    if(objectToPlace != nil || [objectsToPlace count] == 0)
+    if(objectToPlace != nil || [objectsToPlace count] == 0 || state != placingObjects)
         return NO;
     
     //first, remove this object from the "next" preview
@@ -692,7 +695,7 @@ enum {
     [self addChild:nextObjectToPlace];
     
     //and load up our menu again
-    [self addChild:myUI z:1];
+    [self addChild:myUI z:2];
     
     state = placingObjects;
     
@@ -790,7 +793,7 @@ enum {
 
     
     //and load up our menu again
-    [self addChild:myUI z:1];
+    [self addChild:myUI z:2];
     
     state = tut;
     
