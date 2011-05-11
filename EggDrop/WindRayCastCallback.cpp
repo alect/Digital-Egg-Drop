@@ -14,5 +14,5 @@ float32 WindRayCastCallback::ReportFixture(b2Fixture* fixture, const b2Vec2& poi
     b2Body* body = fixture->GetBody();
     body->ApplyForce(b2Vec2(strength, 0), point);
     //we return the given fraction specifically so that we don't continue the ray any farther. 
-    return fraction;
+    return fraction-.01;
 }
