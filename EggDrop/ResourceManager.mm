@@ -17,6 +17,7 @@
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
 #import "SimpleAudioEngine.h"
+#import "CDAudioManager.h"
 
 @implementation ResourceManager
 
@@ -24,6 +25,8 @@
 static NSArray *levelArray;
 static NSArray *xmlLevelArray;
 static NSArray *tutorialArray;
+
+
 
 +(void) initialize
 {
@@ -52,16 +55,20 @@ static NSArray *tutorialArray;
 
     
     
-    //load all our audio effects
+    
+    //load all our audio effects. 
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"breaking_egg_glass.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"wind.caf"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"earthquake.caf"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"hammer_click.caf"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"rotting_wood.caf"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"staw_blowing_away.caf"];
-    [[SimpleAudioEngine sharedEngine] preloadEffect:@"wind.caf"];
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"wrong_placement.caf"];
     
+    
+    
 }
+
 
 +(NSArray*)levelList {return levelArray;}
 

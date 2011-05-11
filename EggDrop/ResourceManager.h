@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
+//some definitions for our sound constants
+#define WIND_SOUND 0
+#define QUAKE_SOUND 1
+
 //a class for containing all the static resources such as the levels. 
 @interface ResourceManager : NSObject {
     

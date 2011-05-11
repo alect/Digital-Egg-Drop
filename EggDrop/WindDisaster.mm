@@ -8,7 +8,7 @@
 
 #import "WindDisaster.h"
 #import "HelloWorldLayer.h"
-#import "SimpleAudioEngine.h"
+#import "ResourceManager.h"
 
 @implementation WindDisaster
 
@@ -29,12 +29,13 @@
     mainLayer.windy = YES;
     mainLayer.windStrength = windStrength;
     
-    [[SimpleAudioEngine sharedEngine] playEffect:@"wind.caf"];
+    mySoundID = [[SimpleAudioEngine sharedEngine] playEffect:@"wind.caf" pitch:1.0f pan:0.0 gain:1.0f loop:YES];
 }
 
 -(void) removeDisasterFromGame:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
 {
     mainLayer.windy = NO;
+    [[SimpleAudioEngine sharedEngine] stopEffect:mySoundID];
     
 }
 

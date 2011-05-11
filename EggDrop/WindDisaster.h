@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "EggDisaster.h"
+#import "SimpleAudioEngine.h"
 
 @interface WindDisaster : EggDisaster {
 @private
     float windStrength;
     float windDuration;
+    ALuint mySoundID;
 }
 
 -(id)initWithDelay:(float)delay andStrength:(float)strength andDuration:(float)duration;

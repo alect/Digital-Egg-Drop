@@ -130,9 +130,15 @@ static CDBufferManager *bufferManager = nil;
 
 -(ALuint) playEffect:(NSString*) filePath pitch:(Float32) pitch pan:(Float32) pan gain:(Float32) gain
 {
+    return [self playEffect:filePath pitch:pitch pan:pan gain:gain loop:false];
+}
+
+//ALEC: HACK HACK hacking the SimpleAudioEngine to allow me to loop the goddamn sound effects
+-(ALuint) playEffect:(NSString*) filePath pitch:(Float32) pitch pan:(Float32) pan gain:(Float32) gain loop:(BOOL) loop
+{
 	int soundId = [bufferManager bufferForFile:filePath create:YES];
 	if (soundId != kCDNoBuffer) {
-		return [soundEngine playSound:soundId sourceGroupId:0 pitch:pitch pan:pan gain:gain loop:false];
+		return [soundEngine playSound:soundId sourceGroupId:0 pitch:pitch pan:pan gain:gain loop:loop];
 	} else {
 		return CD_MUTE;
 	}	

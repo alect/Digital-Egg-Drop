@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EggDisaster.h"
+#import "SimpleAudioEngine.h"
 
 @interface QuakeDisaster : EggDisaster {
 @private
@@ -16,6 +17,7 @@
     float quakeFrequency;
     float quakeFriction;
     float oldFriction;
+    ALuint mySoundID;
 }
 
 -(id) initWithDelay:(float)delay andStrength:(float)strength andFrequency:(float)frequency andFriction:(float)quakeFriction andDuration:(float)duration;

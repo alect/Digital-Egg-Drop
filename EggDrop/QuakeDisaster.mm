@@ -8,8 +8,8 @@
 
 #import "QuakeDisaster.h"
 #import "HelloWorldLayer.h"
-#import "SimpleAudioEngine.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "ResourceManager.h"
 
 
 @implementation QuakeDisaster
@@ -43,8 +43,8 @@
         oldFriction = f->GetFriction();
         f->SetFriction(quakeFriction);
     }
-    //if we're not already playing the quake sound, play it. 
-    [[SimpleAudioEngine sharedEngine] playEffect:@"earthquake.caf"];
+
+    mySoundID = [[SimpleAudioEngine sharedEngine] playEffect:@"earthquake" pitch:1.0f pan:0 gain:1.0f loop:YES];
 }
 
 -(BOOL) isDisasterActive:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
@@ -68,6 +68,7 @@
         f->SetFriction(oldFriction);
     }
     
+    [[SimpleAudioEngine sharedEngine] stopEffect:mySoundID];
     
 }
 

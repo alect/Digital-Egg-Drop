@@ -38,7 +38,7 @@
         
         //play the breaking sound
         if(broken)
-            [[SimpleAudioEngine sharedEngine] playEffect:@"breaking_egg_glass.caf"];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"breaking_egg_glass.caf" pitch:1.0f pan:0 gain:0.7f];
         
     }
 }
