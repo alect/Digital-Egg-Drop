@@ -18,6 +18,7 @@
     b2Body* body;
     float radius;
     BOOL broken;
+@public
     float baseImpulse;
 }
 

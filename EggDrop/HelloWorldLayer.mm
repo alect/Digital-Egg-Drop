@@ -437,6 +437,8 @@ enum {
     if(objectToPlace == nil)
         return;
 
+    //reset the egg's base impulse here to avoid breaking the egg due to messing with the physics world
+    myEgg->baseImpulse = -1;
     if([objectToPlace addToPhysicsWorld:world])
         [objectsToPlace removeObject:objectToPlace];
     else
