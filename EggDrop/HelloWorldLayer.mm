@@ -243,7 +243,7 @@ enum {
         float y = i*rayInterval+10;
         WindRayCastCallback myCallback(windStrength);
         b2Vec2 point1(1, y/PTM_RATIO);
-        b2Vec2 point2(screenSize.width/PTM_RATIO, y/PTM_RATIO + 0.1);
+        b2Vec2 point2(screenSize.width/PTM_RATIO, y/PTM_RATIO - 0.1);
         world->RayCast(&myCallback, point1, point2);
     }
     

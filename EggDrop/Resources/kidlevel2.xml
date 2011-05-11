@@ -1,0 +1,23 @@
+<level>
+
+<!-- Stronger wind disaster. User can use a nail on roof to prevent egg from dying, shows that straw can be useful material -->
+
+  <block length="30" width="100" type="straw"/>
+
+  <block length="30" width="100" type="straw"/>
+
+  <block length="100" width="30" type="straw"/>
+  
+  <nail />
+
+  <nail />
+
+  <nail />
+  
+  <nail />
+
+  <disaster type="wind" strength="7" duration="4" />
+
+  <egg posx="250" posy="60"/>
+
+</level>

@@ -1,0 +1,13 @@
+<level>
+
+<!-- Simple wind disaster . Tests to make sure that builder  is concious of wind risk, and does not place planks where they might topple onto egg -->
+
+  <block length="30" width="100"/>
+
+  <block length="30" width="100"/>
+
+  <disaster type="wind" strength="5" duration="4" />
+
+  <egg posx="250" posy="60"/>
+
+</level>

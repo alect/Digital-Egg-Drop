@@ -1,0 +1,28 @@
+<level>
+
+<!-- Showing quake disaster. Nailing Cushions are the way to go-->
+
+  <block length="30" width="100"/>
+
+  <block length="30" width="100"/>
+
+  <block length="100" width="30"/>
+
+  <block length="30" width="100" type="cushion"/>
+
+  <block length="30" width="100" type="cushion"/>
+
+  <block length="100" width="30" type="cushion"/>
+
+  <nail />
+  <nail />
+  <nail />
+  <nail />
+  
+  <disaster type="meteor" delay="4" duration="4"/>
+  
+  <disaster type="quake" strength="20" duration="4" frequency="2" friction="3" />
+
+  <egg posx="250" posy="60"/>
+
+</level>

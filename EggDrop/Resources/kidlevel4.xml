@@ -1,0 +1,27 @@
+<level>
+
+<!-- Reveals rotting wood, and what it can do. Use "cloud disaster" to call termites -->
+
+  <block length="30" width="100"/>
+
+  <block length="30" width="100" type="cloud"/>
+
+  <block length="30" width="100"/>
+
+  <block length="100" width="30" type="straw"/>
+
+  <block length="100" width="30" type="brick"/>
+
+  <nail />
+
+  <nail />
+
+  <nail />
+
+  <disaster type="cloud" delay="4" duration="4"/>
+
+  <disaster type="meteor" delay="4" duration="4"/>
+  
+  <egg posx="250" posy="60"/>
+
+</level>
