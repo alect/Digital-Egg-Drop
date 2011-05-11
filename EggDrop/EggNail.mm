@@ -9,6 +9,7 @@
 #import "EggNail.h"
 #import "Egg.h"
 #import <math.h>
+#import "SimpleAudioEngine.h"
 
 @implementation EggNail
 
@@ -67,6 +68,7 @@
 {
     firstAnchor = ccp(location.x, location.y);
     secondAnchor = ccp(location.x, location.y);
+    [[SimpleAudioEngine sharedEngine] playEffect:@"hammer_click.caf"];
 }
 
 -(void) updateAddToWorld:(CGPoint)location
@@ -108,8 +110,12 @@
         }
     }
     if(!isAnchor1 || !isAnchor2)
+    {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"wrong_placement.caf"];
         return NO;
-
+    }
+    
+    [[SimpleAudioEngine sharedEngine] playEffect:@"hammer_click.caf"];
     //check quickly to see if we just nailed an egg
     if([(id)bodyAnchor1->GetUserData() class] == [Egg class] )
     {

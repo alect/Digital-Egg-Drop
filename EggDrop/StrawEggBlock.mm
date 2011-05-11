@@ -9,6 +9,7 @@
 #import "StrawEggBlock.h"
 #import "CushionEggBlock.h"
 #import "EggNail.h"
+#import "SimpleAudioEngine.h"
 
 @implementation StrawEggBlock
 
@@ -49,6 +50,9 @@
 //for removing this object from physics
 -(void) removeFromPhysicsWorld:(b2World*)world
 {
+    //play our sound effect
+    [[SimpleAudioEngine sharedEngine] playEffect:@"straw_blowing_away.caf"];
+    
     //need to make sure we didn't just destroy a joint as well.
     for(b2JointEdge *j = body->GetJointList(); j; j=j->next)
     {

@@ -10,6 +10,7 @@
 #import <Math.h>
 #import "HelloWorldLayer.h"
 #import "CushionEggBlock.h"
+#import "SimpleAudioEngine.h"
 
 @implementation Egg
 
@@ -34,6 +35,10 @@
         mySprite.position = oldPos;
         mySprite.rotation = oldRot;
         [self addChild:mySprite];
+        
+        //play the breaking sound
+        if(broken)
+            [[SimpleAudioEngine sharedEngine] playEffect:@"breaking_egg_glass.caf"];
         
     }
 }

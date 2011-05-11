@@ -8,6 +8,7 @@
 
 #import "WindDisaster.h"
 #import "HelloWorldLayer.h"
+#import "SimpleAudioEngine.h"
 
 @implementation WindDisaster
 
@@ -27,11 +28,14 @@
 {
     mainLayer.windy = YES;
     mainLayer.windStrength = windStrength;
+    
+    [[SimpleAudioEngine sharedEngine] playEffect:@"wind.caf"];
 }
 
 -(void) removeDisasterFromGame:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
 {
     mainLayer.windy = NO;
+    
 }
 
 -(BOOL) isDisasterActive:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world

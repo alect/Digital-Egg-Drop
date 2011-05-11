@@ -7,6 +7,7 @@
 //
 
 #import "CloudBlockDisaster.h"
+#import "SimpleAudioEngine.h"
 
 @implementation CloudBlockDisaster
 
@@ -24,6 +25,9 @@
 
 -(void) addDisasterToGame:(HelloWorldLayer *)mainLayer withWorld:(b2World*)world
 {
+    //play the relevant audio
+    [[SimpleAudioEngine sharedEngine] playEffect:@"rotting_wood.caf"];
+    
     //need to remove all of our clouds at the start of the disaster
     for(CloudEggBlock * cBlock in mainLayer.myClouds)
     {

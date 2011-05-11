@@ -16,6 +16,7 @@
 #import "cocos2d.h"
 #import "WindDisaster.h"
 #import "QuakeDisaster.h"
+#import "SimpleAudioEngine.h"
 
 @implementation ResourceManager
 
@@ -49,6 +50,17 @@ static NSArray *tutorialArray;
     
     xmlLevelArray = [[NSArray arrayWithObjects:@"Tutorial", @"Tutorial", @"level1", @"Tutorial", @"level2", @"Tutorial", @"level3", @"Tutorial", @"level5", @"Tutorial", @"level4", @"meteortest", @"lamont_level_test", @"levelZero", @"easy", @"firstLevel", @"thirdLevel", nil] retain];
 
+    
+    
+    //load all our audio effects
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"breaking_egg_glass.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"earthquake.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"hammer_click.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"rotting_wood.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"staw_blowing_away.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"wind.caf"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"wrong_placement.caf"];
+    
 }
 
 +(NSArray*)levelList {return levelArray;}

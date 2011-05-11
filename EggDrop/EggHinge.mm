@@ -9,6 +9,7 @@
 #import "EggHinge.h"
 #import "Egg.h"
 #import <math.h>
+#import "SimpleAudioEngine.h"
 
 @implementation EggHinge
 
@@ -60,9 +61,11 @@
         }
     }
     if(!isAnchor1 || !isAnchor2)
+    {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"wrong_placement.caf"];
         return NO;
-    
-    
+    }
+    [[SimpleAudioEngine sharedEngine] playEffect:@"hammer_click.caf"];
     //check quickly to see if we just nailed an egg
     if([(id)bodyAnchor1->GetUserData() class] == [Egg class] )
     {
