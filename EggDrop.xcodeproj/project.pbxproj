@@ -10,6 +10,7 @@
 		0B531D76136CEC8D00EB7F59 /* LevelParser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0B531D75136CEC8D00EB7F59 /* LevelParser.mm */; };
 		0B80A6E01374BC400020D795 /* easy.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B80A6DE1374BC400020D795 /* easy.xml */; };
 		0B80A6E11374BC400020D795 /* firstLevel.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0B80A6DF1374BC400020D795 /* firstLevel.xml */; };
+		0B906A1B137B9F39008356CD /* newCushion.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B906A1A137B9F39008356CD /* newCushion.png */; };
 		0B92E3371377108800F915B5 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B92E3361377108800F915B5 /* background.png */; };
 		0BD813A71378C36B006A8AAD /* EggTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD813A61378C36A006A8AAD /* EggTutorial.m */; };
 		0BD813B61378EC08006A8AAD /* cloud_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BD813B51378EC08006A8AAD /* cloud_icon.png */; };
@@ -244,6 +245,7 @@
 		0B531D75136CEC8D00EB7F59 /* LevelParser.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelParser.mm; sourceTree = "<group>"; };
 		0B80A6DE1374BC400020D795 /* easy.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = easy.xml; path = Resources/easy.xml; sourceTree = "<group>"; };
 		0B80A6DF1374BC400020D795 /* firstLevel.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = firstLevel.xml; path = Resources/firstLevel.xml; sourceTree = "<group>"; };
+		0B906A1A137B9F39008356CD /* newCushion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newCushion.png; path = Resources/newCushion.png; sourceTree = "<group>"; };
 		0B92E3361377108800F915B5 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Resources/background.png; sourceTree = "<group>"; };
 		0BC29B7E1367A38B00880138 /* LevelParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelParser.h; sourceTree = "<group>"; };
 		0BD813A51378C36A006A8AAD /* EggTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EggTutorial.h; sourceTree = "<group>"; };
@@ -771,6 +773,7 @@
 		41DE7189135B76F800A118A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0B906A1A137B9F39008356CD /* newCushion.png */,
 				415D4B6D137B3AE700129696 /* kidlevel1.xml */,
 				415D4B6E137B3AE700129696 /* kidlevel2.xml */,
 				415D4B6F137B3AE800129696 /* kidlevel3.xml */,
@@ -1289,6 +1292,7 @@
 				415D4B74137B3AE800129696 /* kidlevel3.xml in Resources */,
 				415D4B75137B3AE800129696 /* kidlevel4.xml in Resources */,
 				415D4B76137B3AE800129696 /* kidlevel5.xml in Resources */,
+				0B906A1B137B9F39008356CD /* newCushion.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

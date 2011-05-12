@@ -46,7 +46,7 @@ static NSArray *tutorialArray;
     
     EggTutorial* tutorial4 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newRottingBlock.png", nil]] autorelease];
     
-    EggTutorial* tutorial5 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newQuake.png", nil]] autorelease];
+    EggTutorial* tutorial5 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newCushion.png", @"newQuake.png", nil]] autorelease];
     
     EggTutorial* tutorial6 = [[[EggTutorial alloc] initWithScenes:[NSArray arrayWithObjects:@"newHinge.png", nil] 
                                ]autorelease];
